@@ -1,38 +1,152 @@
 // ========== DATOS DE PRODUCTOS ==========
 const productos = [
+
     // CAMISETAS
-    { id: 1, nombre: "Camiseta Essential", precio: 29.99, categoria: "camisetas", imagen: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500" },
-    { id: 2, nombre: "Camiseta Oversize", precio: 34.99, categoria: "camisetas", imagen: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=500" },
-    { id: 3, nombre: "Camiseta Vintage", precio: 39.99, categoria: "camisetas", imagen: "https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?w=500" },
-    { id: 4, nombre: "Camiseta Street Black", precio: 42.99, categoria: "camisetas", imagen: "https://images.unsplash.com/photo-1583743814966-8936f37f4678?w=500" },
-    { id: 5, nombre: "Camiseta Urban White", precio: 36.99, categoria: "camisetas", imagen: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=500" },
-    { id: 6, nombre: "Camiseta Premium Fit", precio: 44.99, categoria: "camisetas", imagen: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=500" },
+    {
+        id: 1,
+        nombre: "Oversize Street Black",
+        precio: 29.99,
+        categoria: "camisetas",
+        imagen: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500"
+    },
+    {
+        id: 2,
+        nombre: "Urban Graphic Tee",
+        precio: 34.99,
+        categoria: "camisetas",
+        imagen: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=500"
+    },
+    {
+        id: 3,
+        nombre: "Tokyo Street Tee",
+        precio: 39.99,
+        categoria: "camisetas",
+        imagen: "https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?w=500"
+    },
+
+    // HOODIES
+    {
+        id: 4,
+        nombre: "Hoodie Urban Black",
+        precio: 69.99,
+        categoria: "hoodies",
+        imagen: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500"
+    },
+    {
+        id: 5,
+        nombre: "Oversize Hoodie Grey",
+        precio: 74.99,
+        categoria: "hoodies",
+        imagen: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=500"
+    },
+    {
+        id: 6,
+        nombre: "StreetZone Premium Hoodie",
+        precio: 79.99,
+        categoria: "hoodies",
+        imagen: "https://images.unsplash.com/photo-1578587018452-892bacefd3f2?w=500"
+    },
+
+    // CHAQUETAS
+    {
+        id: 7,
+        nombre: "Bomber Jacket Black",
+        precio: 89.99,
+        categoria: "chaquetas",
+        imagen: "https://images.unsplash.com/photo-1523398002811-999ca8dec234?w=500"
+    },
+    {
+        id: 8,
+        nombre: "Street Denim Jacket",
+        precio: 94.99,
+        categoria: "chaquetas",
+        imagen: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=500"
+    },
+    {
+        id: 9,
+        nombre: "Urban Varsity Jacket",
+        precio: 99.99,
+        categoria: "chaquetas",
+        imagen: "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=500"
+    },
 
     // JEANS
-    { id: 13, nombre: "Cargo Street Black", precio: 49.99, categoria: "jeans", imagen: "..." },
-    { id: 14, nombre: "Baggy Denim Blue", precio: 54.99, categoria: "jeans", imagen: "..." },
-    { id: 15, nombre: "Ripped Street Jeans", precio: 59.99, categoria: "jeans", imagen: "..." },
-    { id: 16, nombre: "Cargo Utility", precio: 64.99, categoria: "jeans", imagen: "..." },
-    { id: 17, nombre: "Loose Fit Denim", precio: 57.99, categoria: "jeans", imagen: "..." },
-    { id: 18, nombre: "Urban Black Denim", precio: 61.99, categoria: "jeans", imagen: "..." },
+    {
+        id: 10,
+        nombre: "Baggy Denim Blue",
+        precio: 54.99,
+        categoria: "jeans",
+        imagen: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=500"
+    },
+    {
+        id: 11,
+        nombre: "Ripped Street Jeans",
+        precio: 59.99,
+        categoria: "jeans",
+        imagen: "https://images.unsplash.com/photo-1542272604-787c3835535d?w=500"
+    },
+    {
+        id: 12,
+        nombre: "Urban Black Denim",
+        precio: 61.99,
+        categoria: "jeans",
+        imagen: "https://images.unsplash.com/photo-1582552938357-32b906df40cb?w=500"
+    },
+
+    // PANTALONES
+    {
+        id: 13,
+        nombre: "Cargo Street Black",
+        precio: 64.99,
+        categoria: "pantalones",
+        imagen: "https://images.unsplash.com/photo-1602293589930-45aad59ba3ab?w=500"
+    },
+    {
+        id: 15,
+        nombre: "Jogger Urban Fit",
+        precio: 59.99,
+        categoria: "pantalones",
+        imagen: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=500"
+    },
 
     // CALZADO
-    { id: 19, nombre: "Zapatillas Urban", precio: 79.99, categoria: "calzado", imagen: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=500" },
-    { id: 20, nombre: "Botas Altas", precio: 99.99, categoria: "calzado", imagen: "https://images.unsplash.com/photo-1549298916-f52d724204b4?w=500" },
-    { id: 21, nombre: "Zapatos Casual", precio: 69.99, categoria: "calzado", imagen: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500" },
-    { id: 22, nombre: "Sneakers Street", precio: 84.99, categoria: "calzado", imagen: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=500" },
-    { id: 23, nombre: "Tenis Running", precio: 89.99, categoria: "calzado", imagen: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=500" },
-    { id: 24, nombre: "Botines Urban", precio: 109.99, categoria: "calzado", imagen: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=500" },
-
-    // SUDADERAS
-    { id: 25, nombre: "Sudadera Oversize", precio: 64.99, categoria: "sudaderas", imagen: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500" },
-    { id: 26, nombre: "Hoodie Black", precio: 69.99, categoria: "sudaderas", imagen: "https://images.unsplash.com/photo-1578587018452-892bacefd3f2?w=500" },
-    { id: 27, nombre: "Sudadera Premium", precio: 74.99, categoria: "sudaderas", imagen: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=500" },
+    {
+        id: 17,
+        nombre: "Urban Runner Black",
+        precio: 94.99,
+        categoria: "calzado",
+        imagen: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=500"
+    },
+    {
+        id: 18,
+        nombre: "Street High Top",
+        precio: 99.99,
+        categoria: "calzado",
+        imagen: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=500"
+    },
 
     // ACCESORIOS
-    { id: 28, nombre: "Gorra StreetZone", precio: 24.99, categoria: "accesorios", imagen: "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=500" },
-    { id: 29, nombre: "Mochila Urban", precio: 59.99, categoria: "accesorios", imagen: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500" },
-    { id: 30, nombre: "Lentes Premium", precio: 39.99, categoria: "accesorios", imagen: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=500" }
+    {
+        id: 19,
+        nombre: "Gorra StreetZone",
+        precio: 24.99,
+        categoria: "accesorios",
+        imagen: "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=500"
+    },
+    {
+        id: 20,
+        nombre: "Mochila Urban",
+        precio: 59.99,
+        categoria: "accesorios",
+        imagen: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500"
+    },
+    {
+        id: 21,
+        nombre: "Lentes Street Premium",
+        precio: 39.99,
+        categoria: "accesorios",
+        imagen: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=500"
+    }
 ];
 
 // Productos en oferta (con descuento)

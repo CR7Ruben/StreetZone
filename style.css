@@ -111,7 +111,7 @@ body {
 /* ========== HERO ========== */
 .hero {
     height: 85vh;
-    background: linear-gradient(135deg, #16213ef2, #0f3460e6), url('https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?q=80&w=2070');
+    background: linear-gradient(135deg, rgba(22,33,62,0.95), #0f3460e6), url('https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?q=80&w=2070');
     background-size: cover;
     background-position: center;
     display: flex;
@@ -641,7 +641,7 @@ body {
 .ofertas-section {
     padding: 5rem 5%;
     text-align: center;
-    background: linear-gradient(135deg, #fff5f5, #ffe0e0);
+    color: #000000;
 }
 
 .ofertas-section h2 {
@@ -680,7 +680,7 @@ body {
     top: 15px;
     right: 15px;
     background: #000000;
-    color: white;
+    color: #ffffff;
     padding: 5px 15px;
     border-radius: 30px;
     font-weight: bold;

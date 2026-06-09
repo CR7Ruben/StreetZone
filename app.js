@@ -564,7 +564,7 @@ function mostrarConfirmacion(datos) {
             <p><strong>📦 Total pagado:</strong> $${datos.total.toFixed(2)}</p>
             <p><strong>📧 Recibirás un correo con los detalles</strong></p>
             <hr>
-            <p style="font-size:0.8rem; color:#666;">✨ Gracias por confiar en FashionStore</p>
+            <p style="font-size:0.8rem; color:#666;">✨ Gracias por confiar en StreetZone</p>
         `;
     }
     

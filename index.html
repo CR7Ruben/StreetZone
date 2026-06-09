@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StreetZone | Tienda de Ropa</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo" onclick="irInicio()" style="cursor:pointer;">
+            <i class="fas fa-tshirt"></i>
+            <span>StreetZone</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#" onclick="irInicio()">Inicio</a></li>
+            <li><a href="#" onclick="irColeccion()">Colección</a></li>
+            <li><a href="#" onclick="irOfertas()">Ofertas</a></li>
+            <li><a href="#" onclick="irContacto()">Contacto</a></li>
+            <li><a href="#" class="carrito-icono" onclick="abrirCarrito()">
+                <i class="fas fa-shopping-cart"></i>
+                <span id="contador-carrito">0</span>
+            </a></li>
+        </ul>
+    </nav>
+
+    <!-- Sección Inicio (Hero) -->
+    <header id="inicio" class="hero">
+        <div class="hero-content">
+            <h1>Estilo que <span class="resaltado">inspira</span></h1>
+            <p>Descubre la mejor moda para cada momento</p>
+            <button class="btn-primary" onclick="verColeccion()">Ver colección</button>
+        </div>
+    </header>
+
+    <!-- Sección Colección (Categorías + Productos) -->
+    <section id="coleccion" class="categorias">
+        <h2>Categorías <span>populares</span></h2>
+        <div class="categorias-grid">
+            <div class="categoria-card" onclick="filtrarPorCategoria('camisetas')">
+                <i class="fas fa-tshirt"></i>
+                <h3>Camisetas</h3>
+                <p>12 productos</p>
+            </div>
+            <div class="categoria-card" onclick="filtrarPorCategoria('vestidos')">
+                <i class="fas fa-female"></i>
+                <h3>Vestidos</h3>
+                <p>8 productos</p>
+            </div>
+            <div class="categoria-card" onclick="filtrarPorCategoria('jeans')">
+                <i class="fas fa-male"></i>
+                <h3>Jeans</h3>
+                <p>10 productos</p>
+            </div>
+            <div class="categoria-card" onclick="filtrarPorCategoria('calzado')">
+                <i class="fas fa-shoe-prints"></i>
+                <h3>Calzado</h3>
+                <p>6 productos</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="productos">
+        <h2>Lo más <span>vendido</span></h2>
+        <div class="filtros">
+            <button class="filtro-btn active" onclick="filtrarPorCategoria('todos')">Todos</button>
+            <button class="filtro-btn" onclick="filtrarPorCategoria('camisetas')">Camisetas</button>
+            <button class="filtro-btn" onclick="filtrarPorCategoria('vestidos')">Vestidos</button>
+            <button class="filtro-btn" onclick="filtrarPorCategoria('jeans')">Jeans</button>
+            <button class="filtro-btn" onclick="filtrarPorCategoria('calzado')">Calzado</button>
+        </div>
+        <div class="productos-grid" id="productos-grid"></div>
+    </section>
+
+    <!-- Sección Ofertas (oculta por defecto) -->
+    <section id="ofertas" class="ofertas-section" style="display:none;">
+        <h2>🔥 <span>Ofertas</span> Especiales</h2>
+        <div class="ofertas-grid" id="ofertas-grid"></div>
+    </section>
+
+    <!-- Sección Contacto (oculta por defecto) -->
+    <section id="contacto" class="contacto-section" style="display:none;">
+        <h2>📞 <span>Contáctanos</span></h2>
+        <div class="contacto-container">
+            <div class="contacto-info">
+                <div class="contacto-card">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Dirección</h3>
+                    <p>Av. Moda 123, CDMX</p>
+                </div>
+                <div class="contacto-card">
+                    <i class="fas fa-phone"></i>
+                    <h3>Teléfono</h3>
+                    <p>+52 55 1234 5678</p>
+                </div>
+                <div class="contacto-card">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Email</h3>
+                    <p>info@streetzone.com</p>
+                </div>
+                <div class="contacto-card">
+                    <i class="fas fa-clock"></i>
+                    <h3>Horario</h3>
+                    <p>Lun-Dom: 10am - 8pm</p>
+                </div>
+            </div>
+            <form class="contacto-form" id="contactoForm">
+                <h3>Envíanos un mensaje</h3>
+                <input type="text" id="nombreContacto" placeholder="Tu nombre" required>
+                <input type="email" id="emailContacto" placeholder="Tu email" required>
+                <textarea id="mensajeContacto" placeholder="Tu mensaje" rows="4" required></textarea>
+                <button type="submit" class="btn-primary">Enviar mensaje</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 StreetZone - Tienda de Ropa Online | Todos los derechos reservados</p>
+    </footer>
+
+    <!-- Modal Carrito -->
+    <div id="carrito-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-shopping-cart"></i> Mi Carrito</h3>
+                <span class="cerrar-modal" onclick="cerrarCarrito()">&times;</span>
+            </div>
+            <div id="carrito-items"></div>
+            <div class="carrito-total" id="carrito-total">Total: $0</div>
+            <button class="btn-primary" style="width:100%; margin-top:1rem;" onclick="finalizarCompra()">Finalizar Compra</button>
+        </div>
+    </div>
+
+    <!-- Modal de Pago -->
+    <div id="pago-modal" class="modal">
+        <div class="modal-content pago-modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-credit-card"></i> Finalizar Compra</h3>
+                <span class="cerrar-modal" onclick="cerrarPagoModal()">&times;</span>
+            </div>
+            <div id="resumen-compra" class="resumen-compra"></div>
+            
+            <div class="metodos-pago">
+                <h4>Método de pago</h4>
+                <div class="metodos-grid">
+                    <div class="metodo-pago" data-metodo="tarjeta" onclick="seleccionarMetodo('tarjeta', this)">
+                        <i class="fas fa-credit-card"></i>
+                        <span>Tarjeta</span>
+                    </div>
+                    <div class="metodo-pago" data-metodo="paypal" onclick="seleccionarMetodo('paypal', this)">
+                        <i class="fab fa-paypal"></i>
+                        <span>PayPal</span>
+                    </div>
+                    <div class="metodo-pago" data-metodo="transferencia" onclick="seleccionarMetodo('transferencia', this)">
+                        <i class="fas fa-university"></i>
+                        <span>Transferencia</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Formulario Tarjeta -->
+            <div id="form-tarjeta" class="form-pago" style="display:none;">
+                <h4><i class="fas fa-credit-card"></i> Datos de tarjeta</h4>
+                <input type="text" id="nombre-tarjeta" placeholder="Nombre del titular">
+                <input type="text" id="numero-tarjeta" placeholder="Número de tarjeta" maxlength="16">
+                <div class="row-fila">
+                    <input type="text" id="fecha-expiracion" placeholder="MM/AA" maxlength="5" style="width:48%;">
+                    <input type="text" id="cvv" placeholder="CVV" maxlength="4" style="width:48%;">
+                </div>
+                <div class="payment-status" id="tarjeta-status"></div>
+            </div>
+
+            <!-- Formulario PayPal -->
+            <div id="form-paypal" class="form-pago" style="display:none;">
+                <h4><i class="fab fa-paypal"></i> Datos de PayPal</h4>
+                <input type="email" id="paypal-email" placeholder="correo@ejemplo.com">
+                <input type="password" id="paypal-password" placeholder="Contraseña">
+                <div class="payment-status" id="paypal-status"></div>
+            </div>
+
+            <!-- Formulario Transferencia -->
+            <div id="form-transferencia" class="form-pago" style="display:none;">
+                <h4><i class="fas fa-university"></i> Datos bancarios</h4>
+                <p class="datos-bancarios">
+                    <strong>Banco:</strong> BBVA<br>
+                    <strong>Cuenta:</strong> 1234 5678 9012 3456<br>
+                    <strong>CLABE:</strong> 012 345 678 901 234 567<br>
+                    <strong>Referencia:</strong> FASHION-<span id="ref-numero">1234</span>
+                </p>
+                <div class="payment-status" id="transferencia-status"></div>
+            </div>
+
+            <div class="botones-pago">
+                <button class="btn-primary" id="btn-pagar" style="width:100%;">
+                    <i class="fas fa-lock"></i> Pagar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmación -->
+    <div id="confirmacion-modal" class="modal">
+        <div class="modal-content confirmacion-content">
+            <div class="confirmacion-icono">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2>¡Pago exitoso!</h2>
+            <p id="mensaje-confirmacion">Gracias por tu compra</p>
+            <div id="detalle-confirmacion"></div>
+            <button class="btn-primary" onclick="cerrarConfirmacion()">Continuar comprando</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

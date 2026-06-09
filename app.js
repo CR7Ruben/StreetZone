@@ -1,17 +1,38 @@
 // ========== DATOS DE PRODUCTOS ==========
 const productos = [
+    // CAMISETAS
     { id: 1, nombre: "Camiseta Essential", precio: 29.99, categoria: "camisetas", imagen: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500" },
     { id: 2, nombre: "Camiseta Oversize", precio: 34.99, categoria: "camisetas", imagen: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=500" },
     { id: 3, nombre: "Camiseta Vintage", precio: 39.99, categoria: "camisetas", imagen: "https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?w=500" },
-    { id: 4, nombre: "Vestido Floral", precio: 59.99, categoria: "vestidos", imagen: "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=500" },
-    { id: 5, nombre: "Vestido Rojo", precio: 79.99, categoria: "vestidos", imagen: "https://images.unsplash.com/photo-1495385794356-15371f348c31?w=500" },
-    { id: 6, nombre: "Vestido Largo", precio: 89.99, categoria: "vestidos", imagen: "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=500" },
-    { id: 7, nombre: "Jeans Skinny", precio: 49.99, categoria: "jeans", imagen: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=500" },
-    { id: 8, nombre: "Jeans Rectos", precio: 54.99, categoria: "jeans", imagen: "https://images.unsplash.com/photo-1475178626620-a4d074967452?w=500" },
-    { id: 9, nombre: "Jeans Rotos", precio: 59.99, categoria: "jeans", imagen: "https://images.unsplash.com/photo-1475178626620-a4d074967452?w=500" },
-    { id: 10, nombre: "Zapatillas Urban", precio: 79.99, categoria: "calzado", imagen: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=500" },
-    { id: 11, nombre: "Botas Altas", precio: 99.99, categoria: "calzado", imagen: "https://images.unsplash.com/photo-1549298916-f52d724204b4?w=500" },
-    { id: 12, nombre: "Zapatos Casual", precio: 69.99, categoria: "calzado", imagen: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=500" }
+    { id: 4, nombre: "Camiseta Street Black", precio: 42.99, categoria: "camisetas", imagen: "https://images.unsplash.com/photo-1583743814966-8936f37f4678?w=500" },
+    { id: 5, nombre: "Camiseta Urban White", precio: 36.99, categoria: "camisetas", imagen: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=500" },
+    { id: 6, nombre: "Camiseta Premium Fit", precio: 44.99, categoria: "camisetas", imagen: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=500" },
+
+    // JEANS
+    { id: 13, nombre: "Cargo Street Black", precio: 49.99, categoria: "jeans", imagen: "..." },
+    { id: 14, nombre: "Baggy Denim Blue", precio: 54.99, categoria: "jeans", imagen: "..." },
+    { id: 15, nombre: "Ripped Street Jeans", precio: 59.99, categoria: "jeans", imagen: "..." },
+    { id: 16, nombre: "Cargo Utility", precio: 64.99, categoria: "jeans", imagen: "..." },
+    { id: 17, nombre: "Loose Fit Denim", precio: 57.99, categoria: "jeans", imagen: "..." },
+    { id: 18, nombre: "Urban Black Denim", precio: 61.99, categoria: "jeans", imagen: "..." },
+
+    // CALZADO
+    { id: 19, nombre: "Zapatillas Urban", precio: 79.99, categoria: "calzado", imagen: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=500" },
+    { id: 20, nombre: "Botas Altas", precio: 99.99, categoria: "calzado", imagen: "https://images.unsplash.com/photo-1549298916-f52d724204b4?w=500" },
+    { id: 21, nombre: "Zapatos Casual", precio: 69.99, categoria: "calzado", imagen: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500" },
+    { id: 22, nombre: "Sneakers Street", precio: 84.99, categoria: "calzado", imagen: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=500" },
+    { id: 23, nombre: "Tenis Running", precio: 89.99, categoria: "calzado", imagen: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=500" },
+    { id: 24, nombre: "Botines Urban", precio: 109.99, categoria: "calzado", imagen: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=500" },
+
+    // SUDADERAS
+    { id: 25, nombre: "Sudadera Oversize", precio: 64.99, categoria: "sudaderas", imagen: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500" },
+    { id: 26, nombre: "Hoodie Black", precio: 69.99, categoria: "sudaderas", imagen: "https://images.unsplash.com/photo-1578587018452-892bacefd3f2?w=500" },
+    { id: 27, nombre: "Sudadera Premium", precio: 74.99, categoria: "sudaderas", imagen: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=500" },
+
+    // ACCESORIOS
+    { id: 28, nombre: "Gorra StreetZone", precio: 24.99, categoria: "accesorios", imagen: "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=500" },
+    { id: 29, nombre: "Mochila Urban", precio: 59.99, categoria: "accesorios", imagen: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500" },
+    { id: 30, nombre: "Lentes Premium", precio: 39.99, categoria: "accesorios", imagen: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=500" }
 ];
 
 // Productos en oferta (con descuento)
@@ -78,7 +99,7 @@ function ocultarTodasSecciones() {
     const productosSec = document.querySelector(".productos");
     const ofertasSec = document.getElementById("ofertas");
     const contactoSec = document.getElementById("contacto");
-    
+
     if (inicio) inicio.style.display = "none";
     if (coleccion) coleccion.style.display = "none";
     if (productosSec) productosSec.style.display = "none";
@@ -89,7 +110,7 @@ function ocultarTodasSecciones() {
 function mostrarOfertas() {
     const grid = document.getElementById("ofertas-grid");
     if (!grid) return;
-    
+
     grid.innerHTML = ofertas.map(oferta => `
         <div class="oferta-card">
             <div class="oferta-badge">-${oferta.descuento}</div>
@@ -109,7 +130,7 @@ function mostrarOfertas() {
 function agregarAlCarritoOferta(id) {
     const productoOferta = ofertas.find(o => o.id === id);
     if (!productoOferta) return;
-    
+
     const existe = carrito.find(item => item.id === id);
     if (existe) {
         existe.cantidad++;
@@ -123,7 +144,7 @@ function agregarAlCarritoOferta(id) {
             cantidad: 1
         });
     }
-    
+
     actualizarContador();
     mostrarNotificacion(`${productoOferta.nombre} agregado en oferta ✓`);
     console.log(`🔥 Oferta agregada: ${productoOferta.nombre} - $${productoOferta.oferta}`);
@@ -169,7 +190,7 @@ function mostrarProductos() {
 function filtrarPorCategoria(categoria) {
     categoriaActual = categoria;
     mostrarProductos();
-    
+
     document.querySelectorAll('.filtro-btn').forEach(btn => {
         btn.classList.remove('active');
         const btnTexto = btn.textContent.toLowerCase();
@@ -179,12 +200,12 @@ function filtrarPorCategoria(categoria) {
             btn.classList.add('active');
         }
     });
-    
+
     const seccionProductos = document.querySelector(".productos");
     if (seccionProductos) {
         seccionProductos.scrollIntoView({ behavior: 'smooth' });
     }
-    
+
     console.log(`🔍 Filtro aplicado: ${categoria}`);
 }
 
@@ -192,14 +213,14 @@ function filtrarPorCategoria(categoria) {
 function agregarAlCarrito(id) {
     const producto = productos.find(p => p.id === id);
     if (!producto) return;
-    
+
     const existe = carrito.find(item => item.id === id);
     if (existe) {
         existe.cantidad++;
     } else {
         carrito.push({ ...producto, cantidad: 1 });
     }
-    
+
     actualizarContador();
     mostrarNotificacion(`${producto.nombre} agregado ✓`);
     console.log(`🛒 Agregado: ${producto.nombre} - $${producto.precio}`);
@@ -233,7 +254,7 @@ function mostrarNotificacion(mensaje, tipo = "success") {
         box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         animation: fadeOut 2s ease forwards;
     `;
-    
+
     if (!document.querySelector('#notif-style')) {
         const style = document.createElement("style");
         style.id = 'notif-style';
@@ -246,7 +267,7 @@ function mostrarNotificacion(mensaje, tipo = "success") {
         `;
         document.head.appendChild(style);
     }
-    
+
     document.body.appendChild(notificacion);
     setTimeout(() => notificacion.remove(), 2000);
 }
@@ -256,9 +277,9 @@ function abrirCarrito() {
     const modal = document.getElementById("carrito-modal");
     const carritoItems = document.getElementById("carrito-items");
     const carritoTotal = document.getElementById("carrito-total");
-    
+
     if (!modal) return;
-    
+
     if (carrito.length === 0) {
         carritoItems.innerHTML = '<p style="text-align:center; padding:2rem;">🛒 El carrito está vacío</p>';
         carritoTotal.innerHTML = 'Total: $0';
@@ -280,7 +301,7 @@ function abrirCarrito() {
         const total = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
         carritoTotal.innerHTML = `Total: $${total.toFixed(2)}`;
     }
-    
+
     modal.style.display = "flex";
 }
 
@@ -315,16 +336,16 @@ function finalizarCompra() {
 function abrirPagoModal() {
     const modal = document.getElementById("pago-modal");
     const resumenDiv = document.getElementById("resumen-compra");
-    
+
     if (!modal) return;
-    
+
     totalActual = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
-    
+
     // Generar referencia aleatoria
     const refNumero = Math.floor(Math.random() * 10000);
     const refSpan = document.getElementById("ref-numero");
     if (refSpan) refSpan.innerText = refNumero;
-    
+
     if (resumenDiv) {
         resumenDiv.innerHTML = `
             <h4>Resumen de compra</h4>
@@ -340,34 +361,34 @@ function abrirPagoModal() {
             </div>
         `;
     }
-    
+
     // Actualizar texto del botón de pago
     const btnPagar = document.getElementById("btn-pagar");
     if (btnPagar) {
         btnPagar.innerHTML = `<i class="fas fa-lock"></i> Pagar $${totalActual.toFixed(2)}`;
-        btnPagar.onclick = function() { procesarPago(); };
+        btnPagar.onclick = function () { procesarPago(); };
     }
-    
+
     modal.style.display = "flex";
     metodoSeleccionado = null;
-    
+
     // Ocultar todos los formularios
     const formTarjeta = document.getElementById("form-tarjeta");
     const formPaypal = document.getElementById("form-paypal");
     const formTransferencia = document.getElementById("form-transferencia");
-    
+
     if (formTarjeta) formTarjeta.style.display = "none";
     if (formPaypal) formPaypal.style.display = "none";
     if (formTransferencia) formTransferencia.style.display = "none";
-    
+
     // Remover selección de métodos
     document.querySelectorAll(".metodo-pago").forEach(m => m.classList.remove("seleccionado"));
-    
+
     // Limpiar status
     const tarjetaStatus = document.getElementById("tarjeta-status");
     const paypalStatus = document.getElementById("paypal-status");
     const transferenciaStatus = document.getElementById("transferencia-status");
-    
+
     if (tarjetaStatus) tarjetaStatus.innerHTML = "";
     if (paypalStatus) paypalStatus.innerHTML = "";
     if (transferenciaStatus) transferenciaStatus.innerHTML = "";
@@ -375,20 +396,20 @@ function abrirPagoModal() {
 
 function seleccionarMetodo(metodo, elemento) {
     metodoSeleccionado = metodo;
-    
+
     // Actualizar UI
     document.querySelectorAll(".metodo-pago").forEach(m => m.classList.remove("seleccionado"));
     elemento.classList.add("seleccionado");
-    
+
     // Mostrar formulario correspondiente
     const formTarjeta = document.getElementById("form-tarjeta");
     const formPaypal = document.getElementById("form-paypal");
     const formTransferencia = document.getElementById("form-transferencia");
-    
+
     if (formTarjeta) formTarjeta.style.display = "none";
     if (formPaypal) formPaypal.style.display = "none";
     if (formTransferencia) formTransferencia.style.display = "none";
-    
+
     if (metodo === 'tarjeta' && formTarjeta) {
         formTarjeta.style.display = "block";
         const tarjetaStatus = document.getElementById("tarjeta-status");
@@ -410,9 +431,9 @@ function validarTarjeta() {
     const fecha = document.getElementById("fecha-expiracion");
     const cvv = document.getElementById("cvv");
     const statusDiv = document.getElementById("tarjeta-status");
-    
+
     if (!nombre || !numero || !fecha || !cvv || !statusDiv) return false;
-    
+
     if (!nombre.value.trim()) {
         statusDiv.innerHTML = "⚠️ Ingresa el nombre del titular";
         statusDiv.className = "payment-status error";
@@ -433,7 +454,7 @@ function validarTarjeta() {
         statusDiv.className = "payment-status error";
         return false;
     }
-    
+
     statusDiv.innerHTML = "✅ Tarjeta válida";
     statusDiv.className = "payment-status success";
     return true;
@@ -443,9 +464,9 @@ function validarPaypal() {
     const email = document.getElementById("paypal-email");
     const password = document.getElementById("paypal-password");
     const statusDiv = document.getElementById("paypal-status");
-    
+
     if (!email || !password || !statusDiv) return false;
-    
+
     if (!email.value.trim() || !email.value.includes('@')) {
         statusDiv.innerHTML = "⚠️ Ingresa un email válido";
         statusDiv.className = "payment-status error";
@@ -456,7 +477,7 @@ function validarPaypal() {
         statusDiv.className = "payment-status error";
         return false;
     }
-    
+
     statusDiv.innerHTML = "✅ Cuenta PayPal válida";
     statusDiv.className = "payment-status success";
     return true;
@@ -465,7 +486,7 @@ function validarPaypal() {
 function validarTransferencia() {
     const statusDiv = document.getElementById("transferencia-status");
     if (!statusDiv) return true;
-    
+
     statusDiv.innerHTML = "✅ Transferencia seleccionada - Realiza el depósito con la referencia";
     statusDiv.className = "payment-status success";
     return true;
@@ -476,27 +497,27 @@ function procesarPago() {
         mostrarNotificacion("⚠️ Selecciona un método de pago", "error");
         return;
     }
-    
+
     let valido = false;
     if (metodoSeleccionado === 'tarjeta') valido = validarTarjeta();
     else if (metodoSeleccionado === 'paypal') valido = validarPaypal();
     else if (metodoSeleccionado === 'transferencia') valido = validarTransferencia();
-    
+
     if (!valido) return;
-    
+
     // Mostrar loading
     mostrarLoading();
-    
+
     // Simular procesamiento de pago
     setTimeout(() => {
         ocultarLoading();
-        
+
         const total = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
         const fecha = new Date().toLocaleString();
         const numeroOrden = "ORD-" + Math.floor(Math.random() * 1000000);
-        
+
         cerrarPagoModal();
-        
+
         // Mostrar confirmación
         mostrarConfirmacion({
             numeroOrden: numeroOrden,
@@ -505,18 +526,18 @@ function procesarPago() {
             productos: [...carrito],
             metodo: metodoSeleccionado
         });
-        
+
         // Vaciar carrito
         carrito = [];
         actualizarContador();
-        
+
     }, 2000);
 }
 
 function mostrarLoading() {
     // Eliminar loading existente
     ocultarLoading();
-    
+
     const loading = document.createElement("div");
     loading.id = "loadingOverlay";
     loading.className = "loading-overlay";
@@ -537,9 +558,9 @@ function mostrarConfirmacion(datos) {
     const modal = document.getElementById("confirmacion-modal");
     const mensajeDiv = document.getElementById("mensaje-confirmacion");
     const detalleDiv = document.getElementById("detalle-confirmacion");
-    
+
     if (!modal) return;
-    
+
     let metodoTexto = "";
     let metodoIcono = "";
     if (datos.metodo === 'tarjeta') {
@@ -552,10 +573,10 @@ function mostrarConfirmacion(datos) {
         metodoTexto = "🏦 Transferencia bancaria";
         metodoIcono = "🏦";
     }
-    
+
     const nombreCliente = datos.productos[0]?.nombre?.split(' ')[0] || "cliente";
     if (mensajeDiv) mensajeDiv.innerHTML = `¡Gracias por tu compra, ${nombreCliente}!`;
-    
+
     if (detalleDiv) {
         detalleDiv.innerHTML = `
             <p><strong>🧾 Número de orden:</strong> ${datos.numeroOrden}</p>
@@ -567,9 +588,9 @@ function mostrarConfirmacion(datos) {
             <p style="font-size:0.8rem; color:#666;">✨ Gracias por confiar en StreetZone</p>
         `;
     }
-    
+
     modal.style.display = "flex";
-    
+
     // Registrar en consola para evidencia
     console.log("✅ ===== PAGO COMPLETADO =====");
     console.log("Orden:", datos.numeroOrden);
@@ -608,9 +629,9 @@ function verColeccion() {
 // ========== FORMULARIO CONTACTO ==========
 document.addEventListener("DOMContentLoaded", () => {
     console.log("🌟 FashionStore inicializada correctamente");
-    
+
     mostrarProductos();
-    
+
     const contactoForm = document.getElementById("contactoForm");
     if (contactoForm) {
         contactoForm.addEventListener("submit", (e) => {
@@ -618,7 +639,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const nombre = document.getElementById("nombreContacto");
             const email = document.getElementById("emailContacto");
             const mensaje = document.getElementById("mensajeContacto");
-            
+
             if (!nombre.value.trim()) {
                 mostrarNotificacion("⚠️ Ingresa tu nombre", "error");
                 return;
@@ -631,29 +652,29 @@ document.addEventListener("DOMContentLoaded", () => {
                 mostrarNotificacion("⚠️ Ingresa un mensaje", "error");
                 return;
             }
-            
+
             mostrarNotificacion(`📨 ¡Mensaje enviado! Pronto te contactaremos.`, "success");
             console.log(`📧 Mensaje de contacto - Nombre: ${nombre.value}, Email: ${email.value}, Mensaje: ${mensaje.value}`);
             contactoForm.reset();
         });
     }
-    
+
     // Inicializar referencia de transferencia
     const refSpan = document.getElementById("ref-numero");
     if (refSpan) {
         refSpan.innerText = Math.floor(Math.random() * 10000);
     }
-    
+
     console.log(`📦 Productos disponibles: ${productos.length}`);
     console.log("📋 Categorías:", [...new Set(productos.map(p => p.categoria))]);
 });
 
 // Cerrar modal click fuera
-window.onclick = function(event) {
+window.onclick = function (event) {
     const carritoModal = document.getElementById("carrito-modal");
     const pagoModal = document.getElementById("pago-modal");
     const confirmacionModal = document.getElementById("confirmacion-modal");
-    
+
     if (carritoModal && event.target === carritoModal) {
         carritoModal.style.display = "none";
     }

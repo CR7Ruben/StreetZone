@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StreetZone | Tienda de Ropa</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
+
 <body>
 
     <nav class="navbar">
@@ -21,9 +24,9 @@
             <li><a href="#" onclick="irOfertas()">Ofertas</a></li>
             <li><a href="#" onclick="irContacto()">Contacto</a></li>
             <li><a href="#" class="carrito-icono" onclick="abrirCarrito()">
-                <i class="fas fa-shopping-cart"></i>
-                <span id="contador-carrito">0</span>
-            </a></li>
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="contador-carrito">0</span>
+                </a></li>
         </ul>
     </nav>
 
@@ -45,20 +48,41 @@
                 <h3>Camisetas</h3>
                 <p>12 productos</p>
             </div>
-            <div class="categoria-card" onclick="filtrarPorCategoria('vestidos')">
-                <i class="fas fa-female"></i>
-                <h3>Vestidos</h3>
+
+            <div class="categoria-card" onclick="filtrarPorCategoria('hoodies')">
+                <i class="fas fa-user-ninja"></i>
+                <h3>Hoodies</h3>
                 <p>8 productos</p>
             </div>
+
+            <div class="categoria-card" onclick="filtrarPorCategoria('chaquetas')">
+                <i class="fas fa-user-tie"></i>
+                <h3>Chaquetas</h3>
+                <p>10 productos</p>
+            </div>
+
             <div class="categoria-card" onclick="filtrarPorCategoria('jeans')">
                 <i class="fas fa-male"></i>
                 <h3>Jeans</h3>
                 <p>10 productos</p>
             </div>
+
+            <div class="categoria-card" onclick="filtrarPorCategoria('pantalones')">
+                <i class="fas fa-walking"></i>
+                <h3>Pantalones</h3>
+                <p>8 productos</p>
+            </div>
+
             <div class="categoria-card" onclick="filtrarPorCategoria('calzado')">
                 <i class="fas fa-shoe-prints"></i>
                 <h3>Calzado</h3>
                 <p>6 productos</p>
+            </div>
+
+            <div class="categoria-card" onclick="filtrarPorCategoria('accesorios')">
+                <i class="fas fa-glasses"></i>
+                <h3>Accesorios</h3>
+                <p>12 productos</p>
             </div>
         </div>
     </section>
@@ -68,9 +92,12 @@
         <div class="filtros">
             <button class="filtro-btn active" onclick="filtrarPorCategoria('todos')">Todos</button>
             <button class="filtro-btn" onclick="filtrarPorCategoria('camisetas')">Camisetas</button>
-            <button class="filtro-btn" onclick="filtrarPorCategoria('vestidos')">Vestidos</button>
+            <button class="filtro-btn" onclick="filtrarPorCategoria('hoodies')">Hoodies</button>
+            <button class="filtro-btn" onclick="filtrarPorCategoria('chaquetas')">Chaquetas</button>
             <button class="filtro-btn" onclick="filtrarPorCategoria('jeans')">Jeans</button>
+            <button class="filtro-btn" onclick="filtrarPorCategoria('pantalones')">Pantalones</button>
             <button class="filtro-btn" onclick="filtrarPorCategoria('calzado')">Calzado</button>
+            <button class="filtro-btn" onclick="filtrarPorCategoria('accesorios')">Accesorios</button>
         </div>
         <div class="productos-grid" id="productos-grid"></div>
     </section>
@@ -130,7 +157,8 @@
             </div>
             <div id="carrito-items"></div>
             <div class="carrito-total" id="carrito-total">Total: $0</div>
-            <button class="btn-primary" style="width:100%; margin-top:1rem;" onclick="finalizarCompra()">Finalizar Compra</button>
+            <button class="btn-primary" style="width:100%; margin-top:1rem;" onclick="finalizarCompra()">Finalizar
+                Compra</button>
         </div>
     </div>
 
@@ -142,7 +170,7 @@
                 <span class="cerrar-modal" onclick="cerrarPagoModal()">&times;</span>
             </div>
             <div id="resumen-compra" class="resumen-compra"></div>
-            
+
             <div class="metodos-pago">
                 <h4>Método de pago</h4>
                 <div class="metodos-grid">
@@ -154,7 +182,8 @@
                         <i class="fab fa-paypal"></i>
                         <span>PayPal</span>
                     </div>
-                    <div class="metodo-pago" data-metodo="transferencia" onclick="seleccionarMetodo('transferencia', this)">
+                    <div class="metodo-pago" data-metodo="transferencia"
+                        onclick="seleccionarMetodo('transferencia', this)">
                         <i class="fas fa-university"></i>
                         <span>Transferencia</span>
                     </div>
@@ -216,4 +245,5 @@
 
     <script src="app.js"></script>
 </body>
+
 </html>

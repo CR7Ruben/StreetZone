@@ -29,7 +29,16 @@
             <li><a href="#" onclick="irColeccion()">Colección</a></li>
             <li><a href="#" onclick="irOfertas()">Ofertas</a></li>
             <li><a href="#" onclick="irContacto()">Contacto</a></li>
-            <li><a href="#" onclick="abrirLoginModal()">Iniciar Sesión</a></li>
+            <li>
+                <a href="#" id="btn-login" onclick="abrirLoginModal(); return false;">
+                    Iniciar Sesión
+                </a>
+            </li>
+            <li>
+                <a href="#" id="btn-logout" onclick="cerrarSesion(); return false;" style="display:none;">
+                    <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                </a>
+            </li>
             <li>
                 <a href="#" class="carrito-icono" onclick="abrirCarrito()">
                     <i class="fas fa-shopping-cart"></i>

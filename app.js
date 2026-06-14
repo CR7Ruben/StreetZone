@@ -256,10 +256,38 @@ function toggleMenu() {
 
 // Productos en oferta (con descuento)
 const ofertas = [
-    { id: 1, nombre: "Camiseta Essential", precio: 29.99, oferta: 19.99, imagen: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500", descuento: "34%" },
-    { id: 4, nombre: "Vestido Floral", precio: 59.99, oferta: 39.99, imagen: "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=500", descuento: "33%" },
-    { id: 7, nombre: "Jeans Skinny", precio: 49.99, oferta: 34.99, imagen: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=500", descuento: "30%" },
-    { id: 10, nombre: "Zapatillas Urban", precio: 79.99, oferta: 59.99, imagen: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=500", descuento: "25%" }
+    {
+        id: 1,
+        nombre: "Oversize Street Black",
+        precio: 29.99,
+        oferta: 19.99,
+        imagen: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500",
+        descuento: "34%"
+    },
+    {
+        id: 4,
+        nombre: "Hoodie Urban Black",
+        precio: 69.99,
+        oferta: 49.99,
+        imagen: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500",
+        descuento: "29%"
+    },
+    {
+        id: 7,
+        nombre: "Bomber Jacket Black",
+        precio: 89.99,
+        oferta: 69.99,
+        imagen: "https://images.unsplash.com/photo-1523398002811-999ca8dec234?w=500",
+        descuento: "22%"
+    },
+    {
+        id: 17,
+        nombre: "Urban Runner Black",
+        precio: 94.99,
+        oferta: 74.99,
+        imagen: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=500",
+        descuento: "21%"
+    }
 ];
 
 // ========== VARIABLES GLOBALES ==========
@@ -324,6 +352,34 @@ function ocultarTodasSecciones() {
     if (productosSec) productosSec.style.display = "none";
     if (ofertasSec) ofertasSec.style.display = "none";
     if (contactoSec) contactoSec.style.display = "none";
+}
+
+function agregarAlCarritoOferta(id) {
+    const oferta = ofertas.find(o => o.id === id);
+
+    if (!oferta) return;
+
+    const existe = carrito.find(item => item.id === id);
+
+    if (existe) {
+        existe.cantidad++;
+    } else {
+        carrito.push({
+            id: oferta.id,
+            nombre: oferta.nombre,
+            precio: oferta.oferta, // ← precio con descuento
+            imagen: oferta.imagen,
+            cantidad: 1,
+            enOferta: true
+        });
+    }
+
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+
+    actualizarContador();
+    mostrarNotificacion(
+        `${oferta.nombre} agregado al carrito con descuento ✓`
+    );
 }
 
 function mostrarOfertas() {
@@ -490,8 +546,10 @@ function abrirCarrito() {
             <div class="carrito-item">
                 <div>
                     <strong>${item.nombre}</strong><br>
-                    <small>$${item.precio} x ${item.cantidad}</small>
-                </div>
+<small>
+    ${item.enOferta ? '🔥 Oferta - ' : ''}
+    $${item.precio} x ${item.cantidad}
+</small>                </div>
                 <div>
                     <span style="font-weight:bold;">$${(item.precio * item.cantidad).toFixed(2)}</span>
                     <button onclick="eliminarDelCarrito(${item.id})" style="background:none; border:none; color:#e74c3c; margin-left:10px; cursor:pointer;">
@@ -535,6 +593,74 @@ function finalizarCompra() {
     }
     cerrarCarrito();
     abrirPagoModal();
+}
+
+// Validación de correo electrónico para el formulario de contacto
+function validarCorreo(email) {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+}
+
+// Validación de contraseña para el formulario de contacto (mínimo 8 caracteres, al menos una letra mayúscula, una letra minúscula, un número y un carácter especial)
+function validarPassword(password) {
+    const regex =
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.#_-])[A-Za-z\d@$!%*?&.#_-]{8,}$/;
+
+    return regex.test(password);
+}
+
+function cerrarSesion() {
+    localStorage.removeItem("usuarioLogueado");
+    localStorage.removeItem("correoUsuario");
+
+    actualizarEstadoSesion();
+
+    mostrarNotificacion("👋 Sesión cerrada correctamente");
+}
+
+// Actualizar estado de sesión (mostrar u ocultar botón de login según si el usuario está logueado o no)
+function actualizarEstadoSesion() {
+    const btnLogin = document.getElementById("btn-login");
+    const btnLogout = document.getElementById("btn-logout");
+
+    if (localStorage.getItem("usuarioLogueado") === "true") {
+        if (btnLogin) btnLogin.style.display = "none";
+        if (btnLogout) btnLogout.style.display = "inline-block";
+    } else {
+        if (btnLogin) btnLogin.style.display = "inline-block";
+        if (btnLogout) btnLogout.style.display = "none";
+    }
+}
+
+// Simulación de inicio de sesión (solo para demostración, no es seguro ni recomendado para producción)
+function iniciarSesion() {
+    const email = document.getElementById("emailSesion").value.trim();
+    const password = document.getElementById("passwordSesion").value.trim();
+
+    if (!validarCorreo(email)) {
+        mostrarNotificacion(
+            "⚠️ Ingresa un correo electrónico válido",
+            "error"
+        );
+        return;
+    }
+
+    if (!validarPassword(password)) {
+        mostrarNotificacion(
+            "⚠️ La contraseña debe tener mínimo 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial",
+            "error"
+        );
+        return;
+    }
+
+    localStorage.setItem("usuarioLogueado", "true");
+    localStorage.setItem("correoUsuario", email);
+
+    cerrarLoginModal();
+
+    actualizarEstadoSesion();
+
+    mostrarNotificacion("✅ Sesión iniciada correctamente");
 }
 
 // ========== SISTEMA DE PAGO ==========
@@ -653,7 +779,7 @@ function validarTarjeta() {
         statusDiv.className = "payment-status error";
         return false;
     }
-    if (numeroLimpio.length !== 16) {
+    if (!/^\d{16}$/.test(numeroLimpio)) {
         statusDiv.innerHTML = "⚠️ Número de tarjeta inválido (16 dígitos)";
         statusDiv.className = "payment-status error";
         return false;
@@ -681,7 +807,7 @@ function validarPaypal() {
 
     if (!email || !password || !statusDiv) return false;
 
-    if (!email.value.trim() || !email.value.includes('@')) {
+    if (!validarCorreo(email.value.trim())) {
         statusDiv.innerHTML = "⚠️ Ingresa un email válido";
         statusDiv.className = "payment-status error";
         return false;
@@ -743,10 +869,8 @@ function procesarPago() {
 
         // Vaciar carrito
         carrito = [];
-        localStorage.removeItem("carrito");
-        actualizarContador();
-        localStorage.removeItem("carrito");
         localStorage.setItem("carrito", JSON.stringify(carrito));
+        actualizarContador();
         mostrarNotificacion("🎉 Compra realizada con éxito");
 
     }, 2000);
@@ -852,6 +976,15 @@ document.addEventListener("DOMContentLoaded", () => {
     carrito = JSON.parse(localStorage.getItem("carrito")) || [];
     actualizarContador();
     mostrarProductos();
+    actualizarEstadoSesion();
+
+    const loginForm = document.getElementById("inicioSesionForm");
+    if (loginForm) {
+        loginForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            iniciarSesion();
+        });
+    }
 
     const contactoForm = document.getElementById("contactoForm");
     if (contactoForm) {

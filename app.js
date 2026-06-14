@@ -2,258 +2,302 @@
 const productos = [
 
     // CAMISETAS
-    // CAMISETAS
-{
-    id: 1,
-    nombre: "Oversize Street Black",
-    precio: 29.99,
-    categoria: "camisetas",
-    imagen: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500"
-},
-{
-    id: 2,
-    nombre: "Urban Graphic Tee",
-    precio: 34.99,
-    categoria: "camisetas",
-    imagen: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=500"
-},
-{
-    id: 3,
-    nombre: "Tokyo Street Tee",
-    precio: 39.99,
-    categoria: "camisetas",
-    imagen: "https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?w=500"
-},
-{
-    id: 22,
-    nombre: "Graffiti Drop Tee",
-    precio: 32.99,
-    categoria: "camisetas",
-    imagen: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=500"
-},
-{
-    id: 23,
-    nombre: "Acid Wash Street Tee",
-    precio: 36.99,
-    categoria: "camisetas",
-    imagen: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=500"
-},
+    {
+        id: 1,
+        nombre: "Oversize Street Black",
+        precio: 29.99,
+        categoria: "camisetas",
+        imagen: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500"
+    },
+    {
+        id: 2,
+        nombre: "Urban Graphic Tee",
+        precio: 34.99,
+        categoria: "camisetas",
+        imagen: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=500"
+    },
+    {
+        id: 3,
+        nombre: "Tokyo Street Tee",
+        precio: 39.99,
+        categoria: "camisetas",
+        imagen: "https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?w=500"
+    },
+    {
+        id: 22,
+        nombre: "Graffiti Drop Tee",
+        precio: 32.99,
+        categoria: "camisetas",
+        imagen: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=500"
+    },
+    {
+        id: 23,
+        nombre: "Acid Wash Street Tee",
+        precio: 36.99,
+        categoria: "camisetas",
+        imagen: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=500"
+    },
 
-// HOODIES
-{
-    id: 4,
-    nombre: "Hoodie Urban Black",
-    precio: 69.99,
-    categoria: "hoodies",
-    imagen: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500"
-},
-{
-    id: 5,
-    nombre: "Oversize Hoodie Grey",
-    precio: 74.99,
-    categoria: "hoodies",
-    imagen: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=500"
-},
-{
-    id: 6,
-    nombre: "StreetZone Premium Hoodie",
-    precio: 79.99,
-    categoria: "hoodies",
-    imagen: "https://images.unsplash.com/photo-1578587018452-892bacefd3f2?w=500"
-},
-{
-    id: 24,
-    nombre: "Zip-Up Street Hoodie",
-    precio: 84.99,
-    categoria: "hoodies",
-    imagen: "https://images.unsplash.com/photo-1614975059251-992f11792b9f?w=500"
-},
-{
-    id: 25,
-    nombre: "Cropped Urban Hoodie",
-    precio: 72.99,
-    categoria: "hoodies",
-    imagen: "https://images.unsplash.com/photo-1631947430066-48c30d57b943?w=500"
-},
+    // HOODIES
+    {
+        id: 4,
+        nombre: "Hoodie Urban Black",
+        precio: 69.99,
+        categoria: "hoodies",
+        imagen: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500"
+    },
+    {
+        id: 5,
+        nombre: "Oversize Hoodie Grey",
+        precio: 74.99,
+        categoria: "hoodies",
+        imagen: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=500"
+    },
+    {
+        id: 6,
+        nombre: "StreetZone Premium Hoodie",
+        precio: 79.99,
+        categoria: "hoodies",
+        imagen: "https://images.unsplash.com/photo-1578587018452-892bacefd3f2?w=500"
+    },
+    {
+        id: 24,
+        nombre: "Zip-Up Street Hoodie",
+        precio: 84.99,
+        categoria: "hoodies",
+        imagen: "https://images.unsplash.com/photo-1614975059251-992f11792b9f?w=500"
+    },
+    {
+        id: 25,
+        nombre: "Graffiti Oversize Hoodie",
+        precio: 72.99,
+        categoria: "hoodies",
+        imagen: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500"
+    },
 
-// CHAQUETAS
-{
-    id: 7,
-    nombre: "Bomber Jacket Black",
-    precio: 89.99,
-    categoria: "chaquetas",
-    imagen: "https://images.unsplash.com/photo-1523398002811-999ca8dec234?w=500"
-},
-{
-    id: 8,
-    nombre: "Street Denim Jacket",
-    precio: 94.99,
-    categoria: "chaquetas",
-    imagen: "https://images.unsplash.com/photo-1576871337622-98d48d1cf531?w=500"
-},
-{
-    id: 9,
-    nombre: "Urban Varsity Jacket",
-    precio: 99.99,
-    categoria: "chaquetas",
-    imagen: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500"
-},
-{
-    id: 26,
-    nombre: "Windbreaker Street",
-    precio: 109.99,
-    categoria: "chaquetas",
-    imagen: "https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?w=500"
-},
-{
-    id: 27,
-    nombre: "Coach Jacket Urban",
-    precio: 95.99,
-    categoria: "chaquetas",
-    imagen: "https://images.unsplash.com/photo-1548883354-94bcfe321cbb?w=500"
-},
+    // CHAQUETAS
+    {
+        id: 7,
+        nombre: "Bomber Jacket Black",
+        precio: 89.99,
+        categoria: "chaquetas",
+        imagen: "https://images.unsplash.com/photo-1523398002811-999ca8dec234?w=500"
+    },
+    {
+        id: 8,
+        nombre: "Street Denim Jacket",
+        precio: 94.99,
+        categoria: "chaquetas",
+        imagen: "https://images.unsplash.com/photo-1576871337622-98d48d1cf531?w=500"
+    },
+    {
+        id: 9,
+        nombre: "Urban Varsity Jacket",
+        precio: 99.99,
+        categoria: "chaquetas",
+        imagen: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500"
+    },
+    {
+        id: 26,
+        nombre: "Windbreaker Street",
+        precio: 109.99,
+        categoria: "chaquetas",
+        imagen: "https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?w=500"
+    }, {
+        id: 27,
+        nombre: "Utility Tech Jacket",
+        precio: 95.99,
+        categoria: "chaquetas",
+        imagen: "https://images.unsplash.com/photo-1523398002811-999ca8dec234?w=500"
+    },
 
-// JEANS
-{
-    id: 10,
-    nombre: "Baggy Denim Blue",
-    precio: 54.99,
-    categoria: "jeans",
-    imagen: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=500"
-},
-{
-    id: 11,
-    nombre: "Ripped Street Jeans",
-    precio: 59.99,
-    categoria: "jeans",
-    imagen: "https://images.unsplash.com/photo-1542272604-787c3835535d?w=500"
-},
-{
-    id: 12,
-    nombre: "Urban Black Denim",
-    precio: 61.99,
-    categoria: "jeans",
-    imagen: "https://images.unsplash.com/photo-1582552938357-32b906df40cb?w=500"
-},
-{
-    id: 28,
-    nombre: "Wide Leg Street Denim",
-    precio: 64.99,
-    categoria: "jeans",
-    imagen: "https://images.unsplash.com/photo-1604176354204-9268737828e4?w=500"
-},
-{
-    id: 29,
-    nombre: "Distressed Skate Jeans",
-    precio: 67.99,
-    categoria: "jeans",
-    imagen: "https://images.unsplash.com/photo-1555689502-c4b22d76c56f?w=500"
-},
+    // JEANS
+    {
+        id: 10,
+        nombre: "Baggy Denim Blue",
+        precio: 54.99,
+        categoria: "jeans",
+        imagen: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=500"
+    },
+    {
+        id: 11,
+        nombre: "Ripped Street Jeans",
+        precio: 59.99,
+        categoria: "jeans",
+        imagen: "https://images.unsplash.com/photo-1542272604-787c3835535d?w=500"
+    },
+    {
+        id: 12,
+        nombre: "Urban Black Denim",
+        precio: 61.99,
+        categoria: "jeans",
+        imagen: "https://images.unsplash.com/photo-1582552938357-32b906df40cb?w=500"
+    },
+    {
+        id: 28,
+        nombre: "Wide Leg Street Denim",
+        precio: 64.99,
+        categoria: "jeans",
+        imagen: "https://images.unsplash.com/photo-1604176354204-9268737828e4?w=500"
+    },
+    {
+        id: 29,
+        nombre: "Distressed Skate Jeans",
+        precio: 67.99,
+        categoria: "jeans",
+        imagen: "https://images.unsplash.com/photo-1555689502-c4b22d76c56f?w=500"
+    },
 
-// PANTALONES
-{
-    id: 13,
-    nombre: "Cargo Street Black",
-    precio: 64.99,
-    categoria: "pantalones",
-    imagen: "https://images.unsplash.com/photo-1602293589930-45aad59ba3ab?w=500"
-},
-{
-    id: 15,
-    nombre: "Jogger Urban Fit",
-    precio: 59.99,
-    categoria: "pantalones",
-    imagen: "https://images.unsplash.com/photo-1552902865-b72c031ac5ea?w=500"
-},
-{
-    id: 30,
-    nombre: "Tactical Cargo Khaki",
-    precio: 69.99,
-    categoria: "pantalones",
-    imagen: "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=500"
-},
+    // PANTALONES
+    {
+        id: 13,
+        nombre: "Cargo Street Black",
+        precio: 64.99,
+        categoria: "pantalones",
+        imagen: "https://images.unsplash.com/photo-1602293589930-45aad59ba3ab?w=500"
+    },
+    {
+        id: 15,
+        nombre: "Jogger Urban Fit",
+        precio: 59.99,
+        categoria: "pantalones",
+        imagen: "https://images.unsplash.com/photo-1552902865-b72c031ac5ea?w=500"
+    },
+    {
+        id: 30,
+        nombre: "Tactical Cargo Khaki",
+        precio: 69.99,
+        categoria: "pantalones",
+        imagen: "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=500"
+    },
+    {
+        id: 38,
+        nombre: "Baggy Cargo Black",
+        precio: 74.99,
+        categoria: "pantalones",
+        imagen: "https://images.unsplash.com/photo-1506629905607-d9c297d94c2f?w=500"
+    },
+    {
+        id: 39,
+        nombre: "Parachute Street Pants",
+        precio: 79.99,
+        categoria: "pantalones",
+        imagen: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=500"
+    },
 
-// CALZADO
-{
-    id: 17,
-    nombre: "Urban Runner Black",
-    precio: 94.99,
-    categoria: "calzado",
-    imagen: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=500"
-},
-{
-    id: 18,
-    nombre: "Street High Top",
-    precio: 99.99,
-    categoria: "calzado",
-    imagen: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=500"
-},
-{
-    id: 32,
-    nombre: "Chunky Sole Sneaker",
-    precio: 109.99,
-    categoria: "calzado",
-    imagen: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500"
-},
-{
-    id: 33,
-    nombre: "Skate Low Top White",
-    precio: 89.99,
-    categoria: "calzado",
-    imagen: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=500"
-},
-{
-    id: 34,
-    nombre: "Urban Boot Street",
-    precio: 119.99,
-    categoria: "calzado",
-    imagen: "https://images.unsplash.com/photo-1520639888713-7851133b1ed0?w=500"
-},
+    // CALZADO
+    {
+        id: 17,
+        nombre: "Urban Runner Black",
+        precio: 94.99,
+        categoria: "calzado",
+        imagen: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=500"
+    },
+    {
+        id: 18,
+        nombre: "Street High Top",
+        precio: 99.99,
+        categoria: "calzado",
+        imagen: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=500"
+    },
+    {
+        id: 32,
+        nombre: "Chunky Sole Sneaker",
+        precio: 109.99,
+        categoria: "calzado",
+        imagen: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500"
+    },
+    {
+        id: 33,
+        nombre: "Skate Low Top White",
+        precio: 89.99,
+        categoria: "calzado",
+        imagen: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=500"
+    }, {
+        id: 34,
+        nombre: "Street Platform Sneaker",
+        precio: 119.99,
+        categoria: "calzado",
+        imagen: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500"
+    },
 
-// ACCESORIOS
-{
-    id: 19,
-    nombre: "Gorra StreetZone",
-    precio: 24.99,
-    categoria: "accesorios",
-    imagen: "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=500"
-},
-{
-    id: 20,
-    nombre: "Mochila Urban",
-    precio: 59.99,
-    categoria: "accesorios",
-    imagen: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500"
-},
-{
-    id: 21,
-    nombre: "Lentes Street Premium",
-    precio: 39.99,
-    categoria: "accesorios",
-    imagen: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=500"
-},
-{
-    id: 35,
-    nombre: "Beanie Urban Knit",
-    precio: 19.99,
-    categoria: "accesorios",
-    imagen: "https://images.unsplash.com/photo-1576871337622-98d48d1cf531?w=500"
-},
-{
-    id: 37,
-    nombre: "Bucket Hat Street",
-    precio: 22.99,
-    categoria: "accesorios",
-    imagen: "https://images.unsplash.com/photo-1556306535-0f09a537f0a3?w=500"
-}
+    // ACCESORIOS
+    {
+        id: 19,
+        nombre: "Gorra StreetZone",
+        precio: 24.99,
+        categoria: "accesorios",
+        imagen: "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=500"
+    },
+    {
+        id: 20,
+        nombre: "Mochila Urban",
+        precio: 59.99,
+        categoria: "accesorios",
+        imagen: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500"
+    }, {
+        id: 21,
+        nombre: "Crossbody Street Bag",
+        precio: 39.99,
+        categoria: "accesorios",
+        imagen: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500"
+    },
+    {
+        id: 35,
+        nombre: "Beanie Urban Knit",
+        precio: 19.99,
+        categoria: "accesorios",
+        imagen: "https://images.unsplash.com/photo-1576871337622-98d48d1cf531?w=500"
+    },
+    {
+        id: 37,
+        nombre: "Bucket Hat Street",
+        precio: 22.99,
+        categoria: "accesorios",
+        imagen: "https://images.unsplash.com/photo-1556306535-0f09a537f0a3?w=500"
+    }
 ];
+
+// Para el menú móvil
+function toggleMenu() {
+    const nav = document.getElementById("nav-links");
+    nav.classList.toggle("show");
+}
 
 // Productos en oferta (con descuento)
 const ofertas = [
-    { id: 1, nombre: "Camiseta Essential", precio: 29.99, oferta: 19.99, imagen: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500", descuento: "34%" },
-    { id: 4, nombre: "Vestido Floral", precio: 59.99, oferta: 39.99, imagen: "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=500", descuento: "33%" },
-    { id: 7, nombre: "Jeans Skinny", precio: 49.99, oferta: 34.99, imagen: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=500", descuento: "30%" },
-    { id: 10, nombre: "Zapatillas Urban", precio: 79.99, oferta: 59.99, imagen: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=500", descuento: "25%" }
+    {
+        id: 1,
+        nombre: "Oversize Street Black",
+        precio: 29.99,
+        oferta: 19.99,
+        imagen: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500",
+        descuento: "34%"
+    },
+    {
+        id: 4,
+        nombre: "Hoodie Urban Black",
+        precio: 69.99,
+        oferta: 49.99,
+        imagen: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500",
+        descuento: "29%"
+    },
+    {
+        id: 7,
+        nombre: "Bomber Jacket Black",
+        precio: 89.99,
+        oferta: 69.99,
+        imagen: "https://images.unsplash.com/photo-1523398002811-999ca8dec234?w=500",
+        descuento: "22%"
+    },
+    {
+        id: 17,
+        nombre: "Urban Runner Black",
+        precio: 94.99,
+        oferta: 74.99,
+        imagen: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=500",
+        descuento: "21%"
+    }
 ];
 
 // ========== VARIABLES GLOBALES ==========
@@ -320,6 +364,34 @@ function ocultarTodasSecciones() {
     if (contactoSec) contactoSec.style.display = "none";
 }
 
+function agregarAlCarritoOferta(id) {
+    const oferta = ofertas.find(o => o.id === id);
+
+    if (!oferta) return;
+
+    const existe = carrito.find(item => item.id === id);
+
+    if (existe) {
+        existe.cantidad++;
+    } else {
+        carrito.push({
+            id: oferta.id,
+            nombre: oferta.nombre,
+            precio: oferta.oferta, // ← precio con descuento
+            imagen: oferta.imagen,
+            cantidad: 1,
+            enOferta: true
+        });
+    }
+
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+
+    actualizarContador();
+    mostrarNotificacion(
+        `${oferta.nombre} agregado al carrito con descuento ✓`
+    );
+}
+
 function mostrarOfertas() {
     const grid = document.getElementById("ofertas-grid");
     if (!grid) return;
@@ -330,7 +402,7 @@ function mostrarOfertas() {
             <div class="oferta-imagen" style="background-image: url('${oferta.imagen}'); background-size: cover; background-position: center;"></div>
             <div class="oferta-info">
                 <h3>${oferta.nombre}</h3>
-                <p><span class="precio-original">$${oferta.precio}</span> 
+                <p><span class="precio-original">$${oferta.precio}</span>
                    <span class="precio-oferta">$${oferta.oferta}</span></p>
                 <button class="btn-carrito" onclick="agregarAlCarritoOferta(${oferta.id})">
                     <i class="fas fa-cart-plus"></i> Agregar al carrito
@@ -338,29 +410,6 @@ function mostrarOfertas() {
             </div>
         </div>
     `).join("");
-}
-
-function agregarAlCarritoOferta(id) {
-    const productoOferta = ofertas.find(o => o.id === id);
-    if (!productoOferta) return;
-
-    const existe = carrito.find(item => item.id === id);
-    if (existe) {
-        existe.cantidad++;
-    } else {
-        carrito.push({
-            id: productoOferta.id,
-            nombre: productoOferta.nombre,
-            precio: productoOferta.oferta,
-            categoria: "ofertas",
-            imagen: productoOferta.imagen,
-            cantidad: 1
-        });
-    }
-
-    actualizarContador();
-    mostrarNotificacion(`${productoOferta.nombre} agregado en oferta ✓`);
-    console.log(`🔥 Oferta agregada: ${productoOferta.nombre} - $${productoOferta.oferta}`);
 }
 
 // ========== MOSTRAR PRODUCTOS ==========
@@ -425,18 +474,24 @@ function filtrarPorCategoria(categoria) {
 // ========== AGREGAR AL CARRITO ==========
 function agregarAlCarrito(id) {
     const producto = productos.find(p => p.id === id);
+
     if (!producto) return;
 
     const existe = carrito.find(item => item.id === id);
+
     if (existe) {
         existe.cantidad++;
     } else {
-        carrito.push({ ...producto, cantidad: 1 });
+        carrito.push({
+            ...producto,
+            cantidad: 1
+        });
     }
 
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+
     actualizarContador();
-    mostrarNotificacion(`${producto.nombre} agregado ✓`);
-    console.log(`🛒 Agregado: ${producto.nombre} - $${producto.precio}`);
+    mostrarNotificacion(`${producto.nombre} agregado al carrito ✓`);
 }
 
 function actualizarContador() {
@@ -501,8 +556,10 @@ function abrirCarrito() {
             <div class="carrito-item">
                 <div>
                     <strong>${item.nombre}</strong><br>
-                    <small>$${item.precio} x ${item.cantidad}</small>
-                </div>
+<small>
+    ${item.enOferta ? '🔥 Oferta - ' : ''}
+    $${item.precio} x ${item.cantidad}
+</small>                </div>
                 <div>
                     <span style="font-weight:bold;">$${(item.precio * item.cantidad).toFixed(2)}</span>
                     <button onclick="eliminarDelCarrito(${item.id})" style="background:none; border:none; color:#e74c3c; margin-left:10px; cursor:pointer;">
@@ -520,6 +577,7 @@ function abrirCarrito() {
 
 function eliminarDelCarrito(id) {
     const index = carrito.findIndex(item => item.id === id);
+
     if (index !== -1) {
         if (carrito[index].cantidad > 1) {
             carrito[index].cantidad--;
@@ -527,6 +585,8 @@ function eliminarDelCarrito(id) {
             carrito.splice(index, 1);
         }
     }
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+
     actualizarContador();
     abrirCarrito();
 }
@@ -543,6 +603,74 @@ function finalizarCompra() {
     }
     cerrarCarrito();
     abrirPagoModal();
+}
+
+// Validación de correo electrónico para el formulario de contacto
+function validarCorreo(email) {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+}
+
+// Validación de contraseña para el formulario de contacto (mínimo 8 caracteres, al menos una letra mayúscula, una letra minúscula, un número y un carácter especial)
+function validarPassword(password) {
+    const regex =
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.#_-])[A-Za-z\d@$!%*?&.#_-]{8,}$/;
+
+    return regex.test(password);
+}
+
+function cerrarSesion() {
+    localStorage.removeItem("usuarioLogueado");
+    localStorage.removeItem("correoUsuario");
+
+    actualizarEstadoSesion();
+
+    mostrarNotificacion("👋 Sesión cerrada correctamente");
+}
+
+// Actualizar estado de sesión (mostrar u ocultar botón de login según si el usuario está logueado o no)
+function actualizarEstadoSesion() {
+    const btnLogin = document.getElementById("btn-login");
+    const btnLogout = document.getElementById("btn-logout");
+
+    if (localStorage.getItem("usuarioLogueado") === "true") {
+        if (btnLogin) btnLogin.style.display = "none";
+        if (btnLogout) btnLogout.style.display = "inline-block";
+    } else {
+        if (btnLogin) btnLogin.style.display = "inline-block";
+        if (btnLogout) btnLogout.style.display = "none";
+    }
+}
+
+// Simulación de inicio de sesión (solo para demostración, no es seguro ni recomendado para producción)
+function iniciarSesion() {
+    const email = document.getElementById("emailSesion").value.trim();
+    const password = document.getElementById("passwordSesion").value.trim();
+
+    if (!validarCorreo(email)) {
+        mostrarNotificacion(
+            "⚠️ Ingresa un correo electrónico válido",
+            "error"
+        );
+        return;
+    }
+
+    if (!validarPassword(password)) {
+        mostrarNotificacion(
+            "⚠️ La contraseña debe tener mínimo 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial",
+            "error"
+        );
+        return;
+    }
+
+    localStorage.setItem("usuarioLogueado", "true");
+    localStorage.setItem("correoUsuario", email);
+
+    cerrarLoginModal();
+
+    actualizarEstadoSesion();
+
+    mostrarNotificacion("✅ Sesión iniciada correctamente");
 }
 
 // ========== SISTEMA DE PAGO ==========
@@ -607,6 +735,14 @@ function abrirPagoModal() {
     if (transferenciaStatus) transferenciaStatus.innerHTML = "";
 }
 
+function abrirLoginModal() {
+    document.getElementById("login-modal").style.display = "flex";
+}
+
+function cerrarLoginModal() {
+    document.getElementById("login-modal").style.display = "none";
+}
+
 function seleccionarMetodo(metodo, elemento) {
     metodoSeleccionado = metodo;
 
@@ -644,6 +780,7 @@ function validarTarjeta() {
     const fecha = document.getElementById("fecha-expiracion");
     const cvv = document.getElementById("cvv");
     const statusDiv = document.getElementById("tarjeta-status");
+    const numeroLimpio = numero.value.replace(/\s/g, '');
 
     if (!nombre || !numero || !fecha || !cvv || !statusDiv) return false;
 
@@ -652,7 +789,7 @@ function validarTarjeta() {
         statusDiv.className = "payment-status error";
         return false;
     }
-    if (!numero.value.trim() || numero.value.length < 16) {
+    if (!/^\d{16}$/.test(numeroLimpio)) {
         statusDiv.innerHTML = "⚠️ Número de tarjeta inválido (16 dígitos)";
         statusDiv.className = "payment-status error";
         return false;
@@ -680,7 +817,7 @@ function validarPaypal() {
 
     if (!email || !password || !statusDiv) return false;
 
-    if (!email.value.trim() || !email.value.includes('@')) {
+    if (!validarCorreo(email.value.trim())) {
         statusDiv.innerHTML = "⚠️ Ingresa un email válido";
         statusDiv.className = "payment-status error";
         return false;
@@ -742,7 +879,9 @@ function procesarPago() {
 
         // Vaciar carrito
         carrito = [];
+        localStorage.setItem("carrito", JSON.stringify(carrito));
         actualizarContador();
+        mostrarNotificacion("🎉 Compra realizada con éxito");
 
     }, 2000);
 }
@@ -841,9 +980,21 @@ function verColeccion() {
 
 // ========== FORMULARIO CONTACTO ==========
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("🌟 FashionStore inicializada correctamente");
+    console.log("🌟 StreetZone inicializada correctamente");
 
+    // Recuperar carrito guardado
+    carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    actualizarContador();
     mostrarProductos();
+    actualizarEstadoSesion();
+
+    const loginForm = document.getElementById("inicioSesionForm");
+    if (loginForm) {
+        loginForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            iniciarSesion();
+        });
+    }
 
     const contactoForm = document.getElementById("contactoForm");
     if (contactoForm) {
@@ -887,7 +1038,11 @@ window.onclick = function (event) {
     const carritoModal = document.getElementById("carrito-modal");
     const pagoModal = document.getElementById("pago-modal");
     const confirmacionModal = document.getElementById("confirmacion-modal");
+    const loginModal = document.getElementById("login-modal");
 
+    if (loginModal && event.target === loginModal) {
+        loginModal.style.display = "none";
+    }
     if (carritoModal && event.target === carritoModal) {
         carritoModal.style.display = "none";
     }

@@ -18,15 +18,33 @@
             <i class="fas fa-bolt"></i>
             <span>StreetZone</span>
         </div>
-        <ul class="nav-links">
+
+        <!-- BOTÓN HAMBURGUESA -->
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+
+        <ul class="nav-links" id="nav-links">
             <li><a href="#" onclick="irInicio()">Inicio</a></li>
             <li><a href="#" onclick="irColeccion()">Colección</a></li>
             <li><a href="#" onclick="irOfertas()">Ofertas</a></li>
             <li><a href="#" onclick="irContacto()">Contacto</a></li>
-            <li><a href="#" class="carrito-icono" onclick="abrirCarrito()">
+            <li>
+                <a href="#" id="btn-login" onclick="abrirLoginModal(); return false;">
+                    Iniciar Sesión
+                </a>
+            </li>
+            <li>
+                <a href="#" id="btn-logout" onclick="cerrarSesion(); return false;" style="display:none;">
+                    <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                </a>
+            </li>
+            <li>
+                <a href="#" class="carrito-icono" onclick="abrirCarrito()">
                     <i class="fas fa-shopping-cart"></i>
                     <span id="contador-carrito">0</span>
-                </a></li>
+                </a>
+            </li>
         </ul>
     </nav>
 
@@ -240,6 +258,28 @@
             <p id="mensaje-confirmacion">Gracias por tu compra</p>
             <div id="detalle-confirmacion"></div>
             <button class="btn-primary" onclick="cerrarConfirmacion()">Continuar comprando</button>
+        </div>
+    </div>
+
+    <div id="login-modal" class="modal">
+        <div class="modal-content login-modal-content">
+
+            <div class="modal-header">
+                <h3>
+                    <i class="fas fa-user"></i>
+                    Iniciar Sesión
+                </h3>
+                <span class="cerrar-modal" onclick="cerrarLoginModal()">&times;</span>
+            </div>
+
+            <form id="inicioSesionForm">
+                <input type="email" id="emailSesion" placeholder="Correo electrónico" required>
+                <input type="password" id="passwordSesion" placeholder="Contraseña" required>
+                <button type="submit" class="btn-primary" style="width:100%;">
+                    Iniciar Sesión
+                </button>
+            </form>
+
         </div>
     </div>
 

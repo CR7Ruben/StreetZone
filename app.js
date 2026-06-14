@@ -2,7 +2,6 @@
 const productos = [
 
     // CAMISETAS
-    // CAMISETAS
     {
         id: 1,
         nombre: "Oversize Street Black",
@@ -70,10 +69,10 @@ const productos = [
     },
     {
         id: 25,
-        nombre: "Cropped Urban Hoodie",
+        nombre: "Graffiti Oversize Hoodie",
         precio: 72.99,
         categoria: "hoodies",
-        imagen: "https://images.unsplash.com/photo-1631947430066-48c30d57b943?w=500"
+        imagen: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500"
     },
 
     // CHAQUETAS
@@ -104,13 +103,12 @@ const productos = [
         precio: 109.99,
         categoria: "chaquetas",
         imagen: "https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?w=500"
-    },
-    {
+    }, {
         id: 27,
-        nombre: "Coach Jacket Urban",
+        nombre: "Utility Tech Jacket",
         precio: 95.99,
         categoria: "chaquetas",
-        imagen: "https://images.unsplash.com/photo-1548883354-94bcfe321cbb?w=500"
+        imagen: "https://images.unsplash.com/photo-1523398002811-999ca8dec234?w=500"
     },
 
     // JEANS
@@ -172,6 +170,20 @@ const productos = [
         categoria: "pantalones",
         imagen: "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=500"
     },
+    {
+        id: 38,
+        nombre: "Baggy Cargo Black",
+        precio: 74.99,
+        categoria: "pantalones",
+        imagen: "https://images.unsplash.com/photo-1506629905607-d9c297d94c2f?w=500"
+    },
+    {
+        id: 39,
+        nombre: "Parachute Street Pants",
+        precio: 79.99,
+        categoria: "pantalones",
+        imagen: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=500"
+    },
 
     // CALZADO
     {
@@ -201,13 +213,12 @@ const productos = [
         precio: 89.99,
         categoria: "calzado",
         imagen: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=500"
-    },
-    {
+    }, {
         id: 34,
-        nombre: "Urban Boot Street",
+        nombre: "Street Platform Sneaker",
         precio: 119.99,
         categoria: "calzado",
-        imagen: "https://images.unsplash.com/photo-1520639888713-7851133b1ed0?w=500"
+        imagen: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500"
     },
 
     // ACCESORIOS
@@ -224,13 +235,12 @@ const productos = [
         precio: 59.99,
         categoria: "accesorios",
         imagen: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500"
-    },
-    {
+    }, {
         id: 21,
-        nombre: "Lentes Street Premium",
+        nombre: "Crossbody Street Bag",
         precio: 39.99,
         categoria: "accesorios",
-        imagen: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=500"
+        imagen: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500"
     },
     {
         id: 35,

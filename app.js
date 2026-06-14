@@ -248,6 +248,12 @@ const productos = [
 }
 ];
 
+// Para el menú móvil
+function toggleMenu() {
+    const nav = document.getElementById("nav-links");
+    nav.classList.toggle("show");
+}
+
 // Productos en oferta (con descuento)
 const ofertas = [
     { id: 1, nombre: "Camiseta Essential", precio: 29.99, oferta: 19.99, imagen: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500", descuento: "34%" },

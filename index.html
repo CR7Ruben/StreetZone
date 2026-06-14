@@ -18,17 +18,25 @@
             <i class="fas fa-bolt"></i>
             <span>StreetZone</span>
         </div>
-        <ul class="nav-links">
-            <li><a href="#" onclick="irInicio()">Inicio</a></li>
-            <li><a href="#" onclick="irColeccion()">Colección</a></li>
-            <li><a href="#" onclick="irOfertas()">Ofertas</a></li>
-            <li><a href="#" onclick="irContacto()">Contacto</a></li>
-            <li><a href="#" class="carrito-icono" onclick="abrirCarrito()">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span id="contador-carrito">0</span>
-                </a></li>
-        </ul>
-    </nav>
+
+    <!-- BOTÓN HAMBURGUESA -->
+    <div class="menu-toggle" onclick="toggleMenu()">
+        <i class="fas fa-bars"></i>
+    </div>
+
+    <ul class="nav-links" id="nav-links">
+        <li><a href="#" onclick="irInicio()">Inicio</a></li>
+        <li><a href="#" onclick="irColeccion()">Colección</a></li>
+        <li><a href="#" onclick="irOfertas()">Ofertas</a></li>
+        <li><a href="#" onclick="irContacto()">Contacto</a></li>
+        <li>
+            <a href="#" class="carrito-icono" onclick="abrirCarrito()">
+                <i class="fas fa-shopping-cart"></i>
+                <span id="contador-carrito">0</span>
+            </a>
+        </li>
+    </ul>
+</nav>
 
     <!-- Sección Inicio (Hero) -->
     <header id="inicio" class="hero">

@@ -4,6 +4,40 @@
     box-sizing: border-box;
 }
 
+/* HAMBURGUESA */
+.menu-toggle {
+    display: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: #1a1a2e;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 70px;
+        right: 0;
+        background: white;
+        width: 200px;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        display: none; /* oculto por defecto */
+        border-radius: 10px;
+    }
+
+    .nav-links.show {
+        display: flex;
+    }
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);

@@ -30,6 +30,14 @@ const options = {
             {
                 name: "Usuarios",
                 description: "Operaciones relacionadas con usuarios"
+            },
+            {
+                name: "Ofertas",
+                description: "Operaciones relacionadas con ofertas"
+            },
+            {
+                name: "Pedidos",
+                description: "Operaciones relacionadas con pedidos"
             }
         ],
 
@@ -759,7 +767,521 @@ const options = {
                         }
                     }
                 }
-            }
+            },
+
+            // Ofertas
+            "/api/ofertas": {
+                get: {
+                    tags: ["Ofertas"],
+                    summary: "Obtener todas las ofertas",
+                    description:
+                        "Obtiene todas las ofertas registradas junto con la información del producto.",
+
+                    responses: {
+                        200: {
+                            description:
+                                "Lista de ofertas obtenida correctamente"
+                        },
+
+                        500: {
+                            description:
+                                "Error interno del servidor"
+                        }
+                    }
+                },
+
+                post: {
+                    tags: ["Ofertas"],
+                    summary: "Crear una nueva oferta",
+                    description:
+                        "Registra una nueva oferta asociada a un producto existente.",
+
+                    requestBody: {
+                        required: true,
+
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    type: "object",
+
+                                    required: [
+                                        "producto_id",
+                                        "precio_oferta",
+                                        "descuento",
+                                        "fecha_inicio"
+                                    ],
+
+                                    properties: {
+                                        producto_id: {
+                                            type: "integer"
+                                        },
+
+                                        precio_oferta: {
+                                            type: "number",
+                                            format: "double"
+                                        },
+
+                                        descuento: {
+                                            type: "number",
+                                            format: "double"
+                                        },
+
+                                        fecha_inicio: {
+                                            type: "string",
+                                            format: "date-time"
+                                        },
+
+                                        fecha_fin: {
+                                            type: "string",
+                                            format: "date-time"
+                                        },
+
+                                        activo: {
+                                            type: "boolean"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+
+                    responses: {
+                        201: {
+                            description:
+                                "Oferta creada correctamente"
+                        },
+
+                        400: {
+                            description:
+                                "Datos obligatorios o valores de oferta inválidos"
+                        },
+
+                        404: {
+                            description:
+                                "El producto indicado no existe"
+                        },
+
+                        500: {
+                            description:
+                                "Error interno del servidor"
+                        }
+                    }
+                }
+            },
+
+            "/api/ofertas/{id}": {
+                get: {
+                    tags: ["Ofertas"],
+                    summary: "Obtener una oferta por ID",
+                    description:
+                        "Obtiene una oferta específica junto con la información del producto.",
+
+                    parameters: [
+                        {
+                            name: "id",
+                            in: "path",
+                            required: true,
+                            description: "ID de la oferta",
+
+                            schema: {
+                                type: "integer"
+                            }
+                        }
+                    ],
+
+                    responses: {
+                        200: {
+                            description:
+                                "Oferta encontrada correctamente"
+                        },
+
+                        404: {
+                            description:
+                                "Oferta no encontrada"
+                        },
+
+                        500: {
+                            description:
+                                "Error interno del servidor"
+                        }
+                    }
+                },
+
+                put: {
+                    tags: ["Ofertas"],
+                    summary: "Actualizar una oferta",
+                    description:
+                        "Actualiza la información de una oferta existente.",
+
+                    parameters: [
+                        {
+                            name: "id",
+                            in: "path",
+                            required: true,
+                            description: "ID de la oferta",
+
+                            schema: {
+                                type: "integer"
+                            }
+                        }
+                    ],
+
+                    requestBody: {
+                        required: true,
+
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    type: "object",
+
+                                    properties: {
+                                        producto_id: {
+                                            type: "integer"
+                                        },
+
+                                        precio_oferta: {
+                                            type: "number",
+                                            format: "double"
+                                        },
+
+                                        descuento: {
+                                            type: "number",
+                                            format: "double"
+                                        },
+
+                                        fecha_inicio: {
+                                            type: "string",
+                                            format: "date-time"
+                                        },
+
+                                        fecha_fin: {
+                                            type: "string",
+                                            format: "date-time"
+                                        },
+
+                                        activo: {
+                                            type: "boolean"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+
+                    responses: {
+                        200: {
+                            description:
+                                "Oferta actualizada correctamente"
+                        },
+
+                        400: {
+                            description:
+                                "Valores de oferta inválidos"
+                        },
+
+                        404: {
+                            description:
+                                "Oferta o producto no encontrado"
+                        },
+
+                        500: {
+                            description:
+                                "Error interno del servidor"
+                        }
+                    }
+                },
+
+                delete: {
+                    tags: ["Ofertas"],
+                    summary: "Eliminar una oferta",
+                    description:
+                        "Elimina una oferta existente de la base de datos.",
+
+                    parameters: [
+                        {
+                            name: "id",
+                            in: "path",
+                            required: true,
+                            description: "ID de la oferta",
+
+                            schema: {
+                                type: "integer"
+                            }
+                        }
+                    ],
+
+                    responses: {
+                        200: {
+                            description:
+                                "Oferta eliminada correctamente"
+                        },
+
+                        404: {
+                            description:
+                                "Oferta no encontrada"
+                        },
+
+                        500: {
+                            description:
+                                "Error interno del servidor"
+                        }
+                    }
+                }
+            },
+
+            // Pedidos
+          "/api/pedidos": {
+                get: {
+                    tags: ["Pedidos"],
+                    summary: "Obtener todos los pedidos",
+                    description:
+                        "Obtiene todos los pedidos registrados junto con la información del usuario.",
+
+                    responses: {
+                        200: {
+                            description:
+                                "Lista de pedidos obtenida correctamente"
+                        },
+
+                        500: {
+                            description:
+                                "Error interno del servidor"
+                        }
+                    }
+                },
+
+                post: {
+                    tags: ["Pedidos"],
+                    summary: "Crear un nuevo pedido",
+                    description:
+                        "Registra un nuevo pedido asociado a un usuario existente.",
+
+                    requestBody: {
+                        required: true,
+
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    type: "object",
+
+                                    required: [
+                                        "usuario_id",
+                                        "total"
+                                    ],
+
+                                    properties: {
+                                        usuario_id: {
+                                            type: "integer"
+                                        },
+
+                                        total_importe: {
+                                            type: "number",
+                                            format: "double"
+                                        },
+
+                                        estado_pedido: {
+                                            type: "string"
+                                        },
+
+                                        estado_pago: {
+                                            type: "string"
+                                        },
+
+                                        stripe_payment_intent_id: {
+                                            type: "string"
+                                        },
+
+                                        stripe_checkout_session_id: {
+                                            type: "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+
+                    responses: {
+                        201: {
+                            description:
+                                "Pedido creado correctamente"
+                        },
+
+                        400: {
+                            description:
+                                "Datos obligatorios o estados no válidos"
+                        },
+
+                        404: {
+                            description:
+                                "El usuario indicado no existe"
+                        },
+
+                        500: {
+                            description:
+                                "Error interno del servidor"
+                        }
+                    }
+                }
+            },
+
+            "/api/pedidos/{id}": {
+                get: {
+                    tags: ["Pedidos"],
+                    summary: "Obtener un pedido por ID",
+                    description:
+                        "Obtiene un pedido específico junto con la información del usuario.",
+
+                    parameters: [
+                        {
+                            name: "id",
+                            in: "path",
+                            required: true,
+                            description: "ID del pedido",
+
+                            schema: {
+                                type: "integer"
+                            }
+                        }
+                    ],
+
+                    responses: {
+                        200: {
+                            description:
+                                "Pedido encontrado correctamente"
+                        },
+
+                        404: {
+                            description:
+                                "Pedido no encontrado"
+                        },
+
+                        500: {
+                            description:
+                                "Error interno del servidor"
+                        }
+                    }
+                },
+
+                put: {
+                    tags: ["Pedidos"],
+                    summary: "Actualizar un pedido",
+                    description:
+                        "Actualiza la información de un pedido existente.",
+
+                    parameters: [
+                        {
+                            name: "id",
+                            in: "path",
+                            required: true,
+                            description: "ID del pedido",
+
+                            schema: {
+                                type: "integer"
+                            }
+                        }
+                    ],
+
+                    requestBody: {
+                        required: true,
+
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    type: "object",
+
+                                    properties: {
+                                        usuario_id: {
+                                            type: "integer"
+                                        },
+
+                                        total_pedido: {
+                                            type: "number",
+                                            format: "double"
+                                        },
+
+                                        estado_pedido: {
+                                            type: "string"
+                                        },
+
+                                        estado_pago: {
+                                            type: "string"
+                                        },
+
+                                        stripe_payment_intent_id: {
+                                            type: "string"
+                                        },
+
+                                        stripe_checkout_session_id: {
+                                            type: "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+
+                    responses: {
+                        200: {
+                            description:
+                                "Pedido actualizado correctamente"
+                        },
+
+                        400: {
+                            description:
+                                "Datos o estados no válidos"
+                        },
+
+                        404: {
+                            description:
+                                "Pedido o usuario no encontrado"
+                        },
+
+                        500: {
+                            description:
+                                "Error interno del servidor"
+                        }
+                    }
+                },
+
+                delete: {
+                    tags: ["Pedidos"],
+                    summary: "Eliminar un pedido",
+                    description:
+                        "Elimina un pedido de la base de datos.",
+
+                    parameters: [
+                        {
+                            name: "id",
+                            in: "path",
+                            required: true,
+                            description: "ID del pedido",
+
+                            schema: {
+                                type: "integer"
+                            }
+                        }
+                    ],
+
+                    responses: {
+                        200: {
+                            description:
+                                "Pedido eliminado correctamente"
+                        },
+
+                        404: {
+                            description:
+                                "Pedido no encontrado"
+                        },
+
+                        500: {
+                            description:
+                                "Error interno del servidor"
+                        }
+                    }
+                }
+            },
+
+            //
         }
     },
 

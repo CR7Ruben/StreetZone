@@ -27,6 +27,10 @@ const options = {
                 name: "Categorias",
                 description: "Operaciones relacionadas con categorías"
             },
+            {
+                name: "Usuarios",
+                description: "Operaciones relacionadas con usuarios"
+            }
         ],
 
         paths: {
@@ -274,6 +278,8 @@ const options = {
                     }
                 }
             },
+
+            // Categorias
             "/api/categorias": {
                 get: {
                     tags: ["Categorias"],
@@ -493,6 +499,258 @@ const options = {
                         409: {
                             description:
                                 "No se puede eliminar la categoría porque tiene productos asociados"
+                        },
+
+                        500: {
+                            description:
+                                "Error interno del servidor"
+                        }
+                    }
+                }
+            },
+
+            // Usuarios
+            "/api/usuarios": {
+                get: {
+                    tags: ["Usuarios"],
+                    summary: "Obtener todos los usuarios",
+                    description:
+                        "Obtiene todos los usuarios registrados sin mostrar sus contraseñas.",
+
+                    responses: {
+                        200: {
+                            description:
+                                "Lista de usuarios obtenida correctamente"
+                        },
+
+                        500: {
+                            description:
+                                "Error interno del servidor"
+                        }
+                    }
+                },
+
+                post: {
+                    tags: ["Usuarios"],
+                    summary: "Crear un nuevo usuario",
+                    description:
+                        "Registra un nuevo usuario en la base de datos.",
+
+                    requestBody: {
+                        required: true,
+
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    type: "object",
+
+                                    required: [
+                                        "nombre",
+                                        "email",
+                                        "password"
+                                    ],
+
+                                    properties: {
+                                        nombre: {
+                                            type: "string"
+                                        },
+
+                                        email: {
+                                            type: "string"
+                                        },
+
+                                        password: {
+                                            type: "string",
+                                            description:
+                                                "Mínimo 8 caracteres, con una mayúscula, una minúscula, un número y un carácter especial."
+                                        },
+
+                                        rol: {
+                                            type: "string"
+                                        },
+
+                                        activo: {
+                                            type: "boolean"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+
+                    responses: {
+                        201: {
+                            description:
+                                "Usuario creado correctamente"
+                        },
+
+                        400: {
+                            description:
+                                "Datos obligatorios faltantes o contraseña inválida"
+                        },
+
+                        409: {
+                            description:
+                                "El correo electrónico ya está registrado"
+                        },
+
+                        500: {
+                            description:
+                                "Error interno del servidor"
+                        }
+                    }
+                }
+            },
+
+            "/api/usuarios/{id}": {
+                get: {
+                    tags: ["Usuarios"],
+                    summary: "Obtener un usuario por ID",
+                    description:
+                        "Obtiene la información de un usuario específico.",
+
+                    parameters: [
+                        {
+                            name: "id",
+                            in: "path",
+                            required: true,
+                            description: "ID del usuario",
+
+                            schema: {
+                                type: "integer"
+                            }
+                        }
+                    ],
+
+                    responses: {
+                        200: {
+                            description:
+                                "Usuario encontrado correctamente"
+                        },
+
+                        404: {
+                            description:
+                                "Usuario no encontrado"
+                        },
+
+                        500: {
+                            description:
+                                "Error interno del servidor"
+                        }
+                    }
+                },
+
+                put: {
+                    tags: ["Usuarios"],
+                    summary: "Actualizar un usuario",
+                    description:
+                        "Actualiza la información de un usuario existente.",
+
+                    parameters: [
+                        {
+                            name: "id",
+                            in: "path",
+                            required: true,
+                            description: "ID del usuario",
+
+                            schema: {
+                                type: "integer"
+                            }
+                        }
+                    ],
+
+                    requestBody: {
+                        required: true,
+
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    type: "object",
+
+                                    properties: {
+                                        nombre: {
+                                            type: "string"
+                                        },
+
+                                        email: {
+                                            type: "string"
+                                        },
+
+                                        password: {
+                                            type: "string",
+                                            description:
+                                                "Mínimo 8 caracteres, con una mayúscula, una minúscula, un número y un carácter especial."
+                                        },
+
+                                        rol: {
+                                            type: "string"
+                                        },
+
+                                        activo: {
+                                            type: "boolean"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+
+                    responses: {
+                        200: {
+                            description:
+                                "Usuario actualizado correctamente"
+                        },
+
+                        400: {
+                            description:
+                                "Contraseña inválida"
+                        },
+
+                        404: {
+                            description:
+                                "Usuario no encontrado"
+                        },
+
+                        409: {
+                            description:
+                                "El correo electrónico ya está registrado"
+                        },
+
+                        500: {
+                            description:
+                                "Error interno del servidor"
+                        }
+                    }
+                },
+
+                delete: {
+                    tags: ["Usuarios"],
+                    summary: "Eliminar un usuario",
+                    description:
+                        "Elimina un usuario de la base de datos.",
+
+                    parameters: [
+                        {
+                            name: "id",
+                            in: "path",
+                            required: true,
+                            description: "ID del usuario",
+
+                            schema: {
+                                type: "integer"
+                            }
+                        }
+                    ],
+
+                    responses: {
+                        200: {
+                            description:
+                                "Usuario eliminado correctamente"
+                        },
+
+                        404: {
+                            description:
+                                "Usuario no encontrado"
                         },
 
                         500: {

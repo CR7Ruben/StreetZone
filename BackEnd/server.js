@@ -9,6 +9,7 @@ const swaggerSpec = require("./config/swagger");
 
 const productoRoutes = require("./src/routes/productoRoutes");
 const categoriaRoutes = require("./src/routes/categoriaRoutes");
+const usuarioRoutes = require("./src/routes/usuarioRoutes");
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 // Rutas
 app.use("/api/productos", productoRoutes);
 app.use("/api/categorias", categoriaRoutes);
+app.use("/api/usuarios", usuarioRoutes);
 
 app.get("/", (req, res) => {
     res.json({

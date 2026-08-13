@@ -3,17 +3,45 @@ const express = require("express");
 const {
     obtenerUsuarios,
     obtenerUsuarioPorId,
-    crearUsuario,
     actualizarUsuario,
     eliminarUsuario
 } = require("../controllers/usuarioController");
 
+const {
+    verificarToken,
+    verificarRol
+} = require("../middleware/authMiddleware");
+
 const router = express.Router();
 
-router.get("/", obtenerUsuarios);
-router.get("/:id", obtenerUsuarioPorId);
-router.post("/", crearUsuario);
-router.put("/:id", actualizarUsuario);
-router.delete("/:id", eliminarUsuario);
+// Solo administradores
+
+router.get(
+    "/",
+    verificarToken,
+    verificarRol("admin"),
+    obtenerUsuarios
+);
+
+router.get(
+    "/:id",
+    verificarToken,
+    verificarRol("admin"),
+    obtenerUsuarioPorId
+);
+
+router.put(
+    "/:id",
+    verificarToken,
+    verificarRol("admin"),
+    actualizarUsuario
+);
+
+router.delete(
+    "/:id",
+    verificarToken,
+    verificarRol("admin"),
+    eliminarUsuario
+);
 
 module.exports = router;

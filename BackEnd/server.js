@@ -12,6 +12,8 @@ const categoriaRoutes = require("./src/routes/categoriaRoutes");
 const usuarioRoutes = require("./src/routes/usuarioRoutes");
 const ofertaRoutes = require("./src/routes/ofertaRoutes");
 const pedidoRoutes = require("./src/routes/pedidoRoutes");
+const detallePedidoRoutes = require("./src/routes/detallePedidoRoutes");
+const authRoutes = require("./src/routes/authRoutes");
 
 const app = express();
 
@@ -19,7 +21,19 @@ app.use(cors());
 app.use(express.json());
 
 // Swagger
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use(
+    "/api-docs",
+    swaggerUi.serve,
+    swaggerUi.setup(swaggerSpec, {
+        swaggerOptions: {
+            persistAuthorization: true
+        }
+    })
+);
+
+app.get("/api-docs.json", (req, res) => {
+    res.json(swaggerSpec);
+});
 
 // Rutas
 app.use("/api/productos", productoRoutes);
@@ -27,7 +41,8 @@ app.use("/api/categorias", categoriaRoutes);
 app.use("/api/usuarios", usuarioRoutes);
 app.use("/api/ofertas", ofertaRoutes);
 app.use("/api/pedidos", pedidoRoutes);
-
+app.use("/api/detalle-pedidos", detallePedidoRoutes);
+app.use("/api/auth", authRoutes);
 
 app.get("/", (req, res) => {
     res.json({

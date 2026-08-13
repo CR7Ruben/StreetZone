@@ -3,6 +3,7 @@ const Categoria = require("./Categoria");
 const Producto = require("./Producto");
 const Oferta = require("./Oferta");
 const Pedido = require("./Pedido");
+const DetallePedido = require("./DetallePedido");
 
 // Categoria → productos
 Categoria.hasMany(Producto, {
@@ -38,7 +39,6 @@ Pedido.belongsTo(Usuario, {
 });
 
 // Pedido → detalle de pedidos
-
 Pedido.hasMany(DetallePedido, {
     foreignKey: "pedido_id",
     as: "detalles"
@@ -50,7 +50,6 @@ DetallePedido.belongsTo(Pedido, {
 });
 
 // Producto → detalle de pedidos
-
 Producto.hasMany(DetallePedido, {
     foreignKey: "producto_id",
     as: "detallesPedido"
@@ -60,7 +59,6 @@ DetallePedido.belongsTo(Producto, {
     foreignKey: "producto_id",
     as: "producto"
 });
-
 module.exports = {
     Usuario,
     Categoria,

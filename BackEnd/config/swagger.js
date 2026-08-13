@@ -38,6 +38,14 @@ const options = {
             {
                 name: "Pedidos",
                 description: "Operaciones relacionadas con pedidos"
+            },
+            {
+                name: "DetallePedidos",
+                description: "Operaciones relacionadas con los detalles de pedidos"
+            },
+            {
+                name: "Auth",
+                description: "Operaciones de autenticación y autorización"
             }
         ],
 
@@ -68,6 +76,11 @@ const options = {
                     description:
                         "Registra un nuevo producto en la base de datos.",
 
+                    security: [
+                        {
+                            bearerAuth: []
+                        }
+                    ],
                     requestBody: {
                         required: true,
 
@@ -120,6 +133,16 @@ const options = {
 
                         400: {
                             description: "Datos obligatorios faltantes"
+                        },
+
+                        401: {
+                            description:
+                                "Token inválido o no proporcionado"
+                        },
+
+                        403: {
+                            description:
+                                "No tienes permisos para realizar esta acción"
                         },
 
                         404: {
@@ -175,6 +198,11 @@ const options = {
                     description:
                         "Actualiza la información de un producto existente.",
 
+                    security: [
+                        {
+                            bearerAuth: []
+                        }
+                    ],
                     parameters: [
                         {
                             name: "id",
@@ -237,6 +265,16 @@ const options = {
                                 "Producto actualizado correctamente"
                         },
 
+                        401: {
+                            description:
+                                "Token inválido o no proporcionado"
+                        },
+
+                        403: {
+                            description:
+                                "No tienes permisos para realizar esta acción"
+                        },
+
                         404: {
                             description:
                                 "Producto o categoría no encontrada"
@@ -255,6 +293,11 @@ const options = {
                     description:
                         "Elimina un producto existente de la base de datos.",
 
+                    security: [
+                        {
+                            bearerAuth: []
+                        }
+                    ],
                     parameters: [
                         {
                             name: "id",
@@ -272,6 +315,16 @@ const options = {
                         200: {
                             description:
                                 "Producto eliminado correctamente"
+                        },
+
+                        401: {
+                            description:
+                                "Token inválido o no proporcionado"
+                        },
+
+                        403: {
+                            description:
+                                "No tienes permisos para realizar esta acción"
                         },
 
                         404: {
@@ -525,10 +578,25 @@ const options = {
                     description:
                         "Obtiene todos los usuarios registrados sin mostrar sus contraseñas.",
 
+                    security: [
+                        {
+                            bearerAuth: []
+                        }
+                    ],
                     responses: {
                         200: {
                             description:
-                                "Lista de usuarios obtenida correctamente"
+                                "Usuarios encontrados correctamente"
+                        },
+
+                        401: {
+                            description:
+                                "Token inválido o no proporcionado"
+                        },
+
+                        403: {
+                            description:
+                                "No tienes permisos para realizar esta acción"
                         },
 
                         500: {
@@ -537,77 +605,6 @@ const options = {
                         }
                     }
                 },
-
-                post: {
-                    tags: ["Usuarios"],
-                    summary: "Crear un nuevo usuario",
-                    description:
-                        "Registra un nuevo usuario en la base de datos.",
-
-                    requestBody: {
-                        required: true,
-
-                        content: {
-                            "application/json": {
-                                schema: {
-                                    type: "object",
-
-                                    required: [
-                                        "nombre",
-                                        "email",
-                                        "password"
-                                    ],
-
-                                    properties: {
-                                        nombre: {
-                                            type: "string"
-                                        },
-
-                                        email: {
-                                            type: "string"
-                                        },
-
-                                        password: {
-                                            type: "string",
-                                            description:
-                                                "Mínimo 8 caracteres, con una mayúscula, una minúscula, un número y un carácter especial."
-                                        },
-
-                                        rol: {
-                                            type: "string"
-                                        },
-
-                                        activo: {
-                                            type: "boolean"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-
-                    responses: {
-                        201: {
-                            description:
-                                "Usuario creado correctamente"
-                        },
-
-                        400: {
-                            description:
-                                "Datos obligatorios faltantes o contraseña inválida"
-                        },
-
-                        409: {
-                            description:
-                                "El correo electrónico ya está registrado"
-                        },
-
-                        500: {
-                            description:
-                                "Error interno del servidor"
-                        }
-                    }
-                }
             },
 
             "/api/usuarios/{id}": {
@@ -630,15 +627,25 @@ const options = {
                         }
                     ],
 
+                    security: [
+                        {
+                            bearerAuth: []
+                        }
+                    ],
                     responses: {
                         200: {
                             description:
                                 "Usuario encontrado correctamente"
                         },
 
-                        404: {
+                        401: {
                             description:
-                                "Usuario no encontrado"
+                                "Token inválido o no proporcionado"
+                        },
+
+                        403: {
+                            description:
+                                "No tienes permisos para realizar esta acción"
                         },
 
                         500: {
@@ -703,25 +710,25 @@ const options = {
                         }
                     },
 
+                    security: [
+                        {
+                            bearerAuth: []
+                        }
+                    ],
                     responses: {
                         200: {
                             description:
                                 "Usuario actualizado correctamente"
                         },
 
-                        400: {
+                        401: {
                             description:
-                                "Contraseña inválida"
+                                "Token inválido o no proporcionado"
                         },
 
-                        404: {
+                        403: {
                             description:
-                                "Usuario no encontrado"
-                        },
-
-                        409: {
-                            description:
-                                "El correo electrónico ya está registrado"
+                                "No tienes permisos para realizar esta acción"
                         },
 
                         500: {
@@ -750,15 +757,25 @@ const options = {
                         }
                     ],
 
+                    security: [
+                        {
+                            bearerAuth: []
+                        }
+                    ],
                     responses: {
                         200: {
                             description:
                                 "Usuario eliminado correctamente"
                         },
 
-                        404: {
+                        401: {
                             description:
-                                "Usuario no encontrado"
+                                "Token inválido o no proporcionado"
+                        },
+
+                        403: {
+                            description:
+                                "No tienes permisos para realizar esta acción"
                         },
 
                         500: {
@@ -1030,7 +1047,7 @@ const options = {
             },
 
             // Pedidos
-          "/api/pedidos": {
+            "/api/pedidos": {
                 get: {
                     tags: ["Pedidos"],
                     summary: "Obtener todos los pedidos",
@@ -1074,12 +1091,12 @@ const options = {
                                             type: "integer"
                                         },
 
-                                        total_importe: {
+                                        total: {
                                             type: "number",
                                             format: "double"
                                         },
 
-                                        estado_pedido: {
+                                        estado: {
                                             type: "string"
                                         },
 
@@ -1194,12 +1211,12 @@ const options = {
                                             type: "integer"
                                         },
 
-                                        total_pedido: {
+                                        total: {
                                             type: "number",
                                             format: "double"
                                         },
 
-                                        estado_pedido: {
+                                        estado: {
                                             type: "string"
                                         },
 
@@ -1281,7 +1298,422 @@ const options = {
                 }
             },
 
-            //
+            // Detalle de pedidos
+            "/api/detalle-pedidos": {
+                get: {
+                    tags: ["DetallePedidos"],
+                    summary: "Obtener todos los detalles de pedidos",
+                    description:
+                        "Obtiene todos los detalles registrados junto con el pedido y producto relacionados.",
+
+                    responses: {
+                        200: {
+                            description:
+                                "Lista de detalles obtenida correctamente"
+                        },
+
+                        500: {
+                            description:
+                                "Error interno del servidor"
+                        }
+                    }
+                },
+
+                post: {
+                    tags: ["DetallePedidos"],
+                    summary: "Crear un detalle de pedido",
+                    description:
+                        "Registra un producto dentro de un pedido existente.",
+
+                    requestBody: {
+                        required: true,
+
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    type: "object",
+
+                                    required: [
+                                        "pedido_id",
+                                        "producto_id",
+                                        "cantidad",
+                                        "precio_unitario"
+                                    ],
+
+                                    properties: {
+                                        pedido_id: {
+                                            type: "integer"
+                                        },
+
+                                        producto_id: {
+                                            type: "integer"
+                                        },
+
+                                        cantidad: {
+                                            type: "integer"
+                                        },
+
+                                        precio_unitario: {
+                                            type: "number",
+                                            format: "double"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+
+                    responses: {
+                        201: {
+                            description:
+                                "Detalle de pedido creado correctamente"
+                        },
+
+                        400: {
+                            description:
+                                "Datos inválidos o stock insuficiente"
+                        },
+
+                        404: {
+                            description:
+                                "Pedido o producto no encontrado"
+                        },
+
+                        500: {
+                            description:
+                                "Error interno del servidor"
+                        }
+                    }
+                }
+            },
+
+            "/api/detalle-pedidos/{id}": {
+                get: {
+                    tags: ["DetallePedidos"],
+                    summary: "Obtener un detalle por ID",
+                    description:
+                        "Obtiene un detalle específico junto con su pedido y producto.",
+
+                    parameters: [
+                        {
+                            name: "id",
+                            in: "path",
+                            required: true,
+                            description: "ID del detalle",
+
+                            schema: {
+                                type: "integer"
+                            }
+                        }
+                    ],
+
+                    responses: {
+                        200: {
+                            description:
+                                "Detalle encontrado correctamente"
+                        },
+
+                        404: {
+                            description:
+                                "Detalle de pedido no encontrado"
+                        },
+
+                        500: {
+                            description:
+                                "Error interno del servidor"
+                        }
+                    }
+                },
+
+                put: {
+                    tags: ["DetallePedidos"],
+                    summary: "Actualizar un detalle de pedido",
+                    description:
+                        "Actualiza la información de un detalle de pedido existente.",
+
+                    parameters: [
+                        {
+                            name: "id",
+                            in: "path",
+                            required: true,
+                            description: "ID del detalle",
+
+                            schema: {
+                                type: "integer"
+                            }
+                        }
+                    ],
+
+                    requestBody: {
+                        required: true,
+
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    type: "object",
+
+                                    properties: {
+                                        pedido_id: {
+                                            type: "integer"
+                                        },
+
+                                        producto_id: {
+                                            type: "integer"
+                                        },
+
+                                        cantidad: {
+                                            type: "integer"
+                                        },
+
+                                        precio_unitario: {
+                                            type: "number",
+                                            format: "double"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+
+                    responses: {
+                        200: {
+                            description:
+                                "Detalle actualizado correctamente"
+                        },
+
+                        400: {
+                            description:
+                                "Datos inválidos o stock insuficiente"
+                        },
+
+                        404: {
+                            description:
+                                "Detalle, pedido o producto no encontrado"
+                        },
+
+                        500: {
+                            description:
+                                "Error interno del servidor"
+                        }
+                    }
+                },
+
+                delete: {
+                    tags: ["DetallePedidos"],
+                    summary: "Eliminar un detalle de pedido",
+                    description:
+                        "Elimina un detalle de pedido existente.",
+
+                    parameters: [
+                        {
+                            name: "id",
+                            in: "path",
+                            required: true,
+                            description: "ID del detalle",
+
+                            schema: {
+                                type: "integer"
+                            }
+                        }
+                    ],
+
+                    responses: {
+                        200: {
+                            description:
+                                "Detalle de pedido eliminado correctamente"
+                        },
+
+                        404: {
+                            description:
+                                "Detalle de pedido no encontrado"
+                        },
+
+                        500: {
+                            description:
+                                "Error interno del servidor"
+                        }
+                    }
+                }
+            },
+
+            // Auth
+            "/api/auth/registro": {
+                post: {
+                    tags: ["Auth"],
+                    summary: "Registrar un usuario",
+                    description:
+                        "Registra un nuevo usuario y genera un token JWT.",
+
+                    requestBody: {
+                        required: true,
+
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    type: "object",
+
+                                    required: [
+                                        "nombre",
+                                        "email",
+                                        "password"
+                                    ],
+
+                                    properties: {
+                                        nombre: {
+                                            type: "string"
+                                        },
+
+                                        email: {
+                                            type: "string",
+                                            format: "email"
+                                        },
+
+                                        password: {
+                                            type: "string",
+                                            description:
+                                                "Mínimo 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+
+                    responses: {
+                        201: {
+                            description:
+                                "Usuario registrado correctamente"
+                        },
+
+                        400: {
+                            description:
+                                "Datos inválidos"
+                        },
+
+                        409: {
+                            description:
+                                "El correo electrónico ya está registrado"
+                        },
+
+                        500: {
+                            description:
+                                "Error interno del servidor"
+                        }
+                    }
+                }
+            },
+
+            "/api/auth/login": {
+                post: {
+                    tags: ["Auth"],
+                    summary: "Iniciar sesión",
+                    description:
+                        "Autentica un usuario y genera un token JWT.",
+
+                    requestBody: {
+                        required: true,
+
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    type: "object",
+
+                                    required: [
+                                        "email",
+                                        "password"
+                                    ],
+
+                                    properties: {
+                                        email: {
+                                            type: "string",
+                                            format: "email"
+                                        },
+
+                                        password: {
+                                            type: "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+
+                    responses: {
+                        200: {
+                            description:
+                                "Inicio de sesión correcto"
+                        },
+
+                        400: {
+                            description:
+                                "Email y password son obligatorios"
+                        },
+
+                        401: {
+                            description:
+                                "Credenciales incorrectas"
+                        },
+
+                        403: {
+                            description:
+                                "Usuario desactivado"
+                        },
+
+                        500: {
+                            description:
+                                "Error interno del servidor"
+                        }
+                    }
+                }
+            },
+
+            "/api/auth/perfil": {
+                get: {
+                    tags: ["Auth"],
+                    summary: "Obtener perfil autenticado",
+                    description:
+                        "Obtiene la información del usuario autenticado mediante JWT.",
+
+                    security: [
+                        {
+                            bearerAuth: []
+                        }
+                    ],
+
+                    responses: {
+                        200: {
+                            description:
+                                "Perfil obtenido correctamente"
+                        },
+
+                        401: {
+                            description:
+                                "Token inválido o no proporcionado"
+                        },
+
+                        404: {
+                            description:
+                                "Usuario no encontrado"
+                        },
+
+                        500: {
+                            description:
+                                "Error interno del servidor"
+                        }
+                    }
+                }
+            }
+
+        },
+
+        components: {
+            securitySchemes: {
+                bearerAuth: {
+                    type: "http",
+                    scheme: "bearer",
+                    bearerFormat: "JWT"
+                }
+            }
         }
     },
 

@@ -8,16 +8,61 @@ const {
     eliminarOferta
 } = require("../controllers/ofertaController");
 
+const {
+    verificarToken,
+    verificarRol
+} = require("../middleware/authMiddleware");
+
 const router = express.Router();
+
+// ============================================
+// GET /api/ofertas
+// Público
+// ============================================
 
 router.get("/", obtenerOfertas);
 
+// ============================================
+// GET /api/ofertas/:id
+// Público
+// ============================================
+
 router.get("/:id", obtenerOfertaPorId);
 
-router.post("/", crearOferta);
+// ============================================
+// POST /api/ofertas
+// JWT + ADMIN
+// ============================================
 
-router.put("/:id", actualizarOferta);
+router.post(
+    "/",
+    verificarToken,
+    verificarRol("admin"),
+    crearOferta
+);
 
-router.delete("/:id", eliminarOferta);
+// ============================================
+// PUT /api/ofertas/:id
+// JWT + ADMIN
+// ============================================
+
+router.put(
+    "/:id",
+    verificarToken,
+    verificarRol("admin"),
+    actualizarOferta
+);
+
+// ============================================
+// DELETE /api/ofertas/:id
+// JWT + ADMIN
+// ============================================
+
+router.delete(
+    "/:id",
+    verificarToken,
+    verificarRol("admin"),
+    eliminarOferta
+);
 
 module.exports = router;

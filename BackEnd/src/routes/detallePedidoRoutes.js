@@ -8,16 +8,33 @@ const {
     eliminarDetalle
 } = require("../controllers/detallePedidoController");
 
+const {
+    verificarToken,
+    verificarRol
+} = require("../middleware/authMiddleware");
+
 const router = express.Router();
 
-router.get("/", obtenerDetalles);
+// Cliente + Admin
+router.get("/", verificarToken, obtenerDetalles);
 
-router.get("/:id", obtenerDetallePorId);
+router.get("/:id", verificarToken, obtenerDetallePorId);
 
-router.post("/", crearDetalle);
+router.post("/", verificarToken, crearDetalle);
 
-router.put("/:id", actualizarDetalle);
+// Admin solamente
+router.put(
+    "/:id",
+    verificarToken,
+    verificarRol("admin"),
+    actualizarDetalle
+);
 
-router.delete("/:id", eliminarDetalle);
+router.delete(
+    "/:id",
+    verificarToken,
+    verificarRol("admin"),
+    eliminarDetalle
+);
 
 module.exports = router;

@@ -367,6 +367,11 @@ const options = {
                     description:
                         "Registra una nueva categoría en la base de datos.",
 
+                    security: [
+                        {
+                            bearerAuth: []
+                        }
+                    ],
                     requestBody: {
                         required: true,
 
@@ -406,6 +411,16 @@ const options = {
                         400: {
                             description:
                                 "El nombre de la categoría es obligatorio"
+                        },
+
+                        401: {
+                            description:
+                                "Token inválido o no proporcionado"
+                        },
+
+                        403: {
+                            description:
+                                "No tienes permisos para realizar esta acción"
                         },
 
                         409: {
@@ -465,6 +480,11 @@ const options = {
                     description:
                         "Actualiza la información de una categoría existente.",
 
+                    security: [
+                        {
+                            bearerAuth: []
+                        }
+                    ],
                     parameters: [
                         {
                             name: "id",
@@ -510,6 +530,16 @@ const options = {
                                 "Categoría actualizada correctamente"
                         },
 
+                        401: {
+                            description:
+                                "Token inválido o no proporcionado"
+                        },
+
+                        403: {
+                            description:
+                                "No tienes permisos para realizar esta acción"
+                        },
+
                         404: {
                             description:
                                 "Categoría no encontrada"
@@ -533,6 +563,11 @@ const options = {
                     description:
                         "Elimina una categoría que no tenga productos asociados.",
 
+                    security: [
+                        {
+                            bearerAuth: []
+                        }
+                    ],
                     parameters: [
                         {
                             name: "id",
@@ -550,6 +585,16 @@ const options = {
                         200: {
                             description:
                                 "Categoría eliminada correctamente"
+                        },
+
+                        401: {
+                            description:
+                                "Token inválido o no proporcionado"
+                        },
+
+                        403: {
+                            description:
+                                "No tienes permisos para realizar esta acción"
                         },
 
                         404: {
@@ -813,6 +858,11 @@ const options = {
                     description:
                         "Registra una nueva oferta asociada a un producto existente.",
 
+                    security: [
+                        {
+                            bearerAuth: []
+                        }
+                    ],
                     requestBody: {
                         required: true,
 
@@ -873,6 +923,16 @@ const options = {
                                 "Datos obligatorios o valores de oferta inválidos"
                         },
 
+                        401: {
+                            description:
+                                "Token inválido o no proporcionado"
+                        },
+
+                        403: {
+                            description:
+                                "No tienes permisos para realizar esta acción"
+                        },
+
                         404: {
                             description:
                                 "El producto indicado no existe"
@@ -930,6 +990,11 @@ const options = {
                     description:
                         "Actualiza la información de una oferta existente.",
 
+                    security: [
+                        {
+                            bearerAuth: []
+                        }
+                    ],
                     parameters: [
                         {
                             name: "id",
@@ -996,6 +1061,16 @@ const options = {
                                 "Valores de oferta inválidos"
                         },
 
+                        401: {
+                            description:
+                                "Token inválido o no proporcionado"
+                        },
+
+                        403: {
+                            description:
+                                "No tienes permisos para realizar esta acción"
+                        },
+
                         404: {
                             description:
                                 "Oferta o producto no encontrado"
@@ -1014,6 +1089,11 @@ const options = {
                     description:
                         "Elimina una oferta existente de la base de datos.",
 
+                    security: [
+                        {
+                            bearerAuth: []
+                        }
+                    ],
                     parameters: [
                         {
                             name: "id",
@@ -1031,6 +1111,16 @@ const options = {
                         200: {
                             description:
                                 "Oferta eliminada correctamente"
+                        },
+
+                        401: {
+                            description:
+                                "Token inválido o no proporcionado"
+                        },
+
+                        403: {
+                            description:
+                                "No tienes permisos para realizar esta acción"
                         },
 
                         404: {
@@ -1052,12 +1142,22 @@ const options = {
                     tags: ["Pedidos"],
                     summary: "Obtener todos los pedidos",
                     description:
-                        "Obtiene todos los pedidos registrados junto con la información del usuario.",
+                        "Obtiene los pedidos permitidos para el usuario autenticado junto con la información del usuario y los detalles de cada pedido.",
+                    security: [
+                        {
+                            bearerAuth: []
+                        }
+                    ],
 
                     responses: {
                         200: {
                             description:
                                 "Lista de pedidos obtenida correctamente"
+                        },
+
+                        401: {
+                            description:
+                                "Token inválido o no proporcionado"
                         },
 
                         500: {
@@ -1071,48 +1171,32 @@ const options = {
                     tags: ["Pedidos"],
                     summary: "Crear un nuevo pedido",
                     description:
-                        "Registra un nuevo pedido asociado a un usuario existente.",
+                        "Crea un nuevo pedido para el usuario autenticado. El total inicia en 0 y se calcula automáticamente al agregar los detalles del pedido.",
+
+                    security: [
+                        {
+                            bearerAuth: []
+                        }
+                    ],
 
                     requestBody: {
-                        required: true,
+                        required: false,
 
                         content: {
                             "application/json": {
                                 schema: {
                                     type: "object",
-
-                                    required: [
-                                        "usuario_id",
-                                        "total"
-                                    ],
-
                                     properties: {
                                         usuario_id: {
-                                            type: "integer"
-                                        },
-
-                                        total: {
-                                            type: "number",
-                                            format: "double"
-                                        },
-
-                                        estado: {
-                                            type: "string"
-                                        },
-
-                                        estado_pago: {
-                                            type: "string"
-                                        },
-
-                                        stripe_payment_intent_id: {
-                                            type: "string"
-                                        },
-
-                                        stripe_checkout_session_id: {
-                                            type: "string"
+                                            type: "integer",
+                                            description:
+                                                "ID del usuario. Solo puede ser utilizado por un administrador.",
+                                            example: 1
                                         }
                                     }
-                                }
+                                },
+
+                                example: {}
                             }
                         }
                     },
@@ -1125,7 +1209,12 @@ const options = {
 
                         400: {
                             description:
-                                "Datos obligatorios o estados no válidos"
+                                "El usuario_id es obligatorio para un administrador"
+                        },
+
+                        401: {
+                            description:
+                                "Token inválido o no proporcionado"
                         },
 
                         404: {
@@ -1146,8 +1235,12 @@ const options = {
                     tags: ["Pedidos"],
                     summary: "Obtener un pedido por ID",
                     description:
-                        "Obtiene un pedido específico junto con la información del usuario.",
-
+                        "Obtiene un pedido específico junto con la información del usuario y los detalles de los productos incluidos.",
+                    security: [
+                        {
+                            bearerAuth: []
+                        }
+                    ],
                     parameters: [
                         {
                             name: "id",
@@ -1167,6 +1260,16 @@ const options = {
                                 "Pedido encontrado correctamente"
                         },
 
+                        401: {
+                            description:
+                                "Token inválido o no proporcionado"
+                        },
+
+                        403: {
+                            description:
+                                "No tienes permisos para realizar esta acción"
+                        },
+
                         404: {
                             description:
                                 "Pedido no encontrado"
@@ -1183,8 +1286,12 @@ const options = {
                     tags: ["Pedidos"],
                     summary: "Actualizar un pedido",
                     description:
-                        "Actualiza la información de un pedido existente.",
-
+                        "Actualiza la información administrativa de un pedido. El total no puede modificarse manualmente; se calcula automáticamente a partir de los detalles.",
+                    security: [
+                        {
+                            bearerAuth: []
+                        }
+                    ],
                     parameters: [
                         {
                             name: "id",
@@ -1208,20 +1315,35 @@ const options = {
 
                                     properties: {
                                         usuario_id: {
-                                            type: "integer"
-                                        },
-
-                                        total: {
-                                            type: "number",
-                                            format: "double"
+                                            type: "integer",
+                                            description:
+                                                "ID del usuario asociado al pedido."
                                         },
 
                                         estado: {
-                                            type: "string"
+                                            type: "string",
+                                            enum: [
+                                                "pendiente",
+                                                "confirmado",
+                                                "procesando",
+                                                "enviado",
+                                                "entregado",
+                                                "cancelado"
+                                            ],
+                                            description:
+                                                "Nuevo estado del pedido."
                                         },
 
                                         estado_pago: {
-                                            type: "string"
+                                            type: "string",
+                                            enum: [
+                                                "pendiente",
+                                                "pagado",
+                                                "fallido",
+                                                "reembolsado"
+                                            ],
+                                            description:
+                                                "Nuevo estado del pago."
                                         },
 
                                         stripe_payment_intent_id: {
@@ -1248,6 +1370,16 @@ const options = {
                                 "Datos o estados no válidos"
                         },
 
+                        401: {
+                            description:
+                                "Token inválido o no proporcionado"
+                        },
+
+                        403: {
+                            description:
+                                "No tienes permisos para realizar esta acción"
+                        },
+
                         404: {
                             description:
                                 "Pedido o usuario no encontrado"
@@ -1266,6 +1398,11 @@ const options = {
                     description:
                         "Elimina un pedido de la base de datos.",
 
+                    security: [
+                        {
+                            bearerAuth: []
+                        }
+                    ],
                     parameters: [
                         {
                             name: "id",
@@ -1283,6 +1420,16 @@ const options = {
                         200: {
                             description:
                                 "Pedido eliminado correctamente"
+                        },
+
+                        401: {
+                            description:
+                                "Token inválido o no proporcionado"
+                        },
+
+                        403: {
+                            description:
+                                "No tienes permisos para realizar esta acción"
                         },
 
                         404: {
@@ -1306,10 +1453,20 @@ const options = {
                     description:
                         "Obtiene todos los detalles registrados junto con el pedido y producto relacionados.",
 
+                    security: [
+                        {
+                            bearerAuth: []
+                        }
+                    ],
                     responses: {
                         200: {
                             description:
                                 "Lista de detalles obtenida correctamente"
+                        },
+
+                        401: {
+                            description:
+                                "Token inválido o no proporcionado"
                         },
 
                         500: {
@@ -1325,6 +1482,11 @@ const options = {
                     description:
                         "Registra un producto dentro de un pedido existente.",
 
+                    security: [
+                        {
+                            bearerAuth: []
+                        }
+                    ],
                     requestBody: {
                         required: true,
 
@@ -1336,8 +1498,7 @@ const options = {
                                     required: [
                                         "pedido_id",
                                         "producto_id",
-                                        "cantidad",
-                                        "precio_unitario"
+                                        "cantidad"
                                     ],
 
                                     properties: {
@@ -1350,19 +1511,14 @@ const options = {
                                         },
 
                                         cantidad: {
-                                            type: "integer"
-                                        },
-
-                                        precio_unitario: {
-                                            type: "number",
-                                            format: "double"
+                                            type: "integer",
+                                            minimum: 1
                                         }
                                     }
                                 }
                             }
                         }
                     },
-
                     responses: {
                         201: {
                             description:
@@ -1372,6 +1528,16 @@ const options = {
                         400: {
                             description:
                                 "Datos inválidos o stock insuficiente"
+                        },
+
+                        401: {
+                            description:
+                                "Token inválido o no proporcionado"
+                        },
+
+                        403: {
+                            description:
+                                "No tienes permisos para agregar productos a este pedido"
                         },
 
                         404: {
@@ -1394,6 +1560,11 @@ const options = {
                     description:
                         "Obtiene un detalle específico junto con su pedido y producto.",
 
+                    security: [
+                        {
+                            bearerAuth: []
+                        }
+                    ],
                     parameters: [
                         {
                             name: "id",
@@ -1413,6 +1584,16 @@ const options = {
                                 "Detalle encontrado correctamente"
                         },
 
+                        401: {
+                            description:
+                                "Token inválido o no proporcionado"
+                        },
+
+                        403: {
+                            description:
+                                "No tienes permisos para acceder a este detalle"
+                        },
+
                         404: {
                             description:
                                 "Detalle de pedido no encontrado"
@@ -1429,7 +1610,13 @@ const options = {
                     tags: ["DetallePedidos"],
                     summary: "Actualizar un detalle de pedido",
                     description:
-                        "Actualiza la información de un detalle de pedido existente.",
+                        "Actualiza el pedido, producto o cantidad de un detalle. El precio unitario se obtiene automáticamente del precio actual del producto.",
+
+                    security: [
+                        {
+                            bearerAuth: []
+                        }
+                    ],
 
                     parameters: [
                         {
@@ -1437,7 +1624,6 @@ const options = {
                             in: "path",
                             required: true,
                             description: "ID del detalle",
-
                             schema: {
                                 type: "integer"
                             }
@@ -1454,20 +1640,22 @@ const options = {
 
                                     properties: {
                                         pedido_id: {
-                                            type: "integer"
+                                            type: "integer",
+                                            description:
+                                                "ID del pedido"
                                         },
 
                                         producto_id: {
-                                            type: "integer"
+                                            type: "integer",
+                                            description:
+                                                "ID del producto"
                                         },
 
                                         cantidad: {
-                                            type: "integer"
-                                        },
-
-                                        precio_unitario: {
-                                            type: "number",
-                                            format: "double"
+                                            type: "integer",
+                                            minimum: 1,
+                                            description:
+                                                "Nueva cantidad del producto"
                                         }
                                     }
                                 }
@@ -1483,7 +1671,17 @@ const options = {
 
                         400: {
                             description:
-                                "Datos inválidos o stock insuficiente"
+                                "Datos inválidos, stock insuficiente o pedido finalizado"
+                        },
+
+                        401: {
+                            description:
+                                "Token inválido o no proporcionado"
+                        },
+
+                        403: {
+                            description:
+                                "No tienes permisos para realizar esta acción"
                         },
 
                         404: {
@@ -1504,6 +1702,11 @@ const options = {
                     description:
                         "Elimina un detalle de pedido existente.",
 
+                    security: [
+                        {
+                            bearerAuth: []
+                        }
+                    ],
                     parameters: [
                         {
                             name: "id",
@@ -1521,6 +1724,21 @@ const options = {
                         200: {
                             description:
                                 "Detalle de pedido eliminado correctamente"
+                        },
+
+                        400: {
+                            description:
+                                "No se puede eliminar el detalle de un pedido entregado o cancelado"
+                        },
+
+                        401: {
+                            description:
+                                "Token inválido o no proporcionado"
+                        },
+
+                        403: {
+                            description:
+                                "No tienes permisos para realizar esta acción"
                         },
 
                         404: {

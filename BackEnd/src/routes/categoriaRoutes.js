@@ -2,10 +2,16 @@ const express = require("express");
 
 const { Categoria, Producto } = require("../models");
 
+const {
+    verificarToken,
+    verificarRol
+} = require("../middleware/authMiddleware");
+
 const router = express.Router();
 
 /**
  * Obtener todas las categorías
+ * Público
  */
 router.get("/", async (req, res) => {
     try {
@@ -13,7 +19,7 @@ router.get("/", async (req, res) => {
             order: [["id", "ASC"]]
         });
 
-        res.json(categorias);
+        res.status(200).json(categorias);
 
     } catch (error) {
         console.error("❌ Error al obtener categorías:", error);
@@ -26,6 +32,7 @@ router.get("/", async (req, res) => {
 
 /**
  * Obtener una categoría por ID
+ * Público
  */
 router.get("/:id", async (req, res) => {
     try {
@@ -46,7 +53,7 @@ router.get("/:id", async (req, res) => {
             });
         }
 
-        res.json(categoria);
+        res.status(200).json(categoria);
 
     } catch (error) {
         console.error("❌ Error al obtener la categoría:", error);
@@ -59,142 +66,183 @@ router.get("/:id", async (req, res) => {
 
 /**
  * Crear una categoría
+ * JWT + ADMIN
  */
-router.post("/", async (req, res) => {
-    try {
-        const {
-            nombre,
-            descripcion,
-            activo
-        } = req.body;
+router.post(
+    "/",
+    verificarToken,
+    verificarRol("admin"),
+    async (req, res) => {
+        try {
+            const {
+                nombre,
+                descripcion,
+                activo
+            } = req.body;
 
-        if (!nombre) {
-            return res.status(400).json({
-                mensaje: "El nombre de la categoría es obligatorio"
+            if (!nombre) {
+                return res.status(400).json({
+                    mensaje:
+                        "El nombre de la categoría es obligatorio"
+                });
+            }
+
+            const categoriaExistente =
+                await Categoria.findOne({
+                    where: { nombre }
+                });
+
+            if (categoriaExistente) {
+                return res.status(409).json({
+                    mensaje: "La categoría ya existe"
+                });
+            }
+
+            const nuevaCategoria =
+                await Categoria.create({
+                    nombre,
+                    descripcion,
+                    activo: activo ?? true
+                });
+
+            res.status(201).json(nuevaCategoria);
+
+        } catch (error) {
+            console.error(
+                "❌ Error al crear categoría:",
+                error
+            );
+
+            res.status(500).json({
+                mensaje:
+                    "Error al crear la categoría"
             });
         }
-
-        const categoriaExistente = await Categoria.findOne({
-            where: { nombre }
-        });
-
-        if (categoriaExistente) {
-            return res.status(409).json({
-                mensaje: "La categoría ya existe"
-            });
-        }
-
-        const nuevaCategoria = await Categoria.create({
-            nombre,
-            descripcion,
-            activo: activo ?? true
-        });
-
-        res.status(201).json(nuevaCategoria);
-
-    } catch (error) {
-        console.error("❌ Error al crear categoría:", error);
-
-        res.status(500).json({
-            mensaje: "Error al crear la categoría"
-        });
     }
-});
+);
 
 /**
  * Actualizar una categoría
+ * JWT + ADMIN
  */
-router.put("/:id", async (req, res) => {
-    try {
-        const { id } = req.params;
+router.put(
+    "/:id",
+    verificarToken,
+    verificarRol("admin"),
+    async (req, res) => {
+        try {
+            const { id } = req.params;
 
-        const {
-            nombre,
-            descripcion,
-            activo
-        } = req.body;
+            const {
+                nombre,
+                descripcion,
+                activo
+            } = req.body;
 
-        const categoria = await Categoria.findByPk(id);
+            const categoria =
+                await Categoria.findByPk(id);
 
-        if (!categoria) {
-            return res.status(404).json({
-                mensaje: "Categoría no encontrada"
-            });
-        }
-
-        if (nombre !== undefined) {
-            const categoriaExistente = await Categoria.findOne({
-                where: { nombre }
-            });
-
-            if (
-                categoriaExistente &&
-                categoriaExistente.id !== Number(id)
-            ) {
-                return res.status(409).json({
-                    mensaje: "Ya existe otra categoría con ese nombre"
+            if (!categoria) {
+                return res.status(404).json({
+                    mensaje:
+                        "Categoría no encontrada"
                 });
             }
+
+            if (nombre !== undefined) {
+                const categoriaExistente =
+                    await Categoria.findOne({
+                        where: { nombre }
+                    });
+
+                if (
+                    categoriaExistente &&
+                    categoriaExistente.id !== Number(id)
+                ) {
+                    return res.status(409).json({
+                        mensaje:
+                            "Ya existe otra categoría con ese nombre"
+                    });
+                }
+            }
+
+            await categoria.update({
+                nombre,
+                descripcion,
+                activo
+            });
+
+            res.status(200).json(categoria);
+
+        } catch (error) {
+            console.error(
+                "❌ Error al actualizar categoría:",
+                error
+            );
+
+            res.status(500).json({
+                mensaje:
+                    "Error al actualizar la categoría"
+            });
         }
-
-        await categoria.update({
-            nombre,
-            descripcion,
-            activo
-        });
-
-        res.json(categoria);
-
-    } catch (error) {
-        console.error("❌ Error al actualizar categoría:", error);
-
-        res.status(500).json({
-            mensaje: "Error al actualizar la categoría"
-        });
     }
-});
+);
 
 /**
  * Eliminar una categoría
+ * JWT + ADMIN
  */
-router.delete("/:id", async (req, res) => {
-    try {
-        const { id } = req.params;
+router.delete(
+    "/:id",
+    verificarToken,
+    verificarRol("admin"),
+    async (req, res) => {
+        try {
+            const { id } = req.params;
 
-        const categoria = await Categoria.findByPk(id);
+            const categoria =
+                await Categoria.findByPk(id);
 
-        if (!categoria) {
-            return res.status(404).json({
-                mensaje: "Categoría no encontrada"
-            });
-        }
-
-        const productos = await Producto.count({
-            where: {
-                categoria_id: id
+            if (!categoria) {
+                return res.status(404).json({
+                    mensaje:
+                        "Categoría no encontrada"
+                });
             }
-        });
 
-        if (productos > 0) {
-            return res.status(409).json({
+            const productos =
+                await Producto.count({
+                    where: {
+                        categoria_id: id
+                    }
+                });
+
+            if (productos > 0) {
+                return res.status(409).json({
+                    mensaje:
+                        "No se puede eliminar la categoría porque tiene productos asociados"
+                });
+            }
+
+            await categoria.destroy();
+
+            res.status(200).json({
                 mensaje:
-                    "No se puede eliminar la categoría porque tiene productos asociados"
+                    "Categoría eliminada correctamente"
+            });
+
+        } catch (error) {
+            console.error(
+                "❌ Error al eliminar categoría:",
+                error
+            );
+
+            res.status(500).json({
+                mensaje:
+                    "Error al eliminar la categoría"
             });
         }
-
-        await categoria.destroy();
-
-        res.json({
-            mensaje: "Categoría eliminada correctamente"
-        });
-
-    } catch (error) {
-        console.error("❌ Error al eliminar categoría:", error);
-
-        res.status(500).json({
-            mensaje: "Error al eliminar la categoría"
-        });
     }
-});
+);
 
 module.exports = router;

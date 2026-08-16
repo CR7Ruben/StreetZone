@@ -8,16 +8,33 @@ const {
     eliminarPedido
 } = require("../controllers/pedidoController");
 
+const {
+    verificarToken,
+    verificarRol
+} = require("../middleware/authMiddleware");
+
 const router = express.Router();
 
-router.get("/", obtenerPedidos);
+// Cliente + Admin
+router.get("/", verificarToken, obtenerPedidos);
 
-router.get("/:id", obtenerPedidoPorId);
+router.get("/:id", verificarToken, obtenerPedidoPorId);
 
-router.post("/", crearPedido);
+router.post("/", verificarToken, crearPedido);
 
-router.put("/:id", actualizarPedido);
+// Solo Admin
+router.put(
+    "/:id",
+    verificarToken,
+    verificarRol("admin"),
+    actualizarPedido
+);
 
-router.delete("/:id", eliminarPedido);
+router.delete(
+    "/:id",
+    verificarToken,
+    verificarRol("admin"),
+    eliminarPedido
+);
 
 module.exports = router;

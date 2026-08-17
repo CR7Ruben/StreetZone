@@ -11,7 +11,7 @@ const {
 const {
     verificarToken,
     verificarRol
-} = require("../middleware/authMiddleware");
+} = require("../middleware.js/authMiddleware");
 
 const router = express.Router();
 

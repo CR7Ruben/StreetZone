@@ -1,11 +1,17 @@
+const sequelize = require("../../config/database");
+
 const Usuario = require("./Usuario");
 const Categoria = require("./Categoria");
 const Producto = require("./Producto");
 const Oferta = require("./Oferta");
 const Pedido = require("./Pedido");
 const DetallePedido = require("./DetallePedido");
+const MensajeContacto = require("./MensajeContacto");
 
-// Categoria → productos
+// ============================================================
+// CATEGORÍAS → PRODUCTOS
+// ============================================================
+
 Categoria.hasMany(Producto, {
     foreignKey: "categoria_id",
     as: "productos"
@@ -16,7 +22,10 @@ Producto.belongsTo(Categoria, {
     as: "categoria"
 });
 
-// Productos → ofertas
+// ============================================================
+// PRODUCTOS → OFERTAS
+// ============================================================
+
 Producto.hasMany(Oferta, {
     foreignKey: "producto_id",
     as: "ofertas"
@@ -27,7 +36,10 @@ Oferta.belongsTo(Producto, {
     as: "producto"
 });
 
-// Usuarios → pedidos
+// ============================================================
+// USUARIOS → PEDIDOS
+// ============================================================
+
 Usuario.hasMany(Pedido, {
     foreignKey: "usuario_id",
     as: "pedidos"
@@ -38,7 +50,10 @@ Pedido.belongsTo(Usuario, {
     as: "usuario"
 });
 
-// Pedido → detalle de pedidos
+// ============================================================
+// PEDIDOS → DETALLES
+// ============================================================
+
 Pedido.hasMany(DetallePedido, {
     foreignKey: "pedido_id",
     as: "detalles"
@@ -49,7 +64,10 @@ DetallePedido.belongsTo(Pedido, {
     as: "pedido"
 });
 
-// Producto → detalle de pedidos
+// ============================================================
+// PRODUCTOS → DETALLES DE PEDIDO
+// ============================================================
+
 Producto.hasMany(DetallePedido, {
     foreignKey: "producto_id",
     as: "detallesPedido"
@@ -59,11 +77,18 @@ DetallePedido.belongsTo(Producto, {
     foreignKey: "producto_id",
     as: "producto"
 });
+
+// ============================================================
+// EXPORTAR
+// ============================================================
+
 module.exports = {
+    sequelize,
     Usuario,
     Categoria,
     Producto,
     Oferta,
     Pedido,
     DetallePedido,
+    MensajeContacto
 };

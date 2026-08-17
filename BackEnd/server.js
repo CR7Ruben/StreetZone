@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 require("dotenv").config();
 
 const sequelize = require("./config/database");
@@ -14,10 +15,21 @@ const ofertaRoutes = require("./src/routes/ofertaRoutes");
 const pedidoRoutes = require("./src/routes/pedidoRoutes");
 const detallePedidoRoutes = require("./src/routes/detallePedidoRoutes");
 const authRoutes = require("./src/routes/authRoutes");
+const pagoRoutes = require("./src/routes/pagoRoutes");
+const mensajeContactoRoutes = require("./src/routes/mensajeContactoRoutes");
 
 const app = express();
 
 app.use(cors());
+
+app.use(express.static(
+    path.join(__dirname, "../FrontEnd")
+));
+
+// Rutas de pago
+app.use("/api/pagos", pagoRoutes);
+
+// JSON para las demás rutas
 app.use(express.json());
 
 // Swagger
@@ -43,30 +55,48 @@ app.use("/api/ofertas", ofertaRoutes);
 app.use("/api/pedidos", pedidoRoutes);
 app.use("/api/detalle-pedidos", detallePedidoRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/mensajes-contacto", mensajeContactoRoutes);
 
 app.get("/", (req, res) => {
-    res.json({
-        mensaje: "API de StreetZone funcionando 🚀"
-    });
+    res.sendFile(
+        path.join(__dirname, "../FrontEnd/index.html")
+    );
 });
 
 const PORT = process.env.PORT || 3000;
 
 async function iniciarServidor() {
+
     try {
+
         await sequelize.authenticate();
 
-        console.log("✅ Conexión con PostgreSQL establecida correctamente");
+        console.log(
+            "✅ Conexión con PostgreSQL establecida correctamente"
+        );
 
         app.listen(PORT, () => {
-            console.log(`🚀 Servidor ejecutándose en http://localhost:${PORT}`);
-            console.log(`📚 Swagger disponible en http://localhost:${PORT}/api-docs`);
+
+            console.log(
+                `🚀 Servidor ejecutándose en http://localhost:${PORT}`
+            );
+
+            console.log(
+                `📚 Swagger disponible en http://localhost:${PORT}/api-docs`
+            );
+
         });
 
     } catch (error) {
-        console.error("❌ Error al conectar con PostgreSQL:");
+
+        console.error(
+            "❌ Error al conectar con PostgreSQL:"
+        );
+
         console.error(error.message);
+
     }
+
 }
 
 iniciarServidor();

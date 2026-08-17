@@ -17,7 +17,8 @@ const Pedido = sequelize.define(
 
         total: {
             type: DataTypes.DECIMAL(10, 2),
-            allowNull: false
+            allowNull: false,
+            defaultValue: 0
         },
 
         estado: {
@@ -44,11 +45,13 @@ const Pedido = sequelize.define(
 
         fecha_pedido: {
             type: DataTypes.DATE,
+            allowNull: false,
             defaultValue: DataTypes.NOW
         },
 
         updated_at: {
             type: DataTypes.DATE,
+            allowNull: false,
             defaultValue: DataTypes.NOW
         }
     },

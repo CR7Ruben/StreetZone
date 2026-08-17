@@ -77,7 +77,6 @@ const crearOferta = async (req, res) => {
         const {
             producto_id,
             precio_oferta,
-            descuento,
             fecha_inicio,
             fecha_fin,
             activo
@@ -86,24 +85,17 @@ const crearOferta = async (req, res) => {
         if (
             producto_id === undefined ||
             precio_oferta === undefined ||
-            descuento === undefined ||
             !fecha_inicio
         ) {
             return res.status(400).json({
                 mensaje:
-                    "producto_id, precio_oferta, descuento y fecha_inicio son obligatorios"
+                    "producto_id, precio_oferta y fecha_inicio son obligatorios"
             });
         }
 
         if (precio_oferta < 0) {
             return res.status(400).json({
                 mensaje: "El precio de oferta no puede ser negativo"
-            });
-        }
-
-        if (descuento <= 0 || descuento > 100) {
-            return res.status(400).json({
-                mensaje: "El descuento debe ser mayor a 0 y menor o igual a 100"
             });
         }
 
@@ -115,10 +107,25 @@ const crearOferta = async (req, res) => {
             });
         }
 
+        const precioOriginal = Number(producto.precio);
+        const precioOferta = Number(precio_oferta);
+
+        if (precioOferta >= precioOriginal) {
+            return res.status(400).json({
+                mensaje:
+                    "El precio de oferta debe ser menor al precio original del producto"
+            });
+        }
+
+        const descuento =
+            ((precioOriginal - precioOferta) / precioOriginal) * 100;
+
+        const descuentoRedondeado = Number(descuento.toFixed(2));
+
         const nuevaOferta = await Oferta.create({
             producto_id,
-            precio_oferta,
-            descuento,
+            precio_oferta: precioOferta,
+            descuento: descuentoRedondeado,
             fecha_inicio,
             fecha_fin,
             activo: activo !== undefined ? activo : true
@@ -152,6 +159,7 @@ const crearOferta = async (req, res) => {
     }
 };
 
+
 // Actualizar oferta
 const actualizarOferta = async (req, res) => {
     try {
@@ -160,7 +168,6 @@ const actualizarOferta = async (req, res) => {
         const {
             producto_id,
             precio_oferta,
-            descuento,
             fecha_inicio,
             fecha_fin,
             activo
@@ -174,47 +181,49 @@ const actualizarOferta = async (req, res) => {
             });
         }
 
-        if (producto_id !== undefined) {
-            const producto = await Producto.findByPk(producto_id);
+        const nuevoProductoId =
+            producto_id !== undefined
+                ? producto_id
+                : oferta.producto_id;
 
-            if (!producto) {
-                return res.status(404).json({
-                    mensaje: "El producto indicado no existe"
-                });
-            }
+        const producto = await Producto.findByPk(nuevoProductoId);
+
+        if (!producto) {
+            return res.status(404).json({
+                mensaje: "El producto indicado no existe"
+            });
         }
 
-        if (
-            precio_oferta !== undefined &&
-            precio_oferta < 0
-        ) {
+        const nuevoPrecioOferta =
+            precio_oferta !== undefined
+                ? Number(precio_oferta)
+                : Number(oferta.precio_oferta);
+
+        if (nuevoPrecioOferta < 0) {
             return res.status(400).json({
                 mensaje: "El precio de oferta no puede ser negativo"
             });
         }
 
-        if (
-            descuento !== undefined &&
-            (descuento <= 0 || descuento > 100)
-        ) {
+        const precioOriginal = Number(producto.precio);
+
+        if (nuevoPrecioOferta >= precioOriginal) {
             return res.status(400).json({
-                mensaje: "El descuento debe ser mayor a 0 y menor o igual a 100"
+                mensaje:
+                    "El precio de oferta debe ser menor al precio original del producto"
             });
         }
 
-        const datosActualizados = {};
+        const descuento =
+            ((precioOriginal - nuevoPrecioOferta) / precioOriginal) * 100;
 
-        if (producto_id !== undefined) {
-            datosActualizados.producto_id = producto_id;
-        }
+        const descuentoRedondeado = Number(descuento.toFixed(2));
 
-        if (precio_oferta !== undefined) {
-            datosActualizados.precio_oferta = precio_oferta;
-        }
-
-        if (descuento !== undefined) {
-            datosActualizados.descuento = descuento;
-        }
+        const datosActualizados = {
+            producto_id: nuevoProductoId,
+            precio_oferta: nuevoPrecioOferta,
+            descuento: descuentoRedondeado
+        };
 
         if (fecha_inicio !== undefined) {
             datosActualizados.fecha_inicio = fecha_inicio;
@@ -257,6 +266,7 @@ const actualizarOferta = async (req, res) => {
         });
     }
 };
+
 
 // Eliminar oferta
 const eliminarOferta = async (req, res) => {

@@ -4,6 +4,7 @@ const {
     obtenerPedidos,
     obtenerPedidoPorId,
     crearPedido,
+    crearPedidoCompleto,
     actualizarPedido,
     eliminarPedido
 } = require("../controllers/pedidoController");
@@ -11,18 +12,74 @@ const {
 const {
     verificarToken,
     verificarRol
-} = require("../middleware/authMiddleware");
+} = require("../middleware.js/authMiddleware");
 
 const router = express.Router();
 
-// Cliente + Admin
-router.get("/", verificarToken, obtenerPedidos);
 
-router.get("/:id", verificarToken, obtenerPedidoPorId);
+// ============================================================
+// OBTENER TODOS LOS PEDIDOS
+// CLIENTE → solamente sus pedidos
+// ADMIN   → todos los pedidos
+// ============================================================
 
-router.post("/", verificarToken, crearPedido);
+router.get(
+    "/",
+    verificarToken,
+    obtenerPedidos
+);
 
-// Solo Admin
+
+// ============================================================
+// OBTENER PEDIDO POR ID
+// CLIENTE → solamente si es suyo
+// ADMIN   → cualquiera
+// ============================================================
+
+router.get(
+    "/:id",
+    verificarToken,
+    obtenerPedidoPorId
+);
+
+
+// ============================================================
+// CREAR PEDIDO COMPLETO
+//
+// CREA EN UNA SOLA TRANSACCIÓN:
+//
+// pedido
+// detalles
+// cálculo del total
+// descuento de stock
+//
+// CLIENTE + ADMIN
+// ============================================================
+
+router.post(
+    "/completo",
+    verificarToken,
+    crearPedidoCompleto
+);
+
+
+// ============================================================
+// CREAR PEDIDO SIMPLE
+// Opcional / compatibilidad
+// ============================================================
+
+router.post(
+    "/",
+    verificarToken,
+    crearPedido
+);
+
+
+// ============================================================
+// ACTUALIZAR PEDIDO
+// SOLO ADMIN
+// ============================================================
+
 router.put(
     "/:id",
     verificarToken,
@@ -30,11 +87,18 @@ router.put(
     actualizarPedido
 );
 
+
+// ============================================================
+// ELIMINAR PEDIDO
+// SOLO ADMIN
+// ============================================================
+
 router.delete(
     "/:id",
     verificarToken,
     verificarRol("admin"),
     eliminarPedido
 );
+
 
 module.exports = router;

@@ -224,7 +224,7 @@ body {
 
 .btn-primary:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 25px #333333;
+    box-shadow: 0 10px 25px rgba(135, 0, 22, 0.30);
 }
 
 @keyframes fadeInUp {
@@ -702,15 +702,7 @@ body {
     color: white;
 }
 
-.loading-spinner {
-    width: 60px;
-    height: 60px;
-    border: 4px solid #f3f3f3;
-    border-top: 4px solid #000000;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin-bottom: 1rem;
-}
+
 
 @keyframes spin {
     0% { transform: rotate(0deg); }
@@ -914,4 +906,982 @@ footer {
 /* ========== AJUSTE DE SECCIONES ========== */
 #inicio, #coleccion, .productos, .ofertas-section, .contacto-section {
     scroll-margin-top: 80px;
+}
+
+/* ================================================================
+   PÁGINA DE RESULTADO (pago exitoso / cancelado)
+================================================================ */
+
+.resultado-pago {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, #16213ef2, #0f3460e6),
+        url('https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?q=80&w=2070');
+    background-size: cover;
+    background-position: center;
+}
+
+.resultado-card {
+    background: white;
+    border-radius: 30px;
+    box-shadow: 0 25px 60px #00000040;
+    max-width: 460px;
+    width: 100%;
+    padding: 3rem 2.5rem;
+    text-align: center;
+    animation: fadeInUp 0.5s ease;
+}
+
+.resultado-icono {
+    width: 90px;
+    height: 90px;
+    margin: 0 auto 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 2.8rem;
+    animation: pulse 0.6s ease;
+}
+
+.resultado-pago.exito .resultado-icono {
+    background: #e3f9e8;
+    color: #27ae60;
+}
+
+.resultado-pago.error .resultado-icono {
+    background: #fde8e8;
+    color: #c0392b;
+}
+
+.resultado-card h1 {
+    font-size: 1.7rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: #1a1a2e;
+}
+
+.resultado-pago.exito .resultado-card h1 {
+    color: #1e8e4a;
+}
+
+.resultado-pago.error .resultado-card h1 {
+    color: #c0392b;
+}
+
+.resultado-card p {
+    color: #777;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+}
+
+.resultado-detalle {
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    text-align: left;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.resultado-detalle strong {
+    color: #1a1a2e;
+}
+
+.resultado-card .btn-primary {
+    display: inline-block;
+    text-decoration: none;
+    margin-top: 1rem;
+    animation: none;
+}
+
+.resultado-card .btn-primary:hover {
+    color: white;
+}
+
+@media (max-width: 480px) {
+    .resultado-card {
+        padding: 2.5rem 1.5rem;
+    }
+}
+
+/* ================================================================
+   MIS PEDIDOS
+================================================================ */
+
+.mis-pedidos-section {
+    padding: 5rem 5%;
+    max-width: 1000px;
+    margin: 0 auto;
+    scroll-margin-top: 80px;
+}
+
+.mis-pedidos-section h2 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.mis-pedidos-section h2 i {
+    color: #870016;
+    margin-right: 10px;
+}
+
+.mis-pedidos-section h2 span {
+    color: #000000;
+}
+
+/* ---------- Estado de carga ---------- */
+.pedidos-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5rem 1rem;
+    color: #666;
+}
+
+.pedidos-loading i {
+    font-size: 2.8rem;
+    color: #870016;
+    margin-bottom: 1rem;
+}
+
+.pedidos-loading p {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+/* ---------- Sin pedidos / error ---------- */
+.sin-pedidos {
+    background: white;
+    border-radius: 30px;
+    box-shadow: 0 15px 35px #0000001a;
+    padding: 4rem 2rem;
+    text-align: center;
+    animation: fadeInUp 0.4s ease;
+}
+
+.sin-pedidos i {
+    font-size: 4rem;
+    color: #e0c8cc;
+    margin-bottom: 1.2rem;
+}
+
+.sin-pedidos h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.6rem;
+    color: #1a1a2e;
+}
+
+.sin-pedidos p {
+    color: #777;
+    margin-bottom: 1.8rem;
+}
+
+.sin-pedidos .btn-primary {
+    animation: none;
+}
+
+/* ---------- Lista de pedidos ---------- */
+#pedidos-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+}
+
+.pedido-card {
+    background: white;
+    border-radius: 25px;
+    box-shadow: 0 10px 30px #8700161a;
+    padding: 1.75rem;
+    transition: all 0.35s ease;
+    animation: fadeInUp 0.4s ease;
+}
+
+.pedido-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px #87001633;
+}
+
+.pedido-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding-bottom: 1.25rem;
+    margin-bottom: 1.25rem;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.pedido-header h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.35rem;
+}
+
+.pedido-header p {
+    color: #888;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.pedido-total {
+    background: linear-gradient(135deg, #870016, #000000);
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 10px 22px;
+    border-radius: 40px;
+    white-space: nowrap;
+}
+
+/* ---------- Estados (badges) ---------- */
+.pedido-estados {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.pedido-estado {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 16px;
+    border-radius: 30px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+/* Estado del pedido */
+.estado-pendiente   { background: #fff4e0; color: #b7791f; }
+.estado-confirmado  { background: #e3f0ff; color: #2563eb; }
+.estado-preparado   { background: #f1e6ff; color: #7c3aed; }
+.estado-enviado     { background: #e0f7fa; color: #0891b2; }
+.estado-entregado   { background: #e3f9e8; color: #1e8e4a; }
+.estado-cancelado   { background: #fde8e8; color: #c0392b; }
+
+/* Estado del pago */
+.pago-pendiente     { background: #f2f2f2; color: #666666; }
+.pago-pagado        { background: #e3f9e8; color: #1e8e4a; }
+.pago-fallido       { background: #fde8e8; color: #c0392b; }
+.pago-reembolsado   { background: #eef1ff; color: #4338ca; }
+
+/* ---------- Productos del pedido ---------- */
+.pedido-productos h4 {
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #999;
+    margin-bottom: 1rem;
+}
+
+.pedido-producto {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.pedido-producto:last-child {
+    border-bottom: none;
+}
+
+.pedido-producto-imagen {
+    width: 90px;
+    height: 90px;
+    flex-shrink: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #f2f2f2;
+}
+
+.pedido-producto-imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.pedido-producto-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.pedido-producto-info strong {
+    font-size: 0.95rem;
+    color: #1a1a2e;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.pedido-producto-info span {
+    font-size: 0.8rem;
+    color: #888;
+}
+
+.pedido-producto-subtotal {
+    font-weight: 700;
+    color: #870016;
+    white-space: nowrap;
+}
+
+/* ---------- Footer del pedido ---------- */
+.pedido-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 2px solid #1a1a2e;
+}
+
+.pedido-footer span {
+    color: #777;
+    font-size: 0.95rem;
+}
+
+.pedido-footer strong {
+    font-size: 1.3rem;
+    color: #1a1a2e;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+
+    .mis-pedidos-section {
+        padding: 3rem 5%;
+    }
+
+    .pedido-header {
+        flex-direction: column;
+    }
+
+    .pedido-total {
+        align-self: flex-start;
+    }
+
+    .pedido-producto {
+        flex-wrap: wrap;
+    }
+
+    .pedido-producto-subtotal {
+        margin-left: 106px;
+    }
+}
+
+/* ================================================================
+   PANEL DE ADMINISTRADOR
+================================================================ */
+
+.panel-admin-section {
+    padding: 5rem 5%;
+    max-width: 1300px;
+    margin: 0 auto;
+    scroll-margin-top: 80px;
+}
+
+.panel-admin-section h2 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.panel-admin-section h2 i {
+    color: #870016;
+    margin-right: 10px;
+}
+
+.panel-admin-section h2 span {
+    color: #000000;
+}
+
+.admin-header {
+    background: white;
+    padding: 1.5rem 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px #00000012;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.admin-header h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.3rem;
+}
+
+.admin-header p {
+    color: #777;
+}
+
+.admin-form-container {
+    background: white;
+    padding: 2rem;
+    border-radius: 25px;
+    box-shadow: 0 10px 30px #00000015;
+    margin-bottom: 2rem;
+}
+
+.admin-form-container h3 {
+    margin-bottom: 1.5rem;
+    font-size: 1.4rem;
+}
+
+.admin-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.admin-form-grid > div {
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-form-full {
+    grid-column: 1 / -1;
+}
+
+.admin-form-grid label {
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    font-size: 0.9rem;
+}
+
+.admin-form-grid input,
+.admin-form-grid select,
+.admin-form-grid textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.admin-form-grid input:focus,
+.admin-form-grid select:focus,
+.admin-form-grid textarea:focus {
+    outline: none;
+    border-color: #870016;
+}
+
+.admin-form-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.btn-admin-cancelar {
+    border: none;
+    background: #eee;
+    padding: 14px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+}
+
+.btn-admin-cancelar:hover {
+    background: #ddd;
+}
+
+.admin-productos-container {
+    margin-top: 2rem;
+}
+
+.admin-productos-lista {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.admin-producto-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px #00000012;
+}
+
+.admin-producto-imagen {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    background: #f2f2f2;
+}
+
+.admin-producto-info {
+    padding: 1.5rem;
+}
+
+.admin-producto-info h3 {
+    margin-bottom: 0.5rem;
+}
+
+.admin-producto-categoria {
+    color: #870016;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.admin-producto-precio {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0.7rem 0;
+}
+
+.admin-producto-stock {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.admin-producto-estado {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-top: 0.7rem;
+}
+
+.admin-activo {
+    background: #e3f9e8;
+    color: #1e8e4a;
+}
+
+.admin-inactivo {
+    background: #fde8e8;
+    color: #c0392b;
+}
+
+/* ============================================================
+   BOTONES ADMIN STREETZONE
+============================================================ */
+
+.admin-producto-acciones {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding-top: 1rem;
+    margin-top: 1rem;
+    border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+
+.btn-admin-editar,
+.btn-admin-eliminar {
+
+    border: none;
+
+    padding: 10px 18px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-family: inherit;
+
+    font-weight: 600;
+
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+
+}
+
+
+/* EDITAR */
+
+.btn-admin-editar {
+
+    background: #222;
+
+    color: #fff;
+
+    border: 1px solid #333;
+
+}
+
+
+.btn-admin-editar:hover {
+
+    background: #333;
+
+    transform: translateY(-2px);
+
+}
+
+
+/* ELIMINAR */
+
+.btn-admin-eliminar {
+
+    background: transparent;
+
+    color: #ff4d4d;
+
+    border: 1px solid #ff4d4d;
+
+}
+
+
+.btn-admin-eliminar:hover {
+
+    background: #ff4d4d;
+
+    color: #fff;
+
+    transform: translateY(-2px);
+
+}
+
+.admin-loading {
+    text-align: center;
+    padding: 3rem;
+    color: #666;
+}
+
+.admin-loading i {
+    font-size: 2rem;
+    color: #870016;
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+
+    .admin-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .admin-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-form-full {
+        grid-column: auto;
+    }
+
+    .admin-form-buttons {
+        flex-direction: column;
+    }
+
+    .panel-admin-section h2 {
+        font-size: 2rem;
+    }
+}
+
+/* ============================================================
+   PANEL ADMIN - PRODUCTOS
+============================================================ */
+
+.admin-productos-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.admin-producto-card {
+    width: 100%;
+}
+
+.admin-producto-card .pedido-header {
+    align-items: center;
+}
+
+.admin-producto-card .pedido-productos {
+    margin-top: 1rem;
+}
+
+.admin-producto-card .pedido-producto-info span {
+    display: block;
+    margin-top: 5px;
+}
+
+.admin-producto-card .pedido-producto-info span i {
+    width: 20px;
+}
+
+.admin-producto-card .pedido-footer {
+    align-items: flex-start;
+}
+
+.admin-producto-acciones {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding-top: 1rem;
+    margin-top: 1rem;
+    border-top: 1px solid #eee;
+}
+
+.btn-admin-editar,
+.btn-admin-eliminar {
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+.btn-admin-editar {
+    background: linear-gradient(135deg, #054cff, #000000);
+    color: white;
+}
+
+.btn-admin-editar:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+.btn-admin-eliminar {
+    background: linear-gradient(135deg, #e4072c, #000000);
+    color: white;
+}
+
+.btn-admin-eliminar:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+
+/* ============================================================
+   IMAGEN DEL PRODUCTO ADMIN
+============================================================ */
+
+.admin-producto-card .pedido-producto-imagen {
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.admin-producto-card .pedido-producto-imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+@media (max-width: 600px) {
+
+    .admin-producto-card .pedido-producto {
+        flex-wrap: wrap;
+    }
+
+    .admin-producto-card .pedido-producto-imagen {
+        width: 80px;
+        height: 80px;
+    }
+
+    .admin-producto-card .pedido-producto-subtotal {
+        width: 100%;
+        text-align: right;
+        margin-top: 10px;
+    }
+
+    .admin-producto-acciones {
+        flex-direction: column;
+    }
+
+    .btn-admin-editar,
+    .btn-admin-eliminar {
+        width: 100%;
+    }
+
+}
+
+/* ============================================================
+   FILTROS ADMINISTRADOR
+============================================================ */
+
+.admin-filtros {
+    background: white;
+    border-radius: 22px;
+    padding: 1.3rem 1.5rem;
+    margin-bottom: 2rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+
+    border: 1px solid #f0f0f0;
+}
+
+
+/* TÍTULO DEL FILTRO */
+
+.admin-filtro-titulo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 190px;
+}
+
+.admin-filtro-titulo > i {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: linear-gradient(135deg, #870016, #000000);
+    color: white;
+
+    font-size: 1rem;
+}
+
+.admin-filtro-titulo div {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.admin-filtro-titulo strong {
+    font-size: 0.95rem;
+    color: #1a1a2e;
+}
+
+.admin-filtro-titulo span {
+    font-size: 0.75rem;
+    color: #999;
+}
+
+
+/* BOTONES */
+
+.admin-filtro-botones {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+
+    flex-wrap: wrap;
+}
+
+
+.admin-filtro-btn {
+    border: 1px solid #e5e5e5;
+
+    background: #f8f8f8;
+
+    color: #555;
+
+    padding: 9px 16px;
+
+    border-radius: 30px;
+
+    font-family: 'Poppins', sans-serif;
+
+    font-size: 0.82rem;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: all 0.25s ease;
+}
+
+
+/* HOVER */
+
+.admin-filtro-btn:hover {
+    background: #fff;
+
+    color: #870016;
+
+    border-color: #870016;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 5px 12px rgba(135, 0, 22, 0.12);
+}
+
+
+/* ACTIVO */
+
+.admin-filtro-btn.active {
+    background: linear-gradient(135deg, #870016, #000000);
+
+    color: white;
+
+    border-color: transparent;
+
+    box-shadow: 0 6px 15px rgba(135, 0, 22, 0.25);
+}
+
+
+/* ============================================================
+   RESPONSIVE FILTROS
+============================================================ */
+
+@media (max-width: 1000px) {
+
+    .admin-filtros {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .admin-filtro-titulo {
+        min-width: auto;
+    }
+
+    .admin-filtro-botones {
+        justify-content: flex-start;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .admin-filtros {
+        padding: 1rem;
+        border-radius: 18px;
+    }
+
+    .admin-filtro-botones {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+
+    .admin-filtro-btn {
+        width: 100%;
+        padding: 10px 8px;
+        font-size: 0.78rem;
+    }
+
 }

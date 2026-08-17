@@ -46,6 +46,14 @@ const options = {
             {
                 name: "Auth",
                 description: "Operaciones de autenticación y autorización"
+            },
+            {
+                name: "Pagos",
+                description: "Operaciones relacionadas con pagos mediante Stripe"
+            },
+            {
+                name: "MensajesContacto",
+                description: "Operaciones relacionadas con mensajes de contacto"
             }
         ],
 
@@ -634,6 +642,11 @@ const options = {
                                 "Usuarios encontrados correctamente"
                         },
 
+                        404: {
+                            description:
+                                "Usuario no encontrado"
+                        },
+
                         401: {
                             description:
                                 "Token inválido o no proporcionado"
@@ -874,7 +887,6 @@ const options = {
                                     required: [
                                         "producto_id",
                                         "precio_oferta",
-                                        "descuento",
                                         "fecha_inicio"
                                     ],
 
@@ -884,11 +896,6 @@ const options = {
                                         },
 
                                         precio_oferta: {
-                                            type: "number",
-                                            format: "double"
-                                        },
-
-                                        descuento: {
                                             type: "number",
                                             format: "double"
                                         },
@@ -1920,8 +1927,354 @@ const options = {
                         }
                     }
                 }
-            }
+            },
 
+            // Pagos
+"/api/pagos/crear-checkout": {
+    post: {
+        tags: ["Pagos"],
+        summary: "Crear una sesión de pago con Stripe",
+        description:
+            "Crea una sesión de Stripe Checkout para realizar el pago de un pedido del usuario autenticado.",
+
+        security: [
+            {
+                bearerAuth: []
+            }
+        ],
+
+        requestBody: {
+            required: true,
+
+            content: {
+                "application/json": {
+                    schema: {
+                        type: "object",
+
+                        required: [
+                            "pedido_id"
+                        ],
+
+                        properties: {
+                            pedido_id: {
+                                type: "integer",
+                                description:
+                                    "ID del pedido que se desea pagar"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+        responses: {
+            200: {
+                description:
+                    "Sesión de Stripe Checkout creada correctamente"
+            },
+
+            400: {
+                description:
+                    "El pedido no puede ser pagado o no tiene productos"
+            },
+
+            401: {
+                description:
+                    "Token inválido o no proporcionado"
+            },
+
+            403: {
+                description:
+                    "El pedido no pertenece al usuario autenticado"
+            },
+
+            404: {
+                description:
+                    "Pedido no encontrado"
+            },
+
+            500: {
+                description:
+                    "Error interno del servidor"
+            }
+        }
+    }
+},
+
+            // Mensajes de contacto
+            "/api/mensajes-contacto": {
+                get: {
+                    tags: ["MensajesContacto"],
+                    summary: "Obtener todos los mensajes de contacto",
+                    description:
+                        "Obtiene todos los mensajes enviados mediante el formulario de contacto.",
+
+                    security: [
+                        {
+                            bearerAuth: []
+                        }
+                    ],
+
+                    responses: {
+                        200: {
+                            description:
+                                "Lista de mensajes obtenida correctamente"
+                        },
+
+                        401: {
+                            description:
+                                "Token inválido o no proporcionado"
+                        },
+
+                        500: {
+                            description:
+                                "Error interno del servidor"
+                        }
+                    }
+                },
+
+                post: {
+                    tags: ["MensajesContacto"],
+                    summary: "Crear un mensaje de contacto",
+                    description:
+                        "Registra un nuevo mensaje enviado desde el formulario de contacto.",
+
+                    requestBody: {
+                        required: true,
+
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    type: "object",
+
+                                    required: [
+                                        "nombre",
+                                        "email",
+                                        "mensaje"
+                                    ],
+
+                                    properties: {
+                                        nombre: {
+                                            type: "string",
+                                            example: "Rubén González"
+                                        },
+
+                                        email: {
+                                            type: "string",
+                                            format: "email",
+                                            example:
+                                                "ruben@example.com"
+                                        },
+
+                                        mensaje: {
+                                            type: "string",
+                                            example:
+                                                "Hola, tengo una pregunta sobre un producto."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+
+                    responses: {
+                        201: {
+                            description:
+                                "Mensaje creado correctamente"
+                        },
+
+                        400: {
+                            description:
+                                "Datos obligatorios no proporcionados"
+                        },
+
+                        500: {
+                            description:
+                                "Error interno del servidor"
+                        }
+                    }
+                }
+            },
+
+            "/api/mensajes-contacto/{id}": {
+                get: {
+                    tags: ["MensajesContacto"],
+                    summary: "Obtener un mensaje por ID",
+                    description:
+                        "Obtiene un mensaje específico mediante su ID.",
+
+                    security: [
+                        {
+                            bearerAuth: []
+                        }
+                    ],
+
+                    parameters: [
+                        {
+                            name: "id",
+                            in: "path",
+                            required: true,
+                            description:
+                                "ID del mensaje",
+
+                            schema: {
+                                type: "integer"
+                            }
+                        }
+                    ],
+
+                    responses: {
+                        200: {
+                            description:
+                                "Mensaje encontrado correctamente"
+                        },
+
+                        401: {
+                            description:
+                                "Token inválido o no proporcionado"
+                        },
+
+                        404: {
+                            description:
+                                "Mensaje no encontrado"
+                        },
+
+                        500: {
+                            description:
+                                "Error interno del servidor"
+                        }
+                    }
+                },
+
+                put: {
+                    tags: ["MensajesContacto"],
+                    summary: "Actualizar un mensaje",
+                    description:
+                        "Actualiza la información o el estado de atención de un mensaje.",
+
+                    security: [
+                        {
+                            bearerAuth: []
+                        }
+                    ],
+
+                    parameters: [
+                        {
+                            name: "id",
+                            in: "path",
+                            required: true,
+                            description:
+                                "ID del mensaje",
+
+                            schema: {
+                                type: "integer"
+                            }
+                        }
+                    ],
+
+                    requestBody: {
+                        required: true,
+
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    type: "object",
+
+                                    properties: {
+                                        nombre: {
+                                            type: "string"
+                                        },
+
+                                        email: {
+                                            type: "string",
+                                            format: "email"
+                                        },
+
+                                        mensaje: {
+                                            type: "string"
+                                        },
+
+                                        atendido: {
+                                            type: "boolean"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+
+                    responses: {
+                        200: {
+                            description:
+                                "Mensaje actualizado correctamente"
+                        },
+
+                        401: {
+                            description:
+                                "Token inválido o no proporcionado"
+                        },
+
+                        404: {
+                            description:
+                                "Mensaje no encontrado"
+                        },
+
+                        500: {
+                            description:
+                                "Error interno del servidor"
+                        }
+                    }
+                },
+
+                delete: {
+                    tags: ["MensajesContacto"],
+                    summary: "Eliminar un mensaje",
+                    description:
+                        "Elimina un mensaje de contacto existente.",
+
+                    security: [
+                        {
+                            bearerAuth: []
+                        }
+                    ],
+
+                    parameters: [
+                        {
+                            name: "id",
+                            in: "path",
+                            required: true,
+                            description:
+                                "ID del mensaje",
+
+                            schema: {
+                                type: "integer"
+                            }
+                        }
+                    ],
+
+                    responses: {
+                        200: {
+                            description:
+                                "Mensaje eliminado correctamente"
+                        },
+
+                        401: {
+                            description:
+                                "Token inválido o no proporcionado"
+                        },
+
+                        404: {
+                            description:
+                                "Mensaje no encontrado"
+                        },
+
+                        500: {
+                            description:
+                                "Error interno del servidor"
+                        }
+                    }
+                }
+            },
         },
 
         components: {

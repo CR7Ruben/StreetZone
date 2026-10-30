@@ -1,812 +1,394 @@
-
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>StreetZone | Tienda de Ropa</title>
-
     <link rel="stylesheet" href="style.css">
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet"
-    >
-
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    >
-
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="icon" href="data:,">
-
 </head>
 
 <body>
 
-
-    <!-- =====================================================
-         NAVBAR
-    ====================================================== -->
-
+    <!-- NAVBAR -->
     <nav class="navbar">
-
         <div class="logo" onclick="irInicio()">
-
             <i class="fas fa-bolt"></i>
-
             <span>
                 StreetZone
             </span>
-
         </div>
 
+        <div id="estadoConexion" class="online">
+            En línea
+        </div>
 
         <!-- MENÚ HAMBURGUESA -->
-
         <div class="menu-toggle" onclick="toggleMenu()">
-
             <i class="fas fa-bars"></i>
-
         </div>
 
-
         <!-- ENLACES -->
-
         <ul class="nav-links" id="nav-links">
-
             <li id="menu-inicio">
-
                 <a href="#" onclick="irInicio(); return false;">
-
                     Inicio
-
                 </a>
-
             </li>
-
 
             <li id="menu-coleccion">
-
                 <a href="#" onclick="irColeccion(); return false;">
-
                     Colección
-
                 </a>
-
             </li>
 
-
             <li id="menu-ofertas">
-
                 <a href="#" onclick="irOfertas(); return false;">
 
                     Ofertas
-
                 </a>
-
             </li>
-
 
             <li id="menu-contacto">
-
                 <a href="#" onclick="irContacto(); return false;">
-
                     Contacto
-
                 </a>
-
             </li>
-
 
             <!-- LOGIN -->
-
             <li>
-
-                <a
-                    href="#"
-                    id="btn-login"
-                    onclick="abrirLoginModal(); return false;"
-                >
-
+                <a href="#" id="btn-login" onclick="abrirLoginModal(); return false;">
                     Iniciar Sesión
-
                 </a>
-
             </li>
-
 
             <!-- LOGOUT -->
-
             <li>
-
-                <a
-                    href="#"
-                    id="btn-logout"
-                    onclick="cerrarSesion(); return false;"
-                    style="display:none;"
-                >
-
+                <a href="#" id="btn-logout" onclick="cerrarSesion(); return false;" style="display:none;">
                     <i class="fas fa-sign-out-alt"></i>
-
                     Cerrar Sesión
-
                 </a>
-
             </li>
-
 
             <!-- PANEL ADMIN -->
-
             <li id="menu-admin" style="display:none;">
-
-                <a
-                    href="#"
-                    onclick="irPanelAdmin(); return false;"
-                >
-
+                <a href="#" onclick="irPanelAdmin(); return false;">
                     <i class="fas fa-user-shield"></i>
-
                     Panel Admin
-
                 </a>
-
             </li>
-
 
             <!-- MIS PEDIDOS -->
-
             <li id="menu-mis-pedidos" style="display:none;">
-
-                <a
-                    href="#"
-                    onclick="irMisPedidos(); return false;"
-                >
-
+                <a href="#" onclick="irMisPedidos(); return false;">
                     <i class="fas fa-box"></i>
-
                     Mis pedidos
-
                 </a>
-
             </li>
 
-
             <!-- CARRITO -->
-
             <li id="menu-carrito">
-
-                <a
-                    href="#"
-                    class="carrito-icono"
-                    onclick="abrirCarrito(); return false;"
-                >
-
+                <a href="#" class="carrito-icono" onclick="abrirCarrito(); return false;">
                     <i class="fas fa-shopping-cart"></i>
-
                     <span id="contador-carrito">
                         0
                     </span>
-
                 </a>
-
             </li>
-
         </ul>
-
     </nav>
 
-
-
-    <!-- =====================================================
-         INICIO
-    ====================================================== -->
-
+    <!-- INICIO -->
     <header id="inicio" class="hero">
-
         <div class="hero-content">
-
             <h1>
-
                 Estilo que
-
                 <span class="resaltado">
                     inspira
                 </span>
-
             </h1>
-
-
             <p>
                 Descubre la mejor moda para cada momento
             </p>
-
-
-            <button
-                class="btn-primary"
-                onclick="verColeccion()"
-            >
-
+            <button class="btn-primary" onclick="verColeccion()">
                 Ver colección
-
             </button>
-
         </div>
-
     </header>
 
-
-
-    <!-- =====================================================
-         CATEGORÍAS
-    ====================================================== -->
-
+    <!-- CATEGORÍAS -->
     <section id="coleccion" class="categorias">
-
         <h2>
-
             Categorías
-
             <span>
                 populares
             </span>
-
         </h2>
-
-
         <div class="categorias-grid">
 
-
             <!-- CAMISETAS -->
-
-            <div
-                class="categoria-card"
-                onclick="filtrarPorCategoria('camisetas')"
-            >
-
+            <div class="categoria-card" onclick="filtrarPorCategoria('camisetas')">
                 <i class="fas fa-tshirt"></i>
-
                 <h3>
                     Camisetas
                 </h3>
-
                 <p>
                     Productos disponibles
                 </p>
-
             </div>
 
-
             <!-- HOODIES -->
-
-            <div
-                class="categoria-card"
-                onclick="filtrarPorCategoria('hoodies')"
-            >
-
+            <div class="categoria-card" onclick="filtrarPorCategoria('hoodies')">
                 <i class="fas fa-user-ninja"></i>
-
                 <h3>
                     Hoodies
                 </h3>
-
                 <p>
                     Productos disponibles
                 </p>
-
             </div>
 
-
             <!-- CHAQUETAS -->
-
-            <div
-                class="categoria-card"
-                onclick="filtrarPorCategoria('chaquetas')"
-            >
-
+            <div class="categoria-card" onclick="filtrarPorCategoria('chaquetas')">
                 <i class="fas fa-user-tie"></i>
-
                 <h3>
                     Chaquetas
                 </h3>
-
                 <p>
                     Productos disponibles
                 </p>
-
             </div>
 
-
             <!-- JEANS -->
-
-            <div
-                class="categoria-card"
-                onclick="filtrarPorCategoria('jeans')"
-            >
-
+            <div class="categoria-card" onclick="filtrarPorCategoria('jeans')">
                 <i class="fas fa-male"></i>
-
                 <h3>
                     Jeans
                 </h3>
-
                 <p>
                     Productos disponibles
                 </p>
-
             </div>
 
-
             <!-- PANTALONES -->
-
-            <div
-                class="categoria-card"
-                onclick="filtrarPorCategoria('pantalones')"
-            >
-
+            <div class="categoria-card" onclick="filtrarPorCategoria('pantalones')">
                 <i class="fas fa-walking"></i>
-
                 <h3>
                     Pantalones
                 </h3>
-
                 <p>
                     Productos disponibles
                 </p>
-
             </div>
 
-
             <!-- CALZADO -->
-
-            <div
-                class="categoria-card"
-                onclick="filtrarPorCategoria('calzado')"
-            >
-
+            <div class="categoria-card" onclick="filtrarPorCategoria('calzado')">
                 <i class="fas fa-shoe-prints"></i>
-
                 <h3>
                     Calzado
                 </h3>
-
                 <p>
                     Productos disponibles
                 </p>
-
             </div>
 
-
             <!-- ACCESORIOS -->
-
-            <div
-                class="categoria-card"
-                onclick="filtrarPorCategoria('accesorios')"
-            >
-
+            <div class="categoria-card" onclick="filtrarPorCategoria('accesorios')">
                 <i class="fas fa-glasses"></i>
-
                 <h3>
                     Accesorios
                 </h3>
-
                 <p>
                     Productos disponibles
                 </p>
-
             </div>
-
         </div>
-
     </section>
 
-
-
-    <!-- =====================================================
-         PRODUCTOS
-    ====================================================== -->
-
+    <!-- PRODUCTOS -->
     <section class="productos">
-
         <h2>
-
             Lo más
-
             <span>
                 vendido
             </span>
-
         </h2>
 
-
         <!-- FILTROS CLIENTE -->
-
         <div class="filtros">
-
-
-            <button
-                class="filtro-btn active"
-                onclick="filtrarPorCategoria('todos', this)"
-            >
-
+            <button class="filtro-btn active" onclick="filtrarPorCategoria('todos', this)">
                 Todos
-
             </button>
 
-
-            <button
-                class="filtro-btn"
-                onclick="filtrarPorCategoria('camisetas', this)"
-            >
-
+            <button class="filtro-btn" onclick="filtrarPorCategoria('camisetas', this)">
                 Camisetas
-
             </button>
 
-
-            <button
-                class="filtro-btn"
-                onclick="filtrarPorCategoria('hoodies', this)"
-            >
-
+            <button class="filtro-btn" onclick="filtrarPorCategoria('hoodies', this)">
                 Hoodies
-
             </button>
 
-
-            <button
-                class="filtro-btn"
-                onclick="filtrarPorCategoria('chaquetas', this)"
-            >
-
+            <button class="filtro-btn" onclick="filtrarPorCategoria('chaquetas', this)">
                 Chaquetas
-
             </button>
 
-
-            <button
-                class="filtro-btn"
-                onclick="filtrarPorCategoria('jeans', this)"
-            >
-
+            <button class="filtro-btn" onclick="filtrarPorCategoria('jeans', this)">
                 Jeans
-
             </button>
 
-
-            <button
-                class="filtro-btn"
-                onclick="filtrarPorCategoria('pantalones', this)"
-            >
-
+            <button class="filtro-btn" onclick="filtrarPorCategoria('pantalones', this)">
                 Pantalones
-
             </button>
 
-
-            <button
-                class="filtro-btn"
-                onclick="filtrarPorCategoria('calzado', this)"
-            >
-
+            <button class="filtro-btn" onclick="filtrarPorCategoria('calzado', this)">
                 Calzado
-
             </button>
 
-
-            <button
-                class="filtro-btn"
-                onclick="filtrarPorCategoria('accesorios', this)"
-            >
-
+            <button class="filtro-btn" onclick="filtrarPorCategoria('accesorios', this)">
                 Accesorios
-
             </button>
-
         </div>
-
 
         <!-- PRODUCTOS -->
-
-        <div
-            class="productos-grid"
-            id="productos-grid"
-        >
-
+        <div class="productos-grid" id="productos-grid">
         </div>
-
     </section>
 
-
-
-    <!-- =====================================================
-         OFERTAS PARA CLIENTES
-    ====================================================== -->
-
-    <section
-        id="ofertas"
-        class="ofertas-section"
-        style="display:none;"
-    >
-
+    <!-- OFERTAS PARA CLIENTES -->
+    <section id="ofertas" class="ofertas-section" style="display:none;">
         <h2>
-
             🔥
-
             <span>
                 Ofertas
             </span>
-
             Especiales
-
         </h2>
-
-
-        <div
-            class="ofertas-grid"
-            id="ofertas-grid"
-        >
-
+        <div class="ofertas-grid" id="ofertas-grid">
         </div>
-
     </section>
 
-
-
-    <!-- =====================================================
-         CONTACTO
-    ====================================================== -->
-
-    <section
-        id="contacto"
-        class="contacto-section"
-        style="display:none;"
-    >
-
+    <!-- CONTACTO -->
+    <section id="contacto" class="contacto-section" style="display:none;">
         <h2>
-
             📞
-
             <span>
                 Contáctanos
             </span>
-
         </h2>
 
-
         <div class="contacto-container">
-
-
             <!-- INFORMACIÓN -->
-
             <div class="contacto-info">
-
-
                 <div class="contacto-card">
-
                     <i class="fas fa-map-marker-alt"></i>
-
                     <h3>
                         Dirección
                     </h3>
-
                     <p>
                         Av. de los Peluches,
                         Colonia Lomas de Peluchepec.
                     </p>
-
                 </div>
 
 
                 <div class="contacto-card">
-
                     <i class="fas fa-phone"></i>
-
                     <h3>
                         Teléfono
                     </h3>
-
                     <p>
                         +52 55 1234 5678
                     </p>
-
                 </div>
 
-
                 <div class="contacto-card">
-
                     <i class="fas fa-envelope"></i>
-
                     <h3>
                         Email
                     </h3>
-
                     <p>
                         soporte@streetzone.com
                     </p>
-
                 </div>
 
-
                 <div class="contacto-card">
-
                     <i class="fas fa-clock"></i>
-
                     <h3>
                         Horario
                     </h3>
-
                     <p>
                         Lun-Sáb: 9am - 5pm
                     </p>
-
                 </div>
-
             </div>
 
-
             <!-- FORMULARIO -->
-
-            <form
-                class="contacto-form"
-                id="contactoForm"
-            >
-
+            <form class="contacto-form" id="contactoForm">
                 <h3>
                     Envíanos un mensaje
                 </h3>
 
+                <input type="text" id="nombreContacto" placeholder="Tu nombre" required>
+                <input type="email" id="emailContacto" placeholder="Tu email" required>
 
-                <input
-                    type="text"
-                    id="nombreContacto"
-                    placeholder="Tu nombre"
-                    required
-                >
-
-
-                <input
-                    type="email"
-                    id="emailContacto"
-                    placeholder="Tu email"
-                    required
-                >
-
-
-                <textarea
-                    id="mensajeContacto"
-                    placeholder="Tu mensaje"
-                    rows="4"
-                    required
-                ></textarea>
-
-
-                <button
-                    type="submit"
-                    class="btn-primary"
-                >
-
+                <textarea id="mensajeContacto" placeholder="Tu mensaje" rows="4" required></textarea>
+                <button type="submit" class="btn-primary">
                     Enviar mensaje
-
                 </button>
-
             </form>
-
         </div>
-
     </section>
 
-
-
-    <!-- =====================================================
-         MIS PEDIDOS
-    ====================================================== -->
-
-    <section
-        id="mis-pedidos"
-        class="mis-pedidos-section"
-        style="display:none;"
-    >
-
+    <!-- MIS PEDIDOS -->
+    <section id="mis-pedidos" class="mis-pedidos-section" style="display:none;">
         <h2>
-
             <i class="fas fa-box"></i>
-
             Mis
-
             <span>
                 Pedidos
             </span>
-
         </h2>
-
-
         <div id="pedidos-container">
-
         </div>
-
     </section>
 
-
-
-    <!-- =====================================================
-         PANEL DE ADMINISTRADOR
-    ====================================================== -->
-
-    <section
-        id="panel-admin"
-        class="panel-admin-section"
-        style="display:none;"
-    >
-
-
+    <!-- PANEL DE ADMINISTRADOR -->
+    <section id="panel-admin" class="panel-admin-section" style="display:none;">
         <!-- TÍTULO -->
-
         <h2>
-
             <i class="fas fa-user-shield"></i>
-
             Panel de
-
             <span>
                 Administrador
             </span>
-
         </h2>
 
-
-
-        <!-- =================================================
-             GESTIÓN DE PRODUCTOS
-        ================================================== -->
-
+        <!-- GESTIÓN DE PRODUCTOS -->
         <div class="admin-header">
-
             <div>
-
                 <h3>
                     Gestión de productos
                 </h3>
-
                 <p>
                     Administra el catálogo de StreetZone
                 </p>
-
             </div>
 
-
-            <button
-                class="btn-primary"
-                onclick="abrirFormularioProducto()"
-            >
-
+            <button class="btn-primary" onclick="abrirFormularioProducto()">
                 <i class="fas fa-plus"></i>
-
                 Nuevo producto
-
             </button>
-
         </div>
 
-
-
-        <!-- =================================================
-             FILTRO ADMIN
-        ================================================== -->
-
+        <!-- FILTRO ADMIN -->
         <div class="admin-filtros">
-
-
             <div class="admin-filtro-titulo">
-
                 <i class="fas fa-filter"></i>
-
                 <div>
-
                     <strong>
                         Filtrar productos
                     </strong>
@@ -814,197 +396,84 @@
                     <span>
                         Selecciona una categoría
                     </span>
-
                 </div>
-
             </div>
-
 
             <div class="admin-filtro-botones">
-
-
-                <button
-                    class="admin-filtro-btn active"
-                    onclick="filtrarProductosAdmin('todos', this)"
-                >
-
+                <button class="admin-filtro-btn active" onclick="filtrarProductosAdmin('todos', this)">
                     Todos
-
                 </button>
 
-
-                <button
-                    class="admin-filtro-btn"
-                    onclick="filtrarProductosAdmin('camisetas', this)"
-                >
-
+                <button class="admin-filtro-btn" onclick="filtrarProductosAdmin('camisetas', this)">
                     Camisetas
-
                 </button>
 
-
-                <button
-                    class="admin-filtro-btn"
-                    onclick="filtrarProductosAdmin('hoodies', this)"
-                >
-
+                <button class="admin-filtro-btn" onclick="filtrarProductosAdmin('hoodies', this)">
                     Hoodies
-
                 </button>
 
-
-                <button
-                    class="admin-filtro-btn"
-                    onclick="filtrarProductosAdmin('chaquetas', this)"
-                >
-
+                <button class="admin-filtro-btn" onclick="filtrarProductosAdmin('chaquetas', this)">
                     Chaquetas
-
                 </button>
 
-
-                <button
-                    class="admin-filtro-btn"
-                    onclick="filtrarProductosAdmin('jeans', this)"
-                >
-
+                <button class="admin-filtro-btn" onclick="filtrarProductosAdmin('jeans', this)">
                     Jeans
-
                 </button>
 
-
-                <button
-                    class="admin-filtro-btn"
-                    onclick="filtrarProductosAdmin('pantalones', this)"
-                >
-
+                <button class="admin-filtro-btn" onclick="filtrarProductosAdmin('pantalones', this)">
                     Pantalones
-
                 </button>
 
-
-                <button
-                    class="admin-filtro-btn"
-                    onclick="filtrarProductosAdmin('calzado', this)"
-                >
-
+                <button class="admin-filtro-btn" onclick="filtrarProductosAdmin('calzado', this)">
                     Calzado
-
                 </button>
 
-
-                <button
-                    class="admin-filtro-btn"
-                    onclick="filtrarProductosAdmin('accesorios', this)"
-                >
-
+                <button class="admin-filtro-btn" onclick="filtrarProductosAdmin('accesorios', this)">
                     Accesorios
-
                 </button>
-
             </div>
-
         </div>
 
-
-
-        <!-- =================================================
-             FORMULARIO DE PRODUCTO
-        ================================================== -->
-
-        <div
-            id="form-producto-admin"
-            class="admin-form-container"
-            style="display:none;"
-        >
-
+        <!-- FORMULARIO DE PRODUCTO -->
+        <div id="form-producto-admin" class="admin-form-container" style="display:none;">
             <h3 id="titulo-form-producto">
                 Nuevo producto
             </h3>
 
-
             <form id="formProductoAdmin">
-
-                <input
-                    type="hidden"
-                    id="admin-producto-id"
-                >
-
-
+                <input type="hidden" id="admin-producto-id">
                 <div class="admin-form-grid">
-
-
                     <!-- NOMBRE -->
-
                     <div>
-
                         <label>
                             Nombre
                         </label>
-
-                        <input
-                            type="text"
-                            id="admin-nombre"
-                            placeholder="Nombre del producto"
-                            required
-                        >
-
+                        <input type="text" id="admin-nombre" placeholder="Nombre del producto" required>
                     </div>
 
-
                     <!-- PRECIO -->
-
                     <div>
-
                         <label>
                             Precio
                         </label>
-
-                        <input
-                            type="number"
-                            id="admin-precio"
-                            placeholder="0.00"
-                            min="0"
-                            step="0.01"
-                            required
-                        >
-
+                        <input type="number" id="admin-precio" placeholder="0.00" min="0" step="0.01" required>
                     </div>
 
-
                     <!-- STOCK -->
-
                     <div>
-
                         <label>
                             Stock
                         </label>
-
-                        <input
-                            type="number"
-                            id="admin-stock"
-                            placeholder="0"
-                            min="0"
-                            required
-                        >
-
+                        <input type="number" id="admin-stock" placeholder="0" min="0" required>
                     </div>
 
-
                     <!-- CATEGORÍA -->
-
                     <div>
-
                         <label>
                             Categoría
                         </label>
 
-
-                        <select
-                            id="admin-categoria"
-                            required
-                        >
-
+                        <select id="admin-categoria" required>
                             <option value="">
                                 Selecciona una categoría
                             </option>
@@ -1036,112 +505,52 @@
                             <option value="7">
                                 Accesorios
                             </option>
-
                         </select>
-
                     </div>
 
-
                     <!-- IMAGEN -->
-
                     <div class="admin-form-full">
-
                         <label>
                             Imagen
                         </label>
-
-                        <input
-                            type="text"
-                            id="admin-imagen"
-                            placeholder="URL de la imagen"
-                        >
-
+                        <input type="text" id="admin-imagen" placeholder="URL de la imagen">
                     </div>
 
-
                     <!-- DESCRIPCIÓN -->
-
                     <div class="admin-form-full">
-
                         <label>
                             Descripción
                         </label>
-
-                        <textarea
-                            id="admin-descripcion"
-                            rows="4"
-                            placeholder="Descripción del producto"
-                        ></textarea>
-
+                        <textarea id="admin-descripcion" rows="4" placeholder="Descripción del producto"></textarea>
                     </div>
-
                 </div>
-
-
 
                 <!-- BOTONES -->
-
                 <div class="admin-form-buttons">
-
-
-                    <button
-                        type="submit"
-                        class="btn-primary"
-                    >
-
+                    <button type="submit" class="btn-primary">
                         <i class="fas fa-save"></i>
-
                         Guardar producto
-
                     </button>
 
-
-                    <button
-                        type="button"
-                        class="btn-admin-cancelar"
-                        onclick="cerrarFormularioProducto()"
-                    >
-
+                    <button type="button" class="btn-admin-cancelar" onclick="cerrarFormularioProducto()">
                         Cancelar
-
                     </button>
-
                 </div>
-
             </form>
-
         </div>
 
 
 
-        <!-- =================================================
-             LISTA DE PRODUCTOS
-        ================================================== -->
+        <!-- LISTA DE PRODUCTOS -->
 
         <div class="admin-productos-container">
-
-            <div
-                id="admin-productos-lista"
-                class="admin-productos-lista"
-            >
-
+            <div id="admin-productos-lista" class="admin-productos-lista">
             </div>
-
         </div>
 
-
-
-        <!-- =================================================
-             GESTIÓN DE OFERTAS
-        ================================================== -->
-
-        <div
-            class="admin-header"
-            style="margin-top: 3rem;"
-        >
-
+        <!-- GESTIÓN DE OFERTAS -->
+        <div class="admin-header" style="margin-top: 3rem;">
             <div>
-
                 <h3>
                     Gestión de ofertas
                 </h3>
@@ -1149,136 +558,68 @@
                 <p>
                     Crea y administra las ofertas de StreetZone
                 </p>
-
             </div>
 
-
-            <button
-                class="btn-primary"
-                onclick="abrirFormularioOferta()"
-            >
-
+            <button class="btn-primary" onclick="abrirFormularioOferta()">
                 <i class="fas fa-tags"></i>
-
                 Nueva oferta
-
             </button>
-
         </div>
 
-
-
-        <!-- =================================================
-             FORMULARIO DE OFERTA
-        ================================================== -->
-
-        <div
-            id="form-oferta-admin"
-            class="admin-form-container"
-            style="display:none;"
-        >
-
+        <!-- FORMULARIO DE OFERTA -->
+        <div id="form-oferta-admin" class="admin-form-container" style="display:none;">
             <h3 id="titulo-form-oferta">
                 Nueva oferta
             </h3>
 
-
             <form id="formOfertaAdmin">
-
-                <input
-                    type="hidden"
-                    id="admin-oferta-id"
-                >
-
-
+                <input type="hidden" id="admin-oferta-id">
                 <div class="admin-form-grid">
 
-
                     <!-- PRODUCTO -->
-
                     <div>
-
                         <label for="admin-oferta-producto">
                             Producto
                         </label>
 
-                        <select
-                            id="admin-oferta-producto"
-                            required
-                        >
-
+                        <select id="admin-oferta-producto" required>
                             <option value="">
                                 Selecciona un producto
                             </option>
-
                         </select>
-
                     </div>
 
-
                     <!-- PRECIO OFERTA -->
-
                     <div>
-
                         <label for="admin-precio-oferta">
                             Precio de oferta
                         </label>
-
-                        <input
-                            type="number"
-                            id="admin-precio-oferta"
-                            placeholder="0.00"
-                            min="0"
-                            step="0.01"
-                            required
-                        >
-
+                        <input type="number" id="admin-precio-oferta" placeholder="0.00" min="0" step="0.01" required>
                     </div>
 
-
                     <!-- FECHA INICIO -->
-
                     <div>
-
                         <label for="admin-fecha-inicio">
                             Fecha de inicio
                         </label>
-
-                        <input
-                            type="datetime-local"
-                            id="admin-fecha-inicio"
-                            required
-                        >
-
+                        <input type="datetime-local" id="admin-fecha-inicio" required>
                     </div>
 
-
                     <!-- FECHA FIN -->
-
                     <div>
-
                         <label for="admin-fecha-fin">
                             Fecha de finalización
                         </label>
-
-                        <input
-                            type="datetime-local"
-                            id="admin-fecha-fin"
-                        >
-
+                        <input type="datetime-local" id="admin-fecha-fin">
                     </div>
 
-
                     <!-- ESTADO -->
-
                     <div>
-
                         <label for="admin-oferta-activo">
                             Estado
                         </label>
 
                         <select id="admin-oferta-activo">
-
                             <option value="true">
                                 Activa
                             </option>
@@ -1286,565 +627,233 @@
                             <option value="false">
                                 Inactiva
                             </option>
-
                         </select>
-
                     </div>
-
                 </div>
-
-
 
                 <!-- BOTONES -->
-
                 <div class="admin-form-buttons">
-
-
-                    <button
-                        type="submit"
-                        class="btn-primary"
-                    >
-
+                    <button type="submit" class="btn-primary">
                         <i class="fas fa-save"></i>
-
                         Guardar oferta
-
                     </button>
 
-
-                    <button
-                        type="button"
-                        class="btn-admin-cancelar"
-                        onclick="cerrarFormularioOferta()"
-                    >
-
+                    <button type="button" class="btn-admin-cancelar" onclick="cerrarFormularioOferta()">
                         Cancelar
-
                     </button>
-
                 </div>
-
             </form>
-
         </div>
 
-
-
-        <!-- =================================================
-             LISTA DE OFERTAS
-        ================================================== -->
-
+        <!-- LISTA DE OFERTAS -->
         <div class="admin-productos-container">
-
-            <div
-                id="admin-ofertas-lista"
-                class="admin-productos-lista"
-            >
-
+            <div id="admin-ofertas-lista" class="admin-productos-lista">
             </div>
-
         </div>
-
     </section>
 
-
-
-    <!-- =====================================================
-         FOOTER
-    ====================================================== -->
-
+    <!-- FOOTER -->
     <footer>
-
         <p>
-
             &copy; 2026 StreetZone -
-
             Tienda de Ropa Online |
-
-            Todos los derechos reservados
-
-        </p>
-
+            Todos los derechos reservados | Elaborado por RubencitoSiu
     </footer>
 
+    <!-- MODAL CARRITO -->
 
-
-    <!-- =====================================================
-         MODAL CARRITO
-    ====================================================== -->
-
-    <div
-        id="carrito-modal"
-        class="modal"
-    >
-
+    <div id="carrito-modal" class="modal">
         <div class="modal-content">
-
-
             <div class="modal-header">
-
                 <h3>
-
                     <i class="fas fa-shopping-cart"></i>
-
                     Mi Carrito
-
                 </h3>
 
-
-                <span
-                    class="cerrar-modal"
-                    onclick="cerrarCarrito()"
-                >
-
+                <span class="cerrar-modal" onclick="cerrarCarrito()">
                     &times;
-
                 </span>
-
             </div>
-
 
             <div id="carrito-items">
-
             </div>
 
-
-            <div
-                class="carrito-total"
-                id="carrito-total"
-            >
-
+            <div class="carrito-total" id="carrito-total">
                 Total: $0.00
-
             </div>
 
-
-            <button
-                class="btn-primary"
-                style="width:100%; margin-top:1rem;"
-                onclick="finalizarCompra()"
-            >
-
+            <button class="btn-primary" style="width:100%; margin-top:1rem;" onclick="finalizarCompra()">
                 Finalizar Compra
-
             </button>
-
         </div>
-
     </div>
 
+    <!-- MODAL PAGO-->
 
-
-    <!-- =====================================================
-         MODAL PAGO
-    ====================================================== -->
-
-    <div
-        id="pago-modal"
-        class="modal"
-    >
-
-        <div
-            class="modal-content pago-modal-content"
-        >
-
-
+    <div id="pago-modal" class="modal">
+        <div class="modal-content pago-modal-content">
             <div class="modal-header">
-
                 <h3>
-
                     <i class="fas fa-credit-card"></i>
-
                     Finalizar Compra
-
                 </h3>
 
-
-                <span
-                    class="cerrar-modal"
-                    onclick="cerrarPagoModal()"
-                >
-
+                <span class="cerrar-modal" onclick="cerrarPagoModal()">
                     &times;
-
                 </span>
-
             </div>
-
 
             <!-- RESUMEN -->
-
-            <div
-                id="resumen-compra"
-                class="resumen-compra"
-            >
-
+            <div id="resumen-compra" class="resumen-compra">
             </div>
 
-
             <!-- MÉTODOS -->
-
             <div class="metodos-pago">
-
                 <h4>
                     Método de pago
                 </h4>
 
-
                 <div class="metodos-grid">
-
-
                     <!-- TARJETA -->
-
-                    <div
-                        class="metodo-pago"
-                        data-metodo="tarjeta"
-                        onclick="seleccionarMetodo('tarjeta', this)"
-                    >
-
+                    <div class="metodo-pago" data-metodo="tarjeta" onclick="seleccionarMetodo('tarjeta', this)">
                         <i class="fas fa-credit-card"></i>
-
                         <span>
                             Tarjeta
                         </span>
-
                     </div>
-
                 </div>
-
             </div>
 
-
             <!-- FORM TARJETA -->
-
-            <div
-                id="form-tarjeta"
-                class="form-pago"
-                style="display:none;"
-            >
-
+            <div id="form-tarjeta" class="form-pago" style="display:none;">
                 <h4>
-
                     <i class="fas fa-credit-card"></i>
-
                     Datos de tarjeta
-
                 </h4>
 
-
-                <input
-                    type="text"
-                    id="nombre-tarjeta"
-                    placeholder="Nombre del titular"
-                >
-
-
-                <input
-                    type="text"
-                    id="numero-tarjeta"
-                    placeholder="Número de tarjeta"
-                    maxlength="16"
-                >
-
+                <input type="text" id="nombre-tarjeta" placeholder="Nombre del titular">
+                <input type="text" id="numero-tarjeta" placeholder="Número de tarjeta" maxlength="16">
 
                 <div class="row-fila">
-
-                    <input
-                        type="text"
-                        id="fecha-expiracion"
-                        placeholder="MM/AA"
-                        maxlength="5"
-                        style="width:48%;"
-                    >
-
-
-                    <input
-                        type="text"
-                        id="cvv"
-                        placeholder="CVV"
-                        maxlength="4"
-                        style="width:48%;"
-                    >
-
+                    <input type="text" id="fecha-expiracion" placeholder="MM/AA" maxlength="5" style="width:48%;">
+                    <input type="text" id="cvv" placeholder="CVV" maxlength="4" style="width:48%;">
                 </div>
 
-
-                <div
-                    class="payment-status"
-                    id="tarjeta-status"
-                >
-
+                <div class="payment-status" id="tarjeta-status">
                 </div>
-
             </div>
 
 
             <!-- FORM PAYPAL -->
-
-            <div
-                id="form-paypal"
-                class="form-pago"
-                style="display:none;"
-            >
-
+            <div id="form-paypal" class="form-pago" style="display:none;">
                 <h4>
-
                     <i class="fab fa-paypal"></i>
-
                     Datos de PayPal
-
                 </h4>
 
-
-                <input
-                    type="email"
-                    id="paypal-email"
-                    placeholder="correo@ejemplo.com"
-                >
-
-
-                <input
-                    type="password"
-                    id="paypal-password"
-                    placeholder="Contraseña"
-                >
-
-
-                <div
-                    class="payment-status"
-                    id="paypal-status"
-                >
-
+                <input type="email" id="paypal-email" placeholder="correo@ejemplo.com">
+                <input type="password" id="paypal-password" placeholder="Contraseña">
+                <div class="payment-status" id="paypal-status">
                 </div>
-
             </div>
 
-
             <!-- FORM TRANSFERENCIA -->
-
-            <div
-                id="form-transferencia"
-                class="form-pago"
-                style="display:none;"
-            >
-
+            <div id="form-transferencia" class="form-pago" style="display:none;">
                 <h4>
-
                     <i class="fas fa-university"></i>
-
                     Datos bancarios
-
                 </h4>
 
-
                 <p class="datos-bancarios">
-
                     <strong>
                         Banco:
                     </strong>
-
                     BBVA
-
                     <br>
-
-
                     <strong>
                         Cuenta:
                     </strong>
-
                     1234 5678 9012 3456
-
                     <br>
-
-
                     <strong>
                         CLABE:
                     </strong>
-
                     012 345 678 901 234 567
-
                     <br>
-
-
                     <strong>
                         Referencia:
                     </strong>
-
                     FASHION-
-
                     <span id="ref-numero">
                         1234
                     </span>
-
                 </p>
-
-
-                <div
-                    class="payment-status"
-                    id="transferencia-status"
-                >
-
+                <div class="payment-status" id="transferencia-status">
                 </div>
-
             </div>
-
 
             <!-- BOTÓN PAGAR -->
-
             <div class="botones-pago">
-
-                <button
-                    class="btn-primary"
-                    id="btn-pagar"
-                    style="width:100%;"
-                >
-
+                <button class="btn-primary" id="btn-pagar" style="width:100%;">
                     <i class="fas fa-lock"></i>
-
                     Pagar
-
                 </button>
-
             </div>
-
         </div>
-
     </div>
 
 
 
-    <!-- =====================================================
-         MODAL CONFIRMACIÓN
-    ====================================================== -->
+    <!-- MODAL CONFIRMACIÓN -->
 
-    <div
-        id="confirmacion-modal"
-        class="modal"
-    >
-
-        <div
-            class="modal-content confirmacion-content"
-        >
-
+    <div id="confirmacion-modal" class="modal">
+        <div class="modal-content confirmacion-content">
             <div class="confirmacion-icono">
-
                 <i class="fas fa-check-circle"></i>
-
             </div>
-
 
             <h2>
                 ¡Pedido creado!
             </h2>
 
-
             <p id="mensaje-confirmacion">
-
                 Gracias por tu compra
-
             </p>
 
-
             <div id="detalle-confirmacion">
-
             </div>
-
-
-            <button
-                class="btn-primary"
-                onclick="cerrarConfirmacion()"
-            >
-
+            <button class="btn-primary" onclick="cerrarConfirmacion()">
                 Continuar comprando
-
             </button>
-
         </div>
-
     </div>
 
-
-
-    <!-- =====================================================
-         MODAL LOGIN
-    ====================================================== -->
-
-    <div
-        id="login-modal"
-        class="modal"
-    >
-
-        <div
-            class="modal-content login-modal-content"
-        >
-
-
+    <!-- MODAL LOGIN-->
+    <div id="login-modal" class="modal">
+        <div class="modal-content login-modal-content">
             <div class="modal-header">
-
                 <h3>
-
                     <i class="fas fa-user"></i>
-
                     Iniciar Sesión
-
                 </h3>
 
-
-                <span
-                    class="cerrar-modal"
-                    onclick="cerrarLoginModal()"
-                >
-
+                <span class="cerrar-modal" onclick="cerrarLoginModal()">
                     &times;
-
                 </span>
-
             </div>
 
-
             <form id="inicioSesionForm">
-
-
-                <input
-                    type="email"
-                    id="emailSesion"
-                    placeholder="Correo electrónico"
-                    required
-                >
-
-
-                <input
-                    type="password"
-                    id="passwordSesion"
-                    placeholder="Contraseña"
-                    required
-                >
-
-
-                <button
-                    type="submit"
-                    class="btn-primary"
-                    style="width:100%;"
-                >
-
+                <input type="email" id="emailSesion" placeholder="Correo electrónico" required>
+                <input type="password" id="passwordSesion" placeholder="Contraseña" required>
+                <button type="submit" class="btn-primary" style="width:100%;">
                     Iniciar Sesión
-
                 </button>
-
             </form>
-
         </div>
-
     </div>
 
-
-
-    <!-- =====================================================
-         JAVASCRIPT
-    ====================================================== -->
-
+    <!-- JAVASCRIPT-->
     <script src="app.js"></script>
-
 </body>
 
 </html>

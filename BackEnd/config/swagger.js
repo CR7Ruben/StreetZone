@@ -10,14 +10,12 @@ const options = {
             description:
                 "API REST para el sistema de comercio electrónico StreetZone"
         },
-
         servers: [
             {
                 url: "http://localhost:3000",
                 description: "Servidor local"
             }
         ],
-
         tags: [
             {
                 name: "Productos",

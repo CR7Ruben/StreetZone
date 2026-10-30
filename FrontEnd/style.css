@@ -12,6 +12,37 @@
     color: #1a1a2e;
 }
 
+/* ESTADO DE CONEXIÓN - PWA STREETZONE */
+
+#estadoConexion {
+    padding: 7px 14px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+
+#estadoConexion.online {
+    background: #e3f9e8;
+    color: #1e8e4a;
+    border: 1px solid #b7ebc6;
+}
+
+#estadoConexion.offline {
+    background: #fde8e8;
+    color: #c0392b;
+    border: 1px solid #f5bcbc;
+}
+
+/* Ajuste para dispositivos móviles */
+@media (max-width: 768px) {
+    #estadoConexion {
+        font-size: 0.7rem;
+        padding: 6px 10px;
+    }
+}
+
 /* MOBILE */
 @media (max-width: 768px) {
 

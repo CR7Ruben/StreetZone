@@ -4,6 +4,7 @@
 // ============================================================
 
 const API_URL = "http://localhost:3000/api";
+const estadoConexion = document.getElementById("estadoConexion");
 
 let productos = [];
 let categorias = [];
@@ -25,6 +26,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.log("🌟 STREETZONE INICIANDO");
     console.log("=================================");
 
+    // Registrar el Service Worker de StreetZone
+    await registrarServiceWorker();
+
     cargarCarritoLocal();
 
     actualizarContador();
@@ -44,6 +48,41 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.log("=================================");
 });
 
+// ============================================================
+// REGISTRO DEL SERVICE WORKER - PWA
+// ============================================================
+
+async function registrarServiceWorker() {
+    if ("serviceWorker" in navigator) {
+        try {
+            const registro = await navigator.serviceWorker.register("./sw.js");
+            console.log("✅ Service Worker registrado correctamente");
+
+        } catch (error) {
+            console.error(
+                "❌ Error al registrar el Service Worker:",
+                error
+            );
+        }
+    } else {
+        console.warn("⚠️ Este navegador no soporta Service Workers");
+    }
+}
+
+function actualizarConexion() {
+    if (navigator.onLine) {
+        estadoConexion.textContent = "En línea";
+        estadoConexion.className = "online";
+    } else {
+        estadoConexion.textContent = "Sin conexión";
+        estadoConexion.className = "offline";
+    }
+}
+
+window.addEventListener("online", actualizarConexion);
+window.addEventListener("offline", actualizarConexion);
+
+actualizarConexion();
 
 // ============================================================
 // FORMULARIOS
@@ -130,6 +169,31 @@ function guardarCarrito() {
 
 
 // ============================================================
+// ALMACENAMIENTO LOCAL PARA LA PWA
+// ============================================================
+
+function guardarDatosPWA(clave, datos) {
+
+    try {
+        localStorage.setItem(clave, JSON.stringify(datos));
+    } catch (error) {
+        console.error("Error guardando datos PWA:", error);
+    }
+}
+
+function obtenerDatosPWA(clave) {
+
+    try {
+        const datos = localStorage.getItem(clave);
+        return datos ? JSON.parse(datos) : null;
+    } catch (error) {
+        console.error("Error leyendo datos PWA:", error);
+        return null;
+    }
+}
+
+
+// ============================================================
 // PRODUCTOS
 // ============================================================
 
@@ -182,9 +246,14 @@ async function cargarProductos() {
 // CATEGORÍAS
 // ============================================================
 
+
 async function cargarCategorias() {
 
     try {
+
+        if (!navigator.onLine) {
+            throw new Error("Sin conexión");
+        }
 
         const respuesta =
             await fetch(`${API_URL}/categorias`);
@@ -193,7 +262,6 @@ async function cargarCategorias() {
             await obtenerRespuestaJSON(respuesta);
 
         if (!respuesta.ok) {
-
             throw new Error(
                 datos?.mensaje ||
                 "No se pudieron cargar las categorías"
@@ -205,24 +273,26 @@ async function cargarCategorias() {
                 ? datos
                 : datos.categorias || [];
 
-        console.log(
-            "✅ Categorías:",
-            categorias
-        );
+        guardarDatosPWA("categoriasPWA", categorias);
+
+        console.log("✅ Categorías:", categorias);
 
     } catch (error) {
 
-        console.error(
-            "❌ Error cargando categorías:",
-            error
-        );
+        categorias =
+            obtenerDatosPWA("categoriasPWA") || [];
 
-        mostrarNotificacion(
-            "❌ No se pudieron cargar las categorías",
-            "error"
-        );
+        console.warn("Categorías recuperadas desde almacenamiento local");
+
+        if (categorias.length === 0) {
+            mostrarNotificacion(
+                "No hay categorías guardadas para consultar sin conexión",
+                "error"
+            );
+        }
     }
 }
+
 
 
 // ============================================================
@@ -516,9 +586,14 @@ function filtrarPorCategoria(
 // OFERTAS
 // ============================================================
 
+
 async function cargarOfertas() {
 
     try {
+
+        if (!navigator.onLine) {
+            throw new Error("Sin conexión");
+        }
 
         const respuesta =
             await fetch(`${API_URL}/ofertas`);
@@ -527,7 +602,6 @@ async function cargarOfertas() {
             await obtenerRespuestaJSON(respuesta);
 
         if (!respuesta.ok) {
-
             throw new Error(
                 datos?.mensaje ||
                 "No se pudieron cargar las ofertas"
@@ -539,26 +613,27 @@ async function cargarOfertas() {
                 ? datos
                 : datos.ofertas || [];
 
-        console.log(
-            "✅ Ofertas:",
-            ofertas
-        );
+        guardarDatosPWA("ofertasPWA", ofertas);
+
+        console.log("✅ Ofertas:", ofertas);
 
         mostrarOfertas();
 
     } catch (error) {
 
-        console.error(
-            "❌ Error cargando ofertas:",
-            error
-        );
+        ofertas =
+            obtenerDatosPWA("ofertasPWA") || [];
 
-        mostrarNotificacion(
-            "❌ No se pudieron cargar las ofertas",
-            "error"
-        );
+        console.warn("Ofertas recuperadas desde almacenamiento local");
+
+        mostrarOfertas();
+
+        if (ofertas.length === 0) {
+            console.log("No hay ofertas guardadas localmente");
+        }
     }
 }
+
 
 
 function mostrarOfertas() {
@@ -874,9 +949,9 @@ function mostrarOfertasAdmin(ofertasAdmin) {
 
                             <h3>
                                 ${escaparHTML(
-                                    producto.nombre ||
-                                    "Producto"
-                                )}
+                producto.nombre ||
+                "Producto"
+            )}
                             </h3>
 
                             <p>
@@ -905,12 +980,12 @@ function mostrarOfertasAdmin(ofertasAdmin) {
 
                                 <img
                                     src="${escaparAtributo(
-                                        producto.imagen || ""
-                                    )}"
+                producto.imagen || ""
+            )}"
                                     alt="${escaparAtributo(
-                                        producto.nombre ||
-                                        "Producto"
-                                    )}"
+                producto.nombre ||
+                "Producto"
+            )}"
                                 >
 
                             </div>
@@ -920,9 +995,9 @@ function mostrarOfertasAdmin(ofertasAdmin) {
 
                                 <strong>
                                     ${escaparHTML(
-                                        producto.nombre ||
-                                        "Producto"
-                                    )}
+                producto.nombre ||
+                "Producto"
+            )}
                                 </strong>
 
                                 <span>
@@ -1051,37 +1126,57 @@ function cerrarFormularioOferta() {
 // CARGAR PRODUCTOS EN SELECT
 // ============================================================
 
-function cargarProductosSelectOferta() {
 
-    const select =
-        document.getElementById(
-            "admin-oferta-producto"
-        );
+async function cargarProductos() {
 
-    if (!select) return;
+    try {
 
-    select.innerHTML = `
-        <option value="">
-            Selecciona un producto
-        </option>
-    `;
+        if (!navigator.onLine) {
+            throw new Error("Sin conexión");
+        }
 
-    productos.forEach(producto => {
+        const respuesta =
+            await fetch(`${API_URL}/productos`);
 
-        const option =
-            document.createElement("option");
+        const datos =
+            await obtenerRespuestaJSON(respuesta);
 
-        option.value =
-            producto.id;
+        if (!respuesta.ok) {
+            throw new Error(
+                datos?.mensaje ||
+                "No se pudieron cargar los productos"
+            );
+        }
 
-        option.textContent =
-            `${producto.nombre} - $${Number(
-                producto.precio || 0
-            ).toFixed(2)}`;
+        productos =
+            Array.isArray(datos)
+                ? datos
+                : datos.productos || [];
 
-        select.appendChild(option);
-    });
+        guardarDatosPWA("productosPWA", productos);
+
+        console.log("✅ Productos:", productos);
+
+        mostrarProductos();
+
+    } catch (error) {
+
+        productos =
+            obtenerDatosPWA("productosPWA") || [];
+
+        console.warn("Productos recuperados desde almacenamiento local");
+
+        mostrarProductos();
+
+        if (productos.length === 0) {
+            mostrarNotificacion(
+                "No hay productos guardados para consultar sin conexión",
+                "error"
+            );
+        }
+    }
 }
+
 
 
 // ============================================================
@@ -1175,7 +1270,7 @@ async function guardarOfertaAdmin(event) {
 
     const opcionSeleccionada =
         selectProducto.options[
-            selectProducto.selectedIndex
+        selectProducto.selectedIndex
         ];
 
     if (opcionSeleccionada) {
@@ -4326,6 +4421,17 @@ async function crearPedidoDesdeCarrito() {
 
 async function procesarPago() {
 
+    // Evitar compras sin conexión
+    if (!navigator.onLine) {
+        console.log("🚫 Se detectó que no hay conexión");
+        mostrarNotificacion(
+            "No puedes realizar una compra sin conexión. Intenta nuevamente cuando recuperes internet.",
+            "error"
+        );
+
+        return;
+    }
+
     if (
         !carrito ||
         carrito.length === 0
@@ -4514,6 +4620,7 @@ async function procesarPago() {
     }
 
 }
+
 
 // ============================================================
 // MIS PEDIDOS

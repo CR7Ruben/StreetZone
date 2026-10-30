@@ -64,39 +64,22 @@ app.get("/", (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-
 async function iniciarServidor() {
-
     try {
-
         await sequelize.authenticate();
-
         console.log(
             "✅ Conexión con PostgreSQL establecida correctamente"
         );
-
-        app.listen(PORT, () => {
-
-            console.log(
-                `🚀 Servidor ejecutándose en http://localhost:${PORT}`
-            );
-
-            console.log(
-                `📚 Swagger disponible en http://localhost:${PORT}/api-docs`
-            );
-
+        app.listen(PORT, "0.0.0.0", () => {
+            console.log(`🚀 Servidor StreetZone ejecutándose en el puerto ${PORT}`);
+            console.log(`📚 Swagger disponible en /api-docs`);
         });
 
     } catch (error) {
-
         console.error(
             "❌ Error al conectar con PostgreSQL:"
         );
-
         console.error(error.message);
-
     }
-
 }
-
 iniciarServidor();

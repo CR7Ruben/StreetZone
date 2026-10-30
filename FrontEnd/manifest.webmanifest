@@ -1,0 +1,10 @@
+{
+    "name": "StreetZone",
+    "short_name": "StreetZone",
+    "description": "Tienda online de ropa y accesorios",
+    "start_url": "./index.html",
+    "scope": "./",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#870016"
+}

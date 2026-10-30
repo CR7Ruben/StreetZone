@@ -12,6 +12,10 @@ const options = {
         },
         servers: [
             {
+                url: "https://streetzone.onrender.com",
+                description: "Servidor de producción"
+            },
+            {
                 url: "http://localhost:3000",
                 description: "Servidor local"
             }
@@ -1928,76 +1932,76 @@ const options = {
             },
 
             // Pagos
-"/api/pagos/crear-checkout": {
-    post: {
-        tags: ["Pagos"],
-        summary: "Crear una sesión de pago con Stripe",
-        description:
-            "Crea una sesión de Stripe Checkout para realizar el pago de un pedido del usuario autenticado.",
+            "/api/pagos/crear-checkout": {
+                post: {
+                    tags: ["Pagos"],
+                    summary: "Crear una sesión de pago con Stripe",
+                    description:
+                        "Crea una sesión de Stripe Checkout para realizar el pago de un pedido del usuario autenticado.",
 
-        security: [
-            {
-                bearerAuth: []
-            }
-        ],
+                    security: [
+                        {
+                            bearerAuth: []
+                        }
+                    ],
 
-        requestBody: {
-            required: true,
+                    requestBody: {
+                        required: true,
 
-            content: {
-                "application/json": {
-                    schema: {
-                        type: "object",
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    type: "object",
 
-                        required: [
-                            "pedido_id"
-                        ],
+                                    required: [
+                                        "pedido_id"
+                                    ],
 
-                        properties: {
-                            pedido_id: {
-                                type: "integer",
-                                description:
-                                    "ID del pedido que se desea pagar"
+                                    properties: {
+                                        pedido_id: {
+                                            type: "integer",
+                                            description:
+                                                "ID del pedido que se desea pagar"
+                                        }
+                                    }
+                                }
                             }
+                        }
+                    },
+
+                    responses: {
+                        200: {
+                            description:
+                                "Sesión de Stripe Checkout creada correctamente"
+                        },
+
+                        400: {
+                            description:
+                                "El pedido no puede ser pagado o no tiene productos"
+                        },
+
+                        401: {
+                            description:
+                                "Token inválido o no proporcionado"
+                        },
+
+                        403: {
+                            description:
+                                "El pedido no pertenece al usuario autenticado"
+                        },
+
+                        404: {
+                            description:
+                                "Pedido no encontrado"
+                        },
+
+                        500: {
+                            description:
+                                "Error interno del servidor"
                         }
                     }
                 }
-            }
-        },
-
-        responses: {
-            200: {
-                description:
-                    "Sesión de Stripe Checkout creada correctamente"
             },
-
-            400: {
-                description:
-                    "El pedido no puede ser pagado o no tiene productos"
-            },
-
-            401: {
-                description:
-                    "Token inválido o no proporcionado"
-            },
-
-            403: {
-                description:
-                    "El pedido no pertenece al usuario autenticado"
-            },
-
-            404: {
-                description:
-                    "Pedido no encontrado"
-            },
-
-            500: {
-                description:
-                    "Error interno del servidor"
-            }
-        }
-    }
-},
 
             // Mensajes de contacto
             "/api/mensajes-contacto": {

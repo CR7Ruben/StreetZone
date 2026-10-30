@@ -1,6 +1,6 @@
 const Stripe = require("stripe");
 
-const stripe = new Stripe( process.env.STRIPE_SECRET_KEY );
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 const { Pedido, DetallePedido, Producto, sequelize } = require("../models");
 const crearCheckout = async (req, res) => {
@@ -120,9 +120,10 @@ const crearCheckout = async (req, res) => {
                 line_items,
                 mode: "payment",
                 success_url:
-                    `http://localhost:3000/index.html?pago=exitoso&pedido=${pedido.id}`,
+                    `https://streetzone.onrender.com/success.html?pago=exitoso&pedido=${pedido.id}`,
+
                 cancel_url:
-                    "http://localhost:3000/index.html?pago=cancelado",
+                    "https://streetzone.onrender.com/cancel.html",
                 metadata: {
                     pedido_id:
                         String(pedido.id),

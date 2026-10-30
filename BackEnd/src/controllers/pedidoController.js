@@ -603,20 +603,6 @@ const crearPedidoCompleto = async (req, res) => {
                 }
             );
 
-
-            // =================================================
-            // DESCONTAR STOCK
-            // =================================================
-
-            producto.stock =
-                stockDisponible -
-                cantidad;
-
-            await producto.save({
-                transaction
-            });
-
-
             // =================================================
             // ACUMULAR TOTAL
             // =================================================

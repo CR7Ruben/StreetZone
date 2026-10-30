@@ -3,7 +3,7 @@
 // Frontend conectado al Backend / PostgreSQL
 // ============================================================
 
-const API_URL = "http://localhost:3000/api";
+const API_URL = "/api";
 const estadoConexion = document.getElementById("estadoConexion");
 
 let productos = [];
@@ -191,56 +191,6 @@ function obtenerDatosPWA(clave) {
         return null;
     }
 }
-
-
-// ============================================================
-// PRODUCTOS
-// ============================================================
-
-async function cargarProductos() {
-
-    try {
-
-        const respuesta =
-            await fetch(`${API_URL}/productos`);
-
-        const datos =
-            await obtenerRespuestaJSON(respuesta);
-
-        if (!respuesta.ok) {
-
-            throw new Error(
-                datos?.mensaje ||
-                "No se pudieron cargar los productos"
-            );
-        }
-
-        productos =
-            Array.isArray(datos)
-                ? datos
-                : datos.productos || [];
-
-        console.log(
-            "✅ Productos:",
-            productos
-        );
-
-        mostrarProductos();
-
-    } catch (error) {
-
-        console.error(
-            "❌ Error cargando productos:",
-            error
-        );
-
-        mostrarNotificacion(
-            "❌ No se pudieron cargar los productos",
-            "error"
-        );
-    }
-}
-
 
 // ============================================================
 // CATEGORÍAS

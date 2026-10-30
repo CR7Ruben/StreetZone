@@ -42,6 +42,16 @@
 
     </main>
 
+    <script>
+        // Limpiar carrito después de regresar de Stripe
+        const pedidoId = localStorage.getItem("checkout_pedido_id");
+
+        if (pedidoId) {
+            localStorage.removeItem("carrito");
+            localStorage.removeItem("checkout_pedido_id");
+        }
+    </script>
+
 </body>
 
 </html>

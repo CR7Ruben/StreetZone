@@ -257,15 +257,6 @@ const crearDetalle = async (req, res) => {
         });
 
         // ============================================
-        // DESCONTAR STOCK
-        // ============================================
-
-        producto.stock =
-            Number(producto.stock) - cantidadFinal;
-
-        await producto.save();
-
-        // ============================================
         // ACTUALIZAR TOTAL DEL PEDIDO
         // ============================================
 

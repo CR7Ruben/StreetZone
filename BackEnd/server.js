@@ -1,3 +1,7 @@
+// Prueba de despliegue continuo (CD) con CircleCI y Render
+// Proyecto: StreetZone
+// Verificación de automatización mediante GitHub.
+
 const express = require("express");
 const cors = require("cors");
 const path = require("path");

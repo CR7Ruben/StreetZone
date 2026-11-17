@@ -31,10 +31,10 @@ jobs:
 
       - name: Validar archivos del frontend
         run: |
-          test -f index.html
-          test -f style.css
-          test -f app.js
-          echo "Archivos principales encontrados"
+          test -f FrontEnd/index.html
+          test -f FrontEnd/style.css
+          test -f FrontEnd/app.js
+          echo "Archivos encontrados correctamente"
 
       - name: Configurar GitHub Pages
         uses: actions/configure-pages@v5
@@ -43,13 +43,10 @@ jobs:
         run: |
           mkdir -p _site
           rsync -av \
-            --exclude='.git/' \
-            --exclude='.github/' \
-            --exclude='backend/' \
             --exclude='node_modules/' \
             --exclude='.env' \
             --exclude='.env.*' \
-            ./ _site/
+            FrontEnd/ _site/
           touch _site/.nojekyll
 
       - name: Subir archivos de publicación

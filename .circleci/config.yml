@@ -1,0 +1,42 @@
+
+version: 2.1
+
+jobs:
+  verificar-y-desplegar:
+    docker:
+      - image: cimg/node:20.20
+    working_directory: ~/project/BackEnd
+
+    steps:
+      - checkout:
+          path: ~/project
+
+      - run:
+          name: Instalar dependencias
+          command: npm ci
+
+      - run:
+          name: Verificar sintaxis del servidor
+          command: node --check server.js
+
+      - run:
+          name: Desplegar en Render
+          command: |
+            if [ "$CIRCLE_BRANCH" = "main" ]; then
+              if [ -z "$RENDER_DEPLOY_HOOK" ]; then
+                echo "ERROR: Falta configurar RENDER_DEPLOY_HOOK"
+                exit 1
+              fi
+              curl --fail --show-error --silent \
+                --retry 3 \
+                --request POST "$RENDER_DEPLOY_HOOK"
+              echo "Solicitud de despliegue enviada a Render"
+            fi
+
+workflows:
+  despliegue-streetzone:
+    jobs:
+      - verificar-y-desplegar:
+          filters:
+            branches:
+              only: main

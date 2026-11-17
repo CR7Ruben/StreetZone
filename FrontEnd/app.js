@@ -3,7 +3,7 @@
 // Frontend conectado al Backend / PostgreSQL
 // ============================================================
 
-const API_URL = "/api";
+const API_URL = "https://streetzone.onrender.com/api-docs/";
 const estadoConexion = document.getElementById("estadoConexion");
 
 let productos = [];

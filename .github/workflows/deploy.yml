@@ -1,0 +1,62 @@
+
+name: Despliegue continuo StreetZone
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    permissions:
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Validar archivos del frontend
+        run: |
+          test -f index.html
+          test -f style.css
+          test -f app.js
+          echo "Archivos principales encontrados"
+
+      - name: Configurar GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Preparar archivos para publicar
+        run: |
+          mkdir -p _site
+          rsync -av \
+            --exclude='.git/' \
+            --exclude='.github/' \
+            --exclude='backend/' \
+            --exclude='node_modules/' \
+            --exclude='.env' \
+            --exclude='.env.*' \
+            ./ _site/
+          touch _site/.nojekyll
+
+      - name: Subir archivos de publicación
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Desplegar en GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
